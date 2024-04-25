@@ -41,7 +41,7 @@ mapkey("<C-w>", "set wrap!", "v")
 mapkey("<C-w>", "set wrap!", "i")
 
 if vim.fn.has("macunix") then
-    -- Move lines vertically (MacOs)
+    -- Move lines vertically (MacOS)
     vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })    -- Option + j
     vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" })      -- Option + k
     vim.keymap.set("n", "∆", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })        -- Option + j
@@ -78,7 +78,7 @@ vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, desc = "Yank selection
 vim.keymap.set("n", "<leader>Y", '"+Y', { noremap = true, desc = "Yank line into system clipboard" })
 
 -- Noice
-vim.keymap.set("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "Dismiss Noice messages" })
+vim.keymap.set("n", "<leader>nc", "<CMD>Noice dismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 
 -- Dashboard
 vim.keymap.set("n", "<C-d>", ":Alpha<CR>", {})
