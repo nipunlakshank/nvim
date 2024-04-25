@@ -8,7 +8,7 @@ return {
         require("lspconfig.ui.windows").default_options.border = "rounded"
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
-        local on_attach = require("nipunlakshank.util.lsp").on_attach
+        local on_attach = require("nipunlakshank.utils.lsp").on_attach
         local lspconfig = require("lspconfig")
         local configs = require("lspconfig.configs")
 
@@ -25,40 +25,20 @@ return {
             on_attach = on_attach,
         })
 
-        if not configs.intelephense then
-            configs.intelephense = {
-                default_config = {
-                    cmd = { "intelephense", "--stdio" },
-                    filetypes = { "php" },
-                    root_dir = function(fname)
-                        return vim.loop.cwd()
-                    end,
-                    settings = {
-                        intelephense = {
-                            files = {
-                                maxSize = 1000000,
-                            },
-                            environment = {
-                                includePaths = {
-                                    "/Users/nipun/dev/Sites",
-                                },
-                            },
-                        },
-                    },
-                },
-            }
-        end
-
         lspconfig.intelephense.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
+
         lspconfig.emmet_language_server.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
             filetypes = {
                 "css",
                 "eruby",
                 "html",
                 "php",
+                "phtml",
                 "javascript",
                 "javascriptreact",
                 "less",
@@ -90,6 +70,32 @@ return {
                 variables = {},
             },
         })
+
+        -- Configs
+        if not configs.intelephense then
+            configs.intelephense = {
+                default_config = {
+                    cmd = { "intelephense", "--stdio" },
+                    filetypes = { "php", "phtml" },
+                    root_dir = function(fname)
+                        return vim.loop.cwd()
+                    end,
+                    settings = {
+                        intelephense = {
+                            files = {
+                                maxSize = 1000000,
+                            },
+                            environment = {
+                                includePaths = {
+                                    "/Users/nipun/dev/Sites",
+                                },
+                            },
+                        },
+                    },
+                },
+            }
+        end
+
 
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})

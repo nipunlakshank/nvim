@@ -1,4 +1,4 @@
-local mapkey = require("nipunlakshank.util.keymapper").mapvimkey
+local mapkey = require("nipunlakshank.utils.keymapper").mapvimkey
 
 local M = {}
 

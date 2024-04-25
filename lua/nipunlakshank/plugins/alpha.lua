@@ -11,7 +11,7 @@ return {
         end
 
         local dashboard = require("alpha.themes.dashboard")
-        local arts = require("nipunlakshank.util.arts")
+        local arts = require("nipunlakshank.utils.arts")
 
         dashboard.section.header.val = arts.art2
 

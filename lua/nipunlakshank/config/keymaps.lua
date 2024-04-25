@@ -1,4 +1,4 @@
-local mapkey = require("nipunlakshank.util.keymapper").mapvimkey
+local mapkey = require("nipunlakshank.utils.keymapper").mapvimkey
 
 -- Buffer Navigation
 mapkey("<leader>bn", "bnext", "n")     -- Next buffer
@@ -78,7 +78,7 @@ vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, desc = "Yank selection
 vim.keymap.set("n", "<leader>Y", '"+Y', { noremap = true, desc = "Yank line into system clipboard" })
 
 -- Noice
-vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice messages" })
+vim.keymap.set("n", "<leader>nd", ":NoiceDismiss<CR>", { desc = "Dismiss Noice messages" })
 
 -- Dashboard
 vim.keymap.set("n", "<C-d>", ":Alpha<CR>", {})
