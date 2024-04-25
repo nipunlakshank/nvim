@@ -8,17 +8,21 @@ return {
         require("lspconfig.ui.windows").default_options.border = "rounded"
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local on_attach = require("nipunlakshank.util.lsp").on_attach
         local lspconfig = require("lspconfig")
         local configs = require("lspconfig.configs")
 
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
+            on_attach = on_attach,
         })
         lspconfig.tsserver.setup({
             capabilities = capabilities,
+            on_attach = on_attach,
         })
         lspconfig.bashls.setup({
             capabilities = capabilities,
+            on_attach = on_attach,
         })
 
         if not configs.intelephense then
@@ -47,6 +51,7 @@ return {
 
         lspconfig.intelephense.setup({
             capabilities = capabilities,
+            on_attach = on_attach,
         })
         lspconfig.emmet_language_server.setup({
             filetypes = {

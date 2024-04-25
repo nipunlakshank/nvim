@@ -66,10 +66,10 @@ vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true })
 vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 -- Find and Replace
-vim.keymap.set("n", "<leader>r", ":%s///g<left><left>", { silent = true, noremap = true, desc = "Replace in file" })
-vim.keymap.set( "n", "<leader>rc", ":%s///gc<left><left><left>", { silent = true, noremap = true, desc = "Replace in file" })
-vim.keymap.set( "v", "<leader>r", ":s///g<left><left>", { silent = true, noremap = true, desc = "Replace in selected area" })
-vim.keymap.set( "v", "<leader>rc", ":s///gc<left><left><left>", { silent = true, noremap = true, desc = "Replace in selected area" })
+vim.keymap.set("n", "<leader>R", ":%s///g<left><left>", { silent = true, noremap = true, desc = "Replace in file" })
+vim.keymap.set( "n", "<leader>Rc", ":%s///gc<left><left><left>", { silent = true, noremap = true, desc = "Replace in file" })
+vim.keymap.set( "v", "<leader>R", ":s///g<left><left>", { silent = true, noremap = true, desc = "Replace in selected area" })
+vim.keymap.set( "v", "<leader>Rc", ":s///gc<left><left><left>", { silent = true, noremap = true, desc = "Replace in selected area" })
 
 -- Copy, Paste and Delete
 vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, desc = "Paste without yanking" })
