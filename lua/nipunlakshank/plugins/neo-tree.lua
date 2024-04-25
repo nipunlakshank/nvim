@@ -19,6 +19,9 @@ return {
                     ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
                 },
             },
+            view = {
+                adaptive_size = true,
+            },
         }
         require("neo-tree").setup(opts)
     end,

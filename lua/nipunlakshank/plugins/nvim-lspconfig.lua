@@ -9,6 +9,7 @@ return {
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local lspconfig = require("lspconfig")
+        local configs = require("lspconfig.configs")
 
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
@@ -19,6 +20,31 @@ return {
         lspconfig.bashls.setup({
             capabilities = capabilities,
         })
+
+        if not configs.intelephense then
+            configs.intelephense = {
+                default_config = {
+                    cmd = { "intelephense", "--stdio" },
+                    filetypes = { "php" },
+                    root_dir = function(fname)
+                        return vim.loop.cwd()
+                    end,
+                    settings = {
+                        intelephense = {
+                            files = {
+                                maxSize = 1000000,
+                            },
+                            environment = {
+                                includePaths = {
+                                    "/Users/nipun/dev/Sites",
+                                },
+                            },
+                        },
+                    },
+                },
+            }
+        end
+
         lspconfig.intelephense.setup({
             capabilities = capabilities,
         })
