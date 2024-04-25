@@ -42,12 +42,12 @@ mapkey("<C-w>", "set wrap!", "i")
 
 if vim.fn.has("macunix") then
     -- Move lines vertically (MacOS)
-    vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })    -- Option + j
-    vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" })      -- Option + k
-    vim.keymap.set("n", "∆", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })        -- Option + j
-    vim.keymap.set("n", "˚", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })          -- Option + k
+    vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
+    vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
+    vim.keymap.set("n", "∆", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
+    vim.keymap.set("n", "˚", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
     vim.keymap.set("i", "∆", "<Esc>:m .+1<CR>==gi", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
-    vim.keymap.set("i", "˚", "<Esc>:m .-2<CR>==gi", { noremap = true, silent = true, desc = "Move line up" })   -- Option + k
+    vim.keymap.set("i", "˚", "<Esc>:m .-2<CR>==gi", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
 else
     -- Move lines vertically (Linux, Windows)
     vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })
@@ -67,9 +67,24 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 -- Find and Replace
 vim.keymap.set("n", "<leader>R", ":%s///g<left><left>", { silent = true, noremap = true, desc = "Replace in file" })
-vim.keymap.set( "n", "<leader>Rc", ":%s///gc<left><left><left>", { silent = true, noremap = true, desc = "Replace in file" })
-vim.keymap.set( "v", "<leader>R", ":s///g<left><left>", { silent = true, noremap = true, desc = "Replace in selected area" })
-vim.keymap.set( "v", "<leader>Rc", ":s///gc<left><left><left>", { silent = true, noremap = true, desc = "Replace in selected area" })
+vim.keymap.set(
+    "n",
+    "<leader>Rc",
+    ":%s///gc<left><left><left>",
+    { silent = true, noremap = true, desc = "Replace in file" }
+)
+vim.keymap.set(
+    "v",
+    "<leader>R",
+    ":s///g<left><left>",
+    { silent = true, noremap = true, desc = "Replace in selected area" }
+)
+vim.keymap.set(
+    "v",
+    "<leader>Rc",
+    ":s///gc<left><left><left>",
+    { silent = true, noremap = true, desc = "Replace in selected area" }
+)
 
 -- Copy, Paste and Delete
 vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, desc = "Paste without yanking" })
@@ -84,21 +99,21 @@ vim.keymap.set("n", "<leader>nc", "<CMD>Noice dismiss<CR>", { noremap = true, de
 vim.keymap.set("n", "<C-d>", ":Alpha<CR>", {})
 
 -- Comments
-vim.keymap.set("n", "<C-_>", "gtc", { noremap = false })
-vim.keymap.set("v", "<C-_>", "goc", { noremap = false })
+-- vim.keymap.set("n", "<C-_>", "gtc", { noremap = false })
+-- vim.keymap.set("v", "<C-_>", "goc", { noremap = false })
 
 -- Snapshots
-vim.keymap.set("n", "<leader>Ss", ":Silicon!<CR>", {})
-vim.keymap.set("v", "<leader>Ss", ":Silicon!<CR>", {})
-vim.keymap.set("v", "<leader>Sc", ":Silicon<CR>", {})
-vim.keymap.set("n", "<leader>Sc", ":Silicon<CR>", {})
+vim.keymap.set("n", "<leader>Ss", ":Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
+vim.keymap.set("v", "<leader>Ss", ":Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
+vim.keymap.set("n", "<leader>Sc", ":Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
+vim.keymap.set("v", "<leader>Sc", ":Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
 
 -- Auto save
-vim.keymap.set("n", "<leader>as", ":ASToggle<CR>", {})
+vim.keymap.set("n", "<leader>as", ":ASToggle<CR>", { desc = "Toggle auto save" })
 
 -- Live Server
-vim.keymap.set("n", "<leader>ls", ":LiveServerStart<CR>", {})
-vim.keymap.set("n", "<leader>lx", ":LiveServerStop<CR>", {})
+vim.keymap.set("n", "<leader>ls", ":LiveServerStart<CR>", { desc = "Start live server" })
+vim.keymap.set("n", "<leader>lx", ":LiveServerStop<CR>", { desc = "Stop live server" })
 
 -- Vim Tests
 vim.keymap.set("n", "<leader>tn", ":TestNearest<CR>", {})
@@ -109,5 +124,4 @@ vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", {})
 vim.keymap.set("n", "<leader>tv", ":TestVisit<CR>", {})
 
 -- Undo tree
-vim.keymap.set('n', '<leader>ut', require('undotree').toggle, { noremap = true, silent = true })
-
+vim.keymap.set("n", "<leader>ut", require("undotree").toggle, { noremap = true, silent = true })
