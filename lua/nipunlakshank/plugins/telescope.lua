@@ -30,6 +30,13 @@ return {
                         find_cmd = "rg",
                     },
                 },
+
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                        ignore = { ".git", "node_modules", "vendor" },
+                    },
+                }
             }
 
             telescope.setup(opts)
@@ -40,6 +47,7 @@ return {
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+            vim.keymap.set("n", "<leader>fF", builtin.git_files, {})
             vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
             vim.keymap.set("n", "<leader>fb", builtin.buffers, {})

@@ -4,8 +4,8 @@ return {
     build = "./install.sh build",
     config = function()
         local opts = {
-            font = "MesloLGS NF=26",
             background = "#87f",
+            font = "MesloLGS NF=26",
             theme = "Monokai Extended",
             line_number = true,
             pad_vert = 80,

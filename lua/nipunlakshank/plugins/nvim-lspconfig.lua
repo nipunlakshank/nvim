@@ -11,6 +11,7 @@ return {
         local on_attach = require("nipunlakshank.utils.lsp").on_attach
         local lspconfig = require("lspconfig")
         local configs = require("lspconfig.configs")
+        local util = require("lspconfig.util")
 
         lspconfig.lua_ls.setup({
             capabilities = capabilities,
@@ -28,6 +29,27 @@ return {
         lspconfig.intelephense.setup({
             capabilities = capabilities,
             on_attach = on_attach,
+
+            root_dir = function(pattern)
+                local cwd = vim.loop.cwd()
+                local root = util.root_pattern(
+                    "composer.json",
+                    ".git",
+                    ".gitignore",
+                    ".env",
+                    ".env.example",
+                    "package.json",
+                    "yarn.lock",
+                    "node_modules",
+                    ".htaccess",
+                    ".htpasswd"
+                )(pattern)
+
+                if not root then
+                    root = cwd
+                end
+                return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant
+            end,
         })
 
         lspconfig.emmet_language_server.setup({
@@ -70,30 +92,5 @@ return {
                 variables = {},
             },
         })
-
-        -- Configs
-        if not configs.intelephense then
-            configs.intelephense = {
-                default_config = {
-                    cmd = { "intelephense", "--stdio" },
-                    filetypes = { "php", "phtml" },
-                    root_dir = function(fname)
-                        return vim.loop.cwd()
-                    end,
-                    settings = {
-                        intelephense = {
-                            files = {
-                                maxSize = 1000000,
-                            },
-                            environment = {
-                                includePaths = {
-                                    "/Users/nipun/dev/Sites",
-                                },
-                            },
-                        },
-                    },
-                },
-            }
-        end
     end,
 }
