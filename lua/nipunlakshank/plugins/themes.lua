@@ -25,6 +25,16 @@ local themes = {
             require("onedarkpro").setup(opts)
         end,
     },
+
+    tokyonight = {
+        "folke/tokyonight.nvim",
+        opts = {
+            style = "night",
+            light_style = "day",
+            transparent = true,
+            terminal_colors = true,
+        },
+    },
 }
 
 local function get_themes(active_theme)
@@ -40,6 +50,6 @@ local function get_themes(active_theme)
 end
 
 -- Set active theme
-local active_theme = "onedarkpro"
+local active_theme = _G.colorscheme
 
 return get_themes(active_theme)

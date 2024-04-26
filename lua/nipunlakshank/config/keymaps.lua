@@ -125,3 +125,6 @@ vim.keymap.set("n", "<leader>tv", ":TestVisit<CR>", {})
 
 -- Undo tree
 vim.keymap.set("n", "<leader>ut", require("undotree").toggle, { noremap = true, silent = true })
+
+-- Markdown preview
+vim.keymap.set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>", { desc = "Preview markdown" })

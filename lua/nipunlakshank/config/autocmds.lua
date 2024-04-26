@@ -2,7 +2,7 @@ function Feedkeys(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-vim.cmd("colorscheme onedark") -- Set colorscheme
+vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
 
 -- auto-format on save
 local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})

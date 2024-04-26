@@ -10,7 +10,6 @@ return {
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local on_attach = require("nipunlakshank.utils.lsp").on_attach
         local lspconfig = require("lspconfig")
-        local configs = require("lspconfig.configs")
         local util = require("lspconfig.util")
 
         lspconfig.lua_ls.setup({
@@ -38,16 +37,14 @@ return {
                     ".gitignore",
                     ".env",
                     ".env.example",
-                    "package.json",
-                    "yarn.lock",
-                    "node_modules",
                     ".htaccess",
                     ".htpasswd"
                 )(pattern)
 
                 if not root then
-                    root = cwd
+                    return cwd
                 end
+
                 return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant
             end,
         })
