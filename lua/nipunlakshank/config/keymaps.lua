@@ -4,7 +4,7 @@ local mapkey = require("nipunlakshank.utils.keymapper").mapvimkey
 mapkey("<leader>bn", "bnext", "n")     -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
 mapkey("<leader>bb", "e #", "n")       -- Switch to Other Buffer
-mapkey("<leader>`", "e #", "n")        -- Switch to Other Buffer
+mapkey("<leader>`", "e #", "n")        -- SWitch to Other Buffer
 
 -- File Explorer
 mapkey("<leader>ef", "Neotree", "n")
@@ -25,20 +25,21 @@ mapkey("<C-k>", "TmuxNavigateUp", "n")    -- Navigate Up
 mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
 -- Window Management
-mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
-mapkey("<leader>sh", "split", "n")  -- Split Horizontally
+mapkey("<leader>%", "vsplit", "n") -- Split Vertically
+mapkey("<leader>\"", "split", "n")  -- Split Horizontally
 mapkey("<A-Up>", "horizontal resize +2", "n")
 mapkey("<A-Down>", "horizontal resize -2", "n")
 mapkey("<A-Left>", "vertical resize +2", "n")
 mapkey("<A-Right>", "vertical resize -2", "n")
 
--- Show Full File-Path
-mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
-
 -- Toggle word wrapping
 mapkey("<C-w>", "set wrap!", "n")
 mapkey("<C-w>", "set wrap!", "v")
 mapkey("<C-w>", "set wrap!", "i")
+
+-- Show Full File-Path
+vim.keymap.set("n", "<leader>pa", "<Cmd>echo expand('%:p')<CR>", { noremap = true, silent = true, desc = "Show full file path" })
+vim.keymap.set("n", "<leader>pr", "<Cmd>file<CR>", { noremap = true, silent = true, desc = "Show relative file path" })
 
 if vim.fn.has("macunix") then
     -- Move lines vertically (MacOS)
@@ -93,38 +94,34 @@ vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, desc = "Yank selection
 vim.keymap.set("n", "<leader>Y", '"+Y', { noremap = true, desc = "Yank line into system clipboard" })
 
 -- Noice
-vim.keymap.set("n", "<leader>nc", "<CMD>Noice dismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
+vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 
 -- Dashboard
-vim.keymap.set("n", "<C-d>", ":Alpha<CR>", {})
-
--- Comments
--- vim.keymap.set("n", "<C-_>", "gtc", { noremap = false })
--- vim.keymap.set("v", "<C-_>", "goc", { noremap = false })
+vim.keymap.set("n", "<C-d>", "<Cmd>Alpha<CR>", {})
 
 -- Snapshots
-vim.keymap.set("n", "<leader>Ss", ":Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
-vim.keymap.set("v", "<leader>Ss", ":Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
-vim.keymap.set("n", "<leader>Sc", ":Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
-vim.keymap.set("v", "<leader>Sc", ":Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
+vim.keymap.set("n", "<leader>Ss", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
+vim.keymap.set("v", "<leader>Ss", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
+vim.keymap.set("n", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
+vim.keymap.set("v", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
 
 -- Auto save
-vim.keymap.set("n", "<leader>as", ":ASToggle<CR>", { desc = "Toggle auto save" })
+vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })
 
 -- Live Server
-vim.keymap.set("n", "<leader>ls", ":LiveServerStart<CR>", { desc = "Start live server" })
-vim.keymap.set("n", "<leader>lx", ":LiveServerStop<CR>", { desc = "Stop live server" })
+vim.keymap.set("n", "<leader>lss", "<Cmd>LiveServerStart<CR>", { desc = "Start live server" })
+vim.keymap.set("n", "<leader>lsx", "<Cmd>LiveServerStop<CR>", { desc = "Stop live server" })
 
 -- Vim Tests
-vim.keymap.set("n", "<leader>tn", ":TestNearest<CR>", {})
-vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", {})
-vim.keymap.set("n", "<leader>tc", ":TestClass<CR>", {})
-vim.keymap.set("n", "<leader>ts", ":TestSuite<CR>", {})
-vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", {})
-vim.keymap.set("n", "<leader>tv", ":TestVisit<CR>", {})
+vim.keymap.set("n", "<leader>tn", "<Cmd>TestNearest<CR>", { desc = "Run nearest test" })
+vim.keymap.set("n", "<leader>tf", "<Cmd>TestFile<CR>", { desc = "Run all tests in file" })
+vim.keymap.set("n", "<leader>tc", "<Cmd>TestClass<CR>", { desc = "Run all tests in class"})
+vim.keymap.set("n", "<leader>ts", "<Cmd>TestSuite<CR>", { desc = "Run all tests in suite" })
+vim.keymap.set("n", "<leader>tl", "<Cmd>TestLast<CR>", { desc = "Run last test" })
+vim.keymap.set("n", "<leader>tv", "<Cmd>TestVisit<CR>", { desc = "Visit test file" })
 
 -- Undo tree
-vim.keymap.set("n", "<leader>ut", require("undotree").toggle, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ut", require("undotree").toggle, { noremap = true, silent = true, desc = "Toggle undo tree" })
 
 -- Markdown preview
-vim.keymap.set("n", "<leader>mp", ":MarkdownPreviewToggle<CR>", { desc = "Preview markdown" })
+vim.keymap.set("n", "<leader>mp", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Preview markdown" })

@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+-- general
+opt.filetype = "on"
+
 -- Tab / Indentation
 opt.tabstop = 4
 opt.shiftwidth = 4
@@ -24,7 +27,6 @@ opt.hlsearch = true
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
-opt.colorcolumn = "100"
 opt.signcolumn = "yes"
 opt.cursorline = true
 opt.cmdheight = 1

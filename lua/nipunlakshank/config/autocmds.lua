@@ -28,17 +28,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
-vim.api.nvim_create_autocmd("VimEnter", {
-    group = vim_enter_group,
-    callback = function()
-        local file_info = vim.api.nvim_command_output("f")
-
-        if string.find(file_info, "--No lines in buffer--") and not string.find(file_info, "%[New%]") then
-            vim.cmd("Neotree")
-            vim.cmd("wincmd l")
-            vim.cmd("sleep 100m")
-            vim.cmd("Alpha")
-        end
-    end,
-})
+-- local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     group = vim_enter_group,
+--     callback = function()
+--         local file_info = vim.api.nvim_command_output("f")
+--
+--         if string.find(file_info, "--No lines in buffer--") and not string.find(file_info, "%[New%]") then
+--             vim.cmd("Neotree")
+--             vim.cmd("wincmd l")
+--             vim.cmd("sleep 100m")
+--             vim.cmd("Alpha")
+--         end
+--     end,
+-- })

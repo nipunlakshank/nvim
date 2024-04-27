@@ -1,8 +1,9 @@
 return {
     "goolord/alpha-nvim",
-    event = 'VimEnter',
+    event = "VimEnter",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
+        'BlakeJC94/alpha-nvim-fortune',
     },
     config = function()
         local status_ok, alpha = pcall(require, "alpha")
@@ -13,7 +14,9 @@ return {
         local dashboard = require("alpha.themes.dashboard")
         local arts = require("nipunlakshank.utils.arts")
 
-        dashboard.section.header.val = arts.art2
+        dashboard.section.header.val = function()
+            return arts.dragon
+        end
 
         dashboard.section.buttons.val = {
             dashboard.button("t", "󰙅  File tree", ":Neotree filesystem toggle <CR>"),
@@ -26,16 +29,8 @@ return {
         }
 
         local function footer()
-            return {
-                [[                                                                        ]],
-                [[                                                                        ]],
-                [[                                                                        ]],
-                [[                                                                        ]],
-                [[                Github: https://github.com/nipunlakshank                ]],
-                [[                                                                        ]],
-                [[    Configuration: https://github.com/nipunlakshank/neovim-config.git   ]],
-                [[                                                                        ]],
-            }
+            local fortune = require("alpha.fortune")()
+            return "\n\n" .. fortune
         end
 
         dashboard.section.footer.val = footer()

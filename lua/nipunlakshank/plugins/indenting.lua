@@ -2,7 +2,7 @@
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "VeryLazy",
+        event = "FileType",
         main = "ibl",
         config = function()
             local opts = {
@@ -10,7 +10,7 @@ return {
                     char = "│",
                     tab_char = "│",
                 },
-                scope = { enabled = false },
+                scope = { enabled = true },
                 exclude = {
                     filetypes = {
                         "help",
@@ -37,9 +37,8 @@ return {
     {
         "echasnovski/mini.indentscope",
         version = false, -- wait till new 0.7.0 release to put it back on semver
-        event = "VeryLazy",
+        event = { "FileType" },
         opts = {
-            -- symbol = "▏",
             symbol = "│",
             options = { try_as_border = true },
         },
@@ -59,6 +58,7 @@ return {
                     "lazyterm",
                 },
                 callback = function()
+                    ---@diagnostic disable-next-line: inject-field
                     vim.b.miniindentscope_disable = true
                 end,
             })

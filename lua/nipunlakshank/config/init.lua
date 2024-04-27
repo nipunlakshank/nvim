@@ -43,6 +43,7 @@ local opts = {
 	},
 }
 
+require("nipunlakshank.utils.functions")
 require("nipunlakshank.config.globals")
 require("nipunlakshank.config.options")
 
