@@ -1,5 +1,3 @@
-require("nipunlakshank.config.paths")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -23,7 +21,7 @@ local opts = {
         border = "rounded",
     },
 	install = {
-		colorscheme = { "onedarkpro" },
+		colorscheme = { "catppuccin" },
 	},
 	rtp = {
 		disabled_plugins = {
@@ -43,12 +41,5 @@ local opts = {
 	},
 }
 
-require("nipunlakshank.utils.functions")
-require("nipunlakshank.config.globals")
-require("nipunlakshank.config.options")
-
 require("lazy").setup(plugins, opts)
-
-require("nipunlakshank.config.keymaps")
-require("nipunlakshank.config.autocmds")
 

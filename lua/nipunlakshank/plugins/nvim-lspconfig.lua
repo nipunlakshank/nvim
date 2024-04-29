@@ -58,7 +58,7 @@ return {
 			settings = {
 				typescript = {
 					indentStyle = "space",
-					indentSize = 2,
+					indentSize = 4,
 				},
 			},
 			root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
@@ -82,7 +82,6 @@ return {
 		lspconfig.intelephense.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-
 			root_dir = function(pattern)
 				local cwd = vim.loop.cwd()
 				local root = util.root_pattern(
@@ -164,76 +163,76 @@ return {
 			},
 		})
 
-		local luacheck = require("efmls-configs.linters.luacheck")
-		local stylua = require("efmls-configs.formatters.stylua")
-		local flake8 = require("efmls-configs.linters.flake8")
-		local black = require("efmls-configs.formatters.black")
-		local eslint = require("efmls-configs.linters.eslint")
-		local prettier_d = require("efmls-configs.formatters.prettier_d")
-		local fixjson = require("efmls-configs.formatters.fixjson")
-		local shellcheck = require("efmls-configs.linters.shellcheck")
-		local shfmt = require("efmls-configs.formatters.shfmt")
-		local hadolint = require("efmls-configs.linters.hadolint")
-		local solhint = require("efmls-configs.linters.solhint")
-		local cpplint = require("efmls-configs.linters.cpplint")
-		local clangformat = require("efmls-configs.formatters.clang_format")
-
 		-- configure efm server
-		lspconfig.efm.setup({
-			filetypes = {
-				"lua",
-				"python",
-				"json",
-				"jsonc",
-				"sh",
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
-				"svelte",
-				"vue",
-				"markdown",
-				"docker",
-				"solidity",
-				"html",
-				"php",
-				"blade",
-				"phtml",
-				"css",
-				"c",
-				"cpp",
-			},
-			init_options = {
-				documentFormatting = true,
-				documentRangeFormatting = true,
-				hover = true,
-				documentSymbol = true,
-				codeAction = true,
-				completion = true,
-			},
-			settings = {
-				languages = {
-					lua = { luacheck, stylua },
-					python = { flake8, black },
-					typescript = { eslint, prettier_d },
-					json = { eslint, fixjson },
-					jsonc = { eslint, fixjson },
-					sh = { shellcheck, shfmt },
-					javascript = { eslint, prettier_d },
-					javascriptreact = { eslint, prettier_d },
-					typescriptreact = { eslint, prettier_d },
-					svelte = { eslint, prettier_d },
-					vue = { eslint, prettier_d },
-					markdown = { prettier_d },
-					docker = { hadolint, prettier_d },
-					solidity = { solhint },
-					html = { prettier_d },
-					css = { prettier_d },
-					php = { prettier_d },
-					c = { clangformat, cpplint },
-					cpp = { clangformat, cpplint },
-				},
-			},
-		})
+		-- local luacheck = require("efmls-configs.linters.luacheck")
+		-- local stylua = require("efmls-configs.formatters.stylua")
+		-- local flake8 = require("efmls-configs.linters.flake8")
+		-- local black = require("efmls-configs.formatters.black")
+		-- local eslint = require("efmls-configs.linters.eslint")
+		-- local prettier_d = require("efmls-configs.formatters.prettier_d")
+		-- local fixjson = require("efmls-configs.formatters.fixjson")
+		-- local shellcheck = require("efmls-configs.linters.shellcheck")
+		-- local shfmt = require("efmls-configs.formatters.shfmt")
+		-- local hadolint = require("efmls-configs.linters.hadolint")
+		-- local solhint = require("efmls-configs.linters.solhint")
+		-- local cpplint = require("efmls-configs.linters.cpplint")
+		-- local clangformat = require("efmls-configs.formatters.clang_format")
+
+		-- lspconfig.efm.setup({
+		-- 	filetypes = {
+		-- 		"lua",
+		-- 		"python",
+		-- 		"json",
+		-- 		"jsonc",
+		-- 		"sh",
+		-- 		"javascript",
+		-- 		"javascriptreact",
+		-- 		"typescript",
+		-- 		"typescriptreact",
+		-- 		"svelte",
+		-- 		"vue",
+		-- 		"markdown",
+		-- 		"docker",
+		-- 		"solidity",
+		-- 		"html",
+		-- 		"php",
+		-- 		"blade",
+		-- 		"phtml",
+		-- 		"css",
+		-- 		"c",
+		-- 		"cpp",
+		-- 	},
+		-- 	init_options = {
+		-- 		documentFormatting = true,
+		-- 		documentRangeFormatting = true,
+		-- 		hover = true,
+		-- 		documentSymbol = true,
+		-- 		codeAction = true,
+		-- 		completion = true,
+		-- 	},
+		-- 	settings = {
+		-- 		languages = {
+		-- 			lua = { luacheck, stylua },
+		-- 			python = { flake8, black },
+		-- 			typescript = { eslint, prettier_d },
+		-- 			json = { eslint, fixjson },
+		-- 			jsonc = { eslint, fixjson },
+		-- 			sh = { shellcheck, shfmt },
+		-- 			javascript = { eslint, prettier_d },
+		-- 			javascriptreact = { eslint, prettier_d },
+		-- 			typescriptreact = { eslint, prettier_d },
+		-- 			svelte = { eslint, prettier_d },
+		-- 			vue = { eslint, prettier_d },
+		-- 			markdown = { prettier_d },
+		-- 			docker = { hadolint, prettier_d },
+		-- 			solidity = { solhint },
+		-- 			html = { prettier_d },
+		-- 			css = { prettier_d },
+		-- 			php = { prettier_d },
+		-- 			c = { clangformat, cpplint },
+		-- 			cpp = { clangformat, cpplint },
+		-- 		},
+		-- 	},
+		-- })
 	end,
 }

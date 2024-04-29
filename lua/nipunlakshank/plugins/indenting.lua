@@ -10,7 +10,7 @@ return {
                     char = "│",
                     tab_char = "│",
                 },
-                scope = { enabled = true },
+                scope = { enabled = false },
                 exclude = {
                     filetypes = {
                         "help",
@@ -43,7 +43,8 @@ return {
             options = { try_as_border = true },
         },
         init = function()
-            vim.api.nvim_create_autocmd("FileType", {
+            vim.api.nvim_create_autocmd({ "FileType" }, {
+                group = vim.api.nvim_create_augroup("IndentScopeGroup", {}),
                 pattern = {
                     "help",
                     "alpha",

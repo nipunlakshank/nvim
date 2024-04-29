@@ -2,6 +2,7 @@ local opt = vim.opt
 
 -- general
 opt.filetype = "on"
+opt.confirm = true
 
 -- Tab / Indentation
 opt.tabstop = 4
@@ -40,7 +41,8 @@ opt.hidden = true
 opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
--- opt.undodir = vim.fn.expand("~/.vim/undodir") -- Default is "$XDG_STATE_HOME/nvim/undo//"
+---@diagnostic disable-next-line: assign-type-mismatch
+opt.undodir = vim.fn.expand("$XDG_STATE_HOME/nvim/undo//") -- Default is "$XDG_STATE_HOME/nvim/undo//"
 opt.undofile = true
 opt.backspace = "indent,eol,start"
 opt.splitright = true

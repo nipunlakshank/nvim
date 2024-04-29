@@ -1,2 +1,2 @@
-require("nipunlakshank.config")
+require("nipunlakshank")
 
