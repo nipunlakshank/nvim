@@ -1,6 +1,6 @@
 return {
     "norcalli/nvim-colorizer.lua",
-    event = "FileType",
+    ft = { "css", "html", "javascript", "typescript", "php", "javascriptreact", "typescriptreact" },
     config = function()
         local defaults = {
             RGB = true, -- #RGB hex codes
@@ -14,11 +14,11 @@ return {
         }
 
         local opts = {
-            'css',
-            'html',
-            'javascript',
-            'typescript',
-            'php',
+            "css",
+            "html",
+            "javascript",
+            "typescript",
+            "php",
         }
 
         require("colorizer").setup(opts, defaults)

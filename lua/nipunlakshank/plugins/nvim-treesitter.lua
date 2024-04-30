@@ -15,7 +15,7 @@ local config = function()
             "yaml",
         },
         auto_install = true,
-        sync_install = false,
+        sync_install = true,
         ignore_install = {},
         highlight = {
             enable = true,
@@ -34,8 +34,8 @@ local config = function()
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "<C-s>",
-                node_incremental = "<C-s>",
+                init_selection = "<C-g>",
+                node_incremental = "<C-g>",
                 scope_incremental = false,
                 node_decremental = "<BS>",
             },

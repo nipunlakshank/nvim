@@ -125,3 +125,6 @@ vim.keymap.set("n", "<leader>ut", require("undotree").toggle, { noremap = true, 
 
 -- Markdown preview
 vim.keymap.set("n", "<leader>mp", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Preview markdown" })
+
+-- DBUI
+vim.keymap.set("n", "<leader>db", "<Cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
