@@ -6,6 +6,7 @@ return {
             RGB = true, -- #RGB hex codes
             RRGGBB = true, -- #RRGGBB hex codes
             RRGGBBAA = true, -- #RRGGBBAA hex codes
+            names = false, -- "Name" codes like Blue
             rgb_fn = true, -- CSS rgb() and rgba() functions
             hsl_fn = true, -- CSS hsl() and hsla() functions
             css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
@@ -14,7 +15,9 @@ return {
         }
 
         local opts = {
-            "css",
+            css = {
+                names = true, -- Enable parsing of CSS color names
+            },
             "html",
             "javascript",
             "typescript",
