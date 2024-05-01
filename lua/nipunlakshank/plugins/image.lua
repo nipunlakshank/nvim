@@ -3,6 +3,10 @@ return {
     config = function()
         local backend = "kitty"
 
+        if(vim.fn.has("win32") == 1) then
+            return
+        end
+
         require("image").setup({
             backend = backend,
             integrations = {

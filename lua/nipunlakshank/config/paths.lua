@@ -8,4 +8,3 @@ if vim.fn.has("win32") == 1 then
 end
 package.path = package.path .. ";" .. vim.fn.expand("$XDG_CONFIG_HOME") .. "/luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$XDG_CONFIG_HOME") .. "/luarocks/share/lua/5.1/?.lua;"
-package.path = package.path .. ";" .. vim.fn.stdpath("data") .. "/mason/bin;"
