@@ -1,20 +1,8 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        -- event = { "VeryLazy" },
         cmd = { "Telescope" },
-        keys = {
-            {
-                "<leader>ff",
-                "<leader>fr",
-                "<leader>fl",
-                "<leader>fb",
-                "<leader>fh",
-                "<leader>fF",
-                "<leader>fgc",
-                "<leader>fgb",
-            },
-        },
+        event = { "VeryLazy" },
         tag = "0.1.5",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -44,11 +32,11 @@ return {
                         "--smart-case", -- Smart case search
                     },
                     file_ignore_patterns = {
-                        ".git",
-                        ".idea",
-                        ".vscode",
+                        "^.git/*",
+                        "^.idea/*",
+                        "^.vscode/*",
                         "package-lock.json",
-                        "vendor",
+                        "^vendor/*",
                         "node_modules",
                         "build",
                         "dist",
@@ -61,8 +49,8 @@ return {
                         require("telescope.themes").get_dropdown({}),
                     },
                     media_files = {
-                        filetypes = { "png", "webp", "jpg", "jpeg" },
                         find_cmd = "rg",
+                        filetypes = { "png", "svg", "webp", "jpg", "jpeg" },
                     },
                 },
 
