@@ -9,7 +9,7 @@ opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
 ---@diagnostic disable-next-line: assign-type-mismatch
-opt.undodir = vim.fn.expand("$XDG_STATE_HOME/nvim/undo//") -- Default is "$XDG_STATE_HOME/nvim/undo//"
+opt.undodir = vim.fn.expand("$XDG_STATE_HOME/nvim/undo//")
 opt.undofile = true
 opt.mouse = "a"
 
@@ -22,10 +22,9 @@ opt.smartindent = true
 
 -- Word wrap
 opt.wrap = true
-opt.textwidth=0
-opt.wrapmargin=0
+opt.textwidth = 0
+opt.wrapmargin = 0
 opt.linebreak = true -- (optional - breaks by word rather than character)
--- opt.columns=80 -- <<< THIS IS THE IMPORTANT PART
 
 -- Search
 opt.incsearch = true
@@ -42,8 +41,9 @@ opt.cursorline = true
 opt.cmdheight = 1
 opt.scrolloff = 10
 opt.completeopt = "menuone,noinsert,noselect"
-opt.fillchars = { eob = " "}
-opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
+opt.fillchars = { eob = " " }
+opt.guicursor =
+"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Behaviour
 opt.hidden = true
@@ -60,4 +60,3 @@ opt.showmode = false
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel = 99
-

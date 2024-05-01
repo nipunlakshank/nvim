@@ -1,5 +1,5 @@
 local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
-local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
+-- local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 

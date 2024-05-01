@@ -142,4 +142,16 @@ vim.keymap.set("n", "<leader>mp", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Pr
 vim.keymap.set("n", "<leader>db", "<Cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
 
 -- Oil (File Explorer)
-vim.keymap.set("n", "<leader>-", "<Cmd>Oil<CR>", { desc = "Toggle Oil" })
+vim.keymap.set("n", "-", "<Cmd>Oil<CR>", { desc = "Open parent directory in oil" })
+
+-- Colorizer
+vim.keymap.set("n", "<leader>cl", "<Cmd>ColorizerToggle<CR>", { desc = "Toggle Colorizer" })
+vim.keymap.set("n", "<leader>cL", "<Cmd>ColorizerReloadAllBuffers<CR>", { desc = "Reload Colorizer" })
+
+-- TODO Comments
+vim.keymap.set("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "Find TODO comments" })
+
+-- Opening windows
+vim.keymap.set("n", "<leader>wl", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>wm", "<Cmd>Mason<CR>", { desc = "Open Mason" })
+vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })

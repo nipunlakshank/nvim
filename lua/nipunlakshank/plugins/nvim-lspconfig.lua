@@ -1,11 +1,11 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
+        "folke/neoconf.nvim",
         "folke/neodev.nvim",
         -- "creativenull/efmls-configs-nvim",
     },
     config = function()
-        require("neodev").setup({})
         require("lspconfig.ui.windows").default_options.border = "rounded"
 
         local on_attach = require("nipunlakshank.utils.lsp").on_attach
@@ -30,6 +30,7 @@ return {
                     -- make the language server recognize "vim" global
                     diagnostics = {
                         globals = { "vim" },
+                        disable = { "missing-parameters", "missing-fields" },
                     },
                     workspace = {
                         -- make language server aware of runtime files
@@ -122,6 +123,11 @@ return {
 
         -- docker
         lspconfig.dockerls.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        lspconfig.jsonls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
