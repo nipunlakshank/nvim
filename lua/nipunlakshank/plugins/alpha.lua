@@ -32,11 +32,9 @@ return {
 			local fortune = require("alpha.fortune")()
 			local stats = require("lazy").stats()
 			local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-			print(stats.startuptime)
-			print(ms)
 			local f = {
 				"",
-				"\t  ⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+				"\t⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
 			}
 
 			local sep = "\n"

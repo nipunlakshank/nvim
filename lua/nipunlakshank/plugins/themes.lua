@@ -40,9 +40,10 @@ local themes = {
 local function get_themes(active_theme)
     local result = {}
     for name, theme in pairs(themes) do
-        if name == active_theme then
-            theme.priority = 1000
-            theme.lazy = false
+        if active_theme == name then
+            theme.event = theme.event or { "VimEnter" }
+        else
+            theme.event = theme.event or { "VeryLazy" }
         end
         table.insert(result, theme)
     end

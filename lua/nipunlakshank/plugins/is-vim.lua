@@ -1,4 +1,4 @@
 return {
-    'haya14busa/is.vim',
-    lazy = false,
+    "haya14busa/is.vim",
+    event = { "CursorMoved" },
 }

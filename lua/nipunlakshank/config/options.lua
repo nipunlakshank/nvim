@@ -1,8 +1,17 @@
 local opt = vim.opt
 
 -- general
+vim.g.loaded_netrwPlugin = 0
 opt.filetype = "on"
 opt.confirm = true
+opt.encoding = "UTF-8"
+opt.errorbells = false
+opt.swapfile = false
+opt.backup = false
+---@diagnostic disable-next-line: assign-type-mismatch
+opt.undodir = vim.fn.expand("$XDG_STATE_HOME/nvim/undo//") -- Default is "$XDG_STATE_HOME/nvim/undo//"
+opt.undofile = true
+opt.mouse = "a"
 
 -- Tab / Indentation
 opt.tabstop = 4
@@ -16,7 +25,7 @@ opt.wrap = true
 opt.textwidth=0
 opt.wrapmargin=0
 opt.linebreak = true -- (optional - breaks by word rather than character)
-opt.columns=80 -- <<< THIS IS THE IMPORTANT PART
+-- opt.columns=80 -- <<< THIS IS THE IMPORTANT PART
 
 -- Search
 opt.incsearch = true
@@ -34,27 +43,18 @@ opt.cmdheight = 1
 opt.scrolloff = 10
 opt.completeopt = "menuone,noinsert,noselect"
 opt.fillchars = { eob = " "}
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Behaviour
-vim.g.loaded_netrwPlugin = 0
 opt.hidden = true
-opt.errorbells = false
-opt.swapfile = false
-opt.backup = false
----@diagnostic disable-next-line: assign-type-mismatch
-opt.undodir = vim.fn.expand("$XDG_STATE_HOME/nvim/undo//") -- Default is "$XDG_STATE_HOME/nvim/undo//"
-opt.undofile = true
 opt.backspace = "indent,eol,start"
 opt.splitright = true
 opt.splitbelow = true
 opt.autochdir = false
--- opt.iskeyword:append("-")
-opt.mouse = "a"
--- opt.clipboard:append("unnamedplus")
 opt.modifiable = true
--- opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
-opt.encoding = "UTF-8"
 opt.showmode = false
+-- opt.iskeyword:append("-")
+-- opt.clipboard:append("unnamedplus")
 
 -- folds
 opt.foldmethod = "expr"

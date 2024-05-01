@@ -1,7 +1,7 @@
 return {
     "nvim-neo-tree/neo-tree.nvim",
-    event = "BufReadPost",
-    cmd = "Neotree",
+    event = { "VeryLazy" },
+    cmd = { "NeoTree" },
     branch = "v3.x",
     dependencies = {
         "nvim-lua/plenary.nvim",

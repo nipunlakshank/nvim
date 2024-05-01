@@ -1,6 +1,13 @@
 return {
     'vim-test/vim-test',
-    lazy = false,
+    cmd = {
+        'TestNearest',
+        'TestFile',
+        'TestSuite',
+        'TestLast',
+        'TestClass',
+        'TestVisit',
+    },
     dependencies = {
         'preservim/vimux',
     },

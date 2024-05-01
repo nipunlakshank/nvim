@@ -4,15 +4,8 @@ local config = function()
         build = ":TSUpdate",
         ensure_installed = {
             "lua",
-            "vim",
             "markdown",
             "markdown_inline",
-            "sql",
-            "html",
-            "javascript",
-            "typescript",
-            "json",
-            "yaml",
         },
         auto_install = true,
         sync_install = true,
@@ -45,6 +38,6 @@ end
 
 return {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
+    event = { "BufReadPre", "BufNewFile" },
     config = config,
 }

@@ -60,6 +60,15 @@ return {
                     { name = "buffer" },
                 }),
             })
+            cmp.setup.filetype({ "mysql", "sql" }, {
+                sources = cmp.config.sources({
+                    { name = "vim-dadbod-completion", priority = 1000 },
+                    { name = "buffer",                priority = 750 },
+                    { name = "path",                  priority = 500 },
+                }, {
+                    { name = "buffer" },
+                }),
+            })
 
             -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline({ "/", "?" }, {
