@@ -53,7 +53,7 @@ return {
 
         dashboard.section.header.opts.hl = "Error"
         dashboard.section.buttons.opts.hl = "Keyword"
-        dashboard.section.footer.opts.hl = "Type"
+        dashboard.section.footer.opts.hl = "WarningMsg"
 
         -- close Lazy and re-open when the dashboard is ready
         if vim.o.filetype == "lazy" then

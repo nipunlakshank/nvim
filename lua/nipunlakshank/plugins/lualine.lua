@@ -6,7 +6,7 @@ return {
         local lualine = require("lualine")
         lualine.setup({
             options = {
-                theme = "auto",
+                theme = "catppuccin",
                 globalstatus = true,
                 component_separators = { left = "|", right = "|" },
                 section_separators = { left = "", right = "" },

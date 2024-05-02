@@ -2,6 +2,24 @@ local themes = {
     catppuccin = {
         "catppuccin/nvim",
         name = "catppuccin",
+
+        -- init = function()
+        --     local mini_indent_scope_hi_group = vim.api.nvim_create_augroup("MiniIndentScopeHighlightGroup", {})
+        --     vim.api.nvim_create_autocmd({ "UIEnter", "Colorscheme" }, {
+        --         group = mini_indent_scope_hi_group,
+        --         pattern = "*",
+        --         callback = function()
+        --             local colorscheme = vim.g.colors_name
+        --             if not string.match(colorscheme, "catppuccin") then
+        --                 return
+        --             end
+        --             vim.schedule(function()
+        --                 vim.cmd("highlight MiniIndentScopeSymbol guifg=#f5e0dd")
+        --             end)
+        --         end,
+        --     })
+        -- end,
+
         config = function()
             local opts = {
                 flavour = "mocha",
