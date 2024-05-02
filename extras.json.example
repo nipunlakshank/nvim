@@ -27,6 +27,6 @@
         "plugin": "dotenv",
         "desc": "A neovim plugin to load environment variables from .env file",
         "file": "dotenv.lua",
-        "enabled": true
+        "enabled": false
     }
 ]
