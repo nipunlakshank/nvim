@@ -11,6 +11,23 @@ return {
     },
     config = function()
         local opts = {
+            filesystem = {
+                filtered_items = {
+                    visible = false,
+                    show_hidden_count = true,
+                    hide_dotfiles = false,
+                    hide_gitignored = true,
+                    hide_by_name = {
+                        ".git",
+                        ".DS_Store",
+                        "thumbs.db",
+                        "desktop.ini",
+                        ".idea",
+                        ".vscode",
+                    },
+                    never_show = {},
+                },
+            },
             source_selector = {
                 winbar = true,
                 statusline = false,

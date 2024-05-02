@@ -14,8 +14,8 @@ M.on_attach = function(client, bufnr)
 	mapkey("<leader>rn", "Lspsaga rename", "n", opts) -- smart rename
 	mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts) -- show  diagnostics for line
 	mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts) -- show diagnostics for cursor
-	mapkey("<leader>pd", "Lspsaga diagnostic_jump_prev", "n", opts) -- jump to prev diagnostic in buffer
-	mapkey("<leader>nd", "Lspsaga diagnostic_jump_next", "n", opts) -- jump to next diagnostic in buffer
+	mapkey("<leader>dp", "Lspsaga diagnostic_jump_prev", "n", opts) -- jump to prev diagnostic in buffer
+	mapkey("<leader>dn", "Lspsaga diagnostic_jump_next", "n", opts) -- jump to next diagnostic in buffer
 	mapkey("K", "Lspsaga hover_doc", "n", opts) -- show documentation for what is under cursor
 
 	if client.name == "pyright" then

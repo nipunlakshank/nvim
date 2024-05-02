@@ -32,11 +32,7 @@ return {
                         "--smart-case", -- Smart case search
                     },
                     file_ignore_patterns = {
-                        "^.git/*",
-                        "^.idea/*",
-                        "^.vscode/*",
-                        "package-lock.json",
-                        "^vendor/*",
+                        "^.git//*",
                         "node_modules",
                         "build",
                         "dist",
@@ -76,6 +72,7 @@ return {
             vim.keymap.set("n", "<leader>fF", builtin.git_files, { desc = "Find git files" })
             vim.keymap.set("n", "<leader>fgc", builtin.git_commits, { desc = "Find git commits" })
             vim.keymap.set("n", "<leader>fgb", builtin.git_branches, { desc = "Find git branches" })
+
         end,
     },
 }

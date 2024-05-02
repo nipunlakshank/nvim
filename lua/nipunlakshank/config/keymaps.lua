@@ -40,11 +40,11 @@ mapkey("<C-w>", "set wrap!", "i")
 -- Show Full File-Path
 vim.keymap.set(
     "n",
-    "<leader>pa",
+    "<leader>ap",
     "<Cmd>echo expand('%:p')<CR>",
     { noremap = true, silent = true, desc = "Show full file path" }
 )
-vim.keymap.set("n", "<leader>pr", "<Cmd>file<CR>", { noremap = true, silent = true, desc = "Show relative file path" })
+vim.keymap.set("n", "<leader>rp", "<Cmd>file<CR>", { noremap = true, silent = true, desc = "Show relative file path" })
 
 if vim.fn.has("macunix") then
     -- Move lines vertically (MacOS)
@@ -105,9 +105,9 @@ vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, des
 vim.keymap.set("n", "<C-d>", "<Cmd>Alpha<CR>", {})
 
 -- Snapshots
-vim.keymap.set("n", "<leader>Ss", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
-vim.keymap.set("v", "<leader>Ss", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
-vim.keymap.set("n", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
+vim.keymap.set("n", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
+vim.keymap.set("v", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
+vim.keymap.set("n", "<C-s>c", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
 vim.keymap.set(
     "v",
     "<leader>Sc",
@@ -155,3 +155,10 @@ vim.keymap.set("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "Find TODO 
 vim.keymap.set("n", "<leader>wl", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>wm", "<Cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })
+
+-- Lazy stats
+vim.keymap.set("n", "<leader>ls", function ()
+    local lazy = require("lazy")
+    local stats = lazy.stats()
+    print("Startup time: " .. stats.startuptime)
+end, { desc = "Show startup time" })

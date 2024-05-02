@@ -33,6 +33,7 @@ opt.smartcase = true
 opt.hlsearch = true
 
 -- Appearance
+opt.guifont = "Jetbrains Mono:h16"
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
