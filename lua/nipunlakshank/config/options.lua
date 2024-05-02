@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 -- general
-vim.g.loaded_netrwPlugin = 0
+-- vim.g.loaded_netrwPlugin = 0
 opt.filetype = "on"
 opt.confirm = true
 opt.encoding = "UTF-8"

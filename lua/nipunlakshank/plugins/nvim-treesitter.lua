@@ -4,11 +4,12 @@ local config = function()
         build = ":TSUpdate",
         ensure_installed = {
             "lua",
+            "regex",
             "markdown",
             "markdown_inline",
         },
         auto_install = true,
-        sync_install = true,
+        sync_install = false,
         ignore_install = {},
         highlight = {
             enable = true,

@@ -1,0 +1,32 @@
+[
+    {
+        "plugin": "image",
+        "desc": "A neovim plugin to preview images in the buffer",
+        "file": "image.lua",
+        "enabled": false
+    },
+    {
+        "plugin": "live-server",
+        "desc": "A little development server with live reload capability.",
+        "file": "live-server.lua",
+        "enabled": false
+    },
+    {
+        "plugin": "markdown-preview",
+        "desc": "Markdown Preview plugin for neovim",
+        "file": "markdown-preview.lua",
+        "enabled": false
+    },
+    {
+        "plugin": "silicon",
+        "desc": "A code snapshooter written in rust",
+        "file": "silicon.lua",
+        "enabled": false
+    },
+    {
+        "plugin": "dotenv",
+        "desc": "A neovim plugin to load environment variables from .env file",
+        "file": "dotenv.lua",
+        "enabled": true
+    }
+]

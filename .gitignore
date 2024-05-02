@@ -159,5 +159,7 @@ $RECYCLE.BIN/
 
 # Custom
 *.log
+extras.json
+!extras.json.example
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,vim,visualstudiocode,lua
