@@ -3,6 +3,8 @@ return {
     cmd = "Silicon",
     build = "./install.sh build",
     config = function()
+        local log = require("nipunlakshank.utils.functions").log
+        log("Loading silicon.nvim", "", { silent = false, async = true })
         local opts = {
             background = "#87f",
             font = "MesloLGS NF=26",
@@ -13,7 +15,7 @@ return {
             line_pad = 2,       -- (number) The padding between lines.
             -- line_offset = 1,    -- (number) The starting line number for the screenshot.
             tab_width = 4,      -- (number) The tab width for the screenshot.
-            gobble = true,     -- (boolean) Whether to trim extra indentation.
+            gobble = true,      -- (boolean) Whether to trim extra indentation.
             highlight_selection = false, -- (boolean) Whether to capture the whole file and highlight selected lines.
             round_corner = true,
             window_controls = true, -- (boolean) Whether to show window controls (minimize, maximize, close) in the screenshot.

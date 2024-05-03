@@ -3,7 +3,7 @@ return {
     dependencies = {
         "folke/neoconf.nvim",
         "folke/neodev.nvim",
-        -- "creativenull/efmls-configs-nvim",
+        -- { "creativenull/efmls-configs-nvim" },
     },
     config = function()
         require("lspconfig.ui.windows").default_options.border = "rounded"

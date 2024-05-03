@@ -2,6 +2,7 @@ local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 -- local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
+local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim_enter_group,
@@ -40,5 +41,33 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
             name = "dot",
             cmd = { "dot-language-server", "--stdio" },
         })
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    group = python_env_group,
+    callback = function()
+        vim.schedule(function()
+            local f = require("nipunlakshank.utils.functions")
+            local python_env_path = vim.fn.stdpath("data") .. "/python"
+
+            f.async_cmd("mkdir -p " .. python_env_path)
+            f.async_cmd("python3 -m venv " .. python_env_path)
+            f.async_cmd(
+                "source "
+                .. python_env_path
+                .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
+            )
+            vim.g.python3_host_prog = python_env_path .. "/bin/python3"
+        end)
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "VimLeave" }, {
+    group = python_env_group,
+    callback = function()
+        vim.schedule(function()
+            vim.cmd("!deactivate")
+        end)
     end,
 })

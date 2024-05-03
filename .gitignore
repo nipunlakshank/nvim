@@ -158,6 +158,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Custom
+tmp/*
 *.log
 extras.json
 !extras.json.example

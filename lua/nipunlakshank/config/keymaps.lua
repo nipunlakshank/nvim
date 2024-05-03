@@ -1,4 +1,5 @@
 local mapkey = require("nipunlakshank.utils.keymapper").mapvimkey
+local f = require("nipunlakshank.utils.functions")
 
 -- Buffer Navigation
 mapkey("<leader>bn", "bnext", "n")     -- Next buffer
@@ -46,7 +47,7 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>rp", "<Cmd>file<CR>", { noremap = true, silent = true, desc = "Show relative file path" })
 
-if vim.fn.has("macunix") then
+if f.os.is_mac() then
     -- Move lines vertically (MacOS)
     vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
     vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
@@ -91,6 +92,15 @@ vim.keymap.set(
     ":s///gc<left><left><left>",
     { silent = true, noremap = true, desc = "Replace in selected area" }
 )
+
+-- Enter new lines without leaving normal mode
+vim.keymap.set("n", "<C-o>", 'o<Esc>^"_Dk', { noremap = true, silent = true, desc = "Insert newline below" })
+if f.os.is_mac() then
+    vim.keymap.set("n", "ø", 'O<Esc>^"_Dj', { noremap = true, silent = true, desc = "Insert newline above" })
+else
+    print("not MacOS")
+    vim.keymap.set("n", "<M-o>", 'O<Esc>^"_Dj', { noremap = true, silent = true, desc = "Insert newline above" })
+end
 
 -- Copy, Paste and Delete
 vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, desc = "Paste without yanking" })
