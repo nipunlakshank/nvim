@@ -34,9 +34,9 @@ mapkey("<A-Left>", "vertical resize +2", "n")
 mapkey("<A-Right>", "vertical resize -2", "n")
 
 -- Toggle word wrapping
-mapkey("<C-w>", "set wrap!", "n")
-mapkey("<C-w>", "set wrap!", "v")
-mapkey("<C-w>", "set wrap!", "i")
+mapkey("gw", "set wrap!", "n", {desc = "Toggle word wrapping"})
+mapkey("gw", "set wrap!", "v", {desc = "Toggle word wrapping"})
+-- mapkey("<C-w>", "set wrap!", "i")
 
 -- Show Full File-Path
 vim.keymap.set(
@@ -93,23 +93,36 @@ vim.keymap.set(
     { silent = true, noremap = true, desc = "Replace in selected area" }
 )
 
+-- Backspace motions
+vim.keymap.set("i", '<C-BS>', '<Esc>"_ddk$', { noremap = true, silent = true, desc = "Delete current line" })
+
 -- Enter new lines without leaving normal mode
-vim.keymap.set("n", "<C-o>", 'o<Esc>^"_Dk', { noremap = true, silent = true, desc = "Insert newline below" })
 if f.os.is_mac() then
-    vim.keymap.set("n", "ø", 'O<Esc>^"_Dj', { noremap = true, silent = true, desc = "Insert newline above" })
+    vim.keymap.set("n", "ø", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below (<A-o>)" })
+    vim.keymap.set("n", "Ø", 'mzO<Esc>0"_D`z', { noremap = true, silent = true, desc = "Insert newline above (<A-O>)" })
 else
-    print("not MacOS")
-    vim.keymap.set("n", "<M-o>", 'O<Esc>^"_Dj', { noremap = true, silent = true, desc = "Insert newline above" })
+    vim.keymap.set("n", "<A-o>", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below" })
+    vim.keymap.set("n", "<A-O>", 'mzO<Esc>0"_D`z', { noremap = true, silent = true, desc = "Insert newline above" })
 end
 
+-- Usefull when jumping from a commented line to a new line
+vim.keymap.set("n", "<leader>o", 'o<Esc>"_S', { noremap = true, silent = true, desc = "Insert newline below and clear before changing to insert mode" })
+vim.keymap.set("n", "<leader>O", 'O<Esc>"_S', { noremap = true, silent = true, desc = "Insert newline above and clear before changing to insert mode" })
+
 -- Copy, Paste and Delete
-vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, desc = "Paste without yanking" })
 vim.keymap.set("n", "<leader>y", '"+y', { noremap = true, desc = "Yank into system clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, desc = "Yank selection into system clipboard" })
-vim.keymap.set("n", "<leader>Y", '"+Y', { noremap = true, desc = "Yank line into system clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+y$', { noremap = true, desc = "Yank to end of line to system clipboard" })
+vim.keymap.set("n", "<leader>yy", '"+yy', { noremap = true, desc = "Yank line into system clipboard" })
+vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, desc = "Paste without yanking" })
+vim.keymap.set("v", "<leader>d", '"_d', { noremap = true, desc = "Delete into void" })
+
+-- New lines and appending
+vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true, desc = "Insert a new line below" })
+vim.keymap.set("i", "<C-CR>", "<Esc>jA", { noremap = true, silent = true, desc = "Append to line below" })
 
 -- Noice
-vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
+vim.keymap.set("n", "<leader>cn", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 
 -- Dashboard
 vim.keymap.set("n", "<C-d>", "<Cmd>Alpha<CR>", {})
@@ -118,19 +131,14 @@ vim.keymap.set("n", "<C-d>", "<Cmd>Alpha<CR>", {})
 vim.keymap.set("n", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
 vim.keymap.set("v", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
 vim.keymap.set("n", "<C-s>c", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
-vim.keymap.set(
-    "v",
-    "<leader>Sc",
-    "<Cmd>Silicon<CR>",
-    { desc = "Take a snapshot of the current selection into clipboard" }
-)
+vim.keymap.set( "v", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
 
 -- Auto save
 vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })
 
 -- Live Server
-vim.keymap.set("n", "<leader>lss", "<Cmd>LiveServerStart<CR>", { desc = "Start live server" })
-vim.keymap.set("n", "<leader>lsx", "<Cmd>LiveServerStop<CR>", { desc = "Stop live server" })
+-- vim.keymap.set("n", "<leader>lss", "<Cmd>LiveServerStart<CR>", { desc = "Start live server" })
+-- vim.keymap.set("n", "<leader>lsx", "<Cmd>LiveServerStop<CR>", { desc = "Stop live server" })
 
 -- Vim Tests
 vim.keymap.set("n", "<leader>tn", "<Cmd>TestNearest<CR>", { desc = "Run nearest test" })
@@ -139,6 +147,14 @@ vim.keymap.set("n", "<leader>tc", "<Cmd>TestClass<CR>", { desc = "Run all tests 
 vim.keymap.set("n", "<leader>ts", "<Cmd>TestSuite<CR>", { desc = "Run all tests in suite" })
 vim.keymap.set("n", "<leader>tl", "<Cmd>TestLast<CR>", { desc = "Run last test" })
 vim.keymap.set("n", "<leader>tv", "<Cmd>TestVisit<CR>", { desc = "Visit test file" })
+
+-- Plenary tests
+vim.keymap.set("n", "<leader>pd", function ()
+    require("plenary.test_harness").test_directory(vim.loop.cwd(), {})
+end, { desc = "Run tests in directory" })
+vim.keymap.set("n", "<leader>pf", function ()
+    require("plenary.test_harness").test_file(vim.fn.expand("%"))
+end, { desc = "Run tests in file" })
 
 -- Undo tree
 vim.keymap.set("n", "<leader>ut", function()
@@ -167,7 +183,7 @@ vim.keymap.set("n", "<leader>wm", "<Cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })
 
 -- Lazy stats
-vim.keymap.set("n", "<leader>ls", function ()
+vim.keymap.set("n", "<leader>ls", function()
     local lazy = require("lazy")
     local stats = lazy.stats()
     print("Startup time: " .. stats.startuptime)

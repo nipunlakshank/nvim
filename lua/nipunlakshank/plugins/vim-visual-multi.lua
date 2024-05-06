@@ -1,7 +1,8 @@
 return {
     "mg979/vim-visual-multi",
+    enabled = false,
     keys = {
-        { "<C-n>" },
+        { "<C-m>" },
     },
     branch = "master",
 }

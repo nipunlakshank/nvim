@@ -62,12 +62,3 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
         end)
     end,
 })
-
-vim.api.nvim_create_autocmd({ "VimLeave" }, {
-    group = python_env_group,
-    callback = function()
-        vim.schedule(function()
-            vim.cmd("!deactivate")
-        end)
-    end,
-})

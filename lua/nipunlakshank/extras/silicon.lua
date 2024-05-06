@@ -3,8 +3,6 @@ return {
     cmd = "Silicon",
     build = "./install.sh build",
     config = function()
-        local log = require("nipunlakshank.utils.functions").log
-        log("Loading silicon.nvim", "", { silent = false, async = true })
         local opts = {
             background = "#87f",
             font = "MesloLGS NF=26",

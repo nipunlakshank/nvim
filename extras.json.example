@@ -24,9 +24,21 @@
         "enabled": false
     },
     {
-        "plugin": "dotenv",
-        "desc": "A neovim plugin to load environment variables from .env file",
-        "file": "dotenv.lua",
+        "plugin": "copilot",
+        "desc": "Github Copilot integration for neovim",
+        "file": "copilot.lua",
+        "enabled": false
+    },
+    {
+        "plugin": "git-dev",
+        "desc": "Open remote git repository in neovim",
+        "file": "git-dev.lua",
+        "enabled": false
+    },
+    {
+        "plugin": "remote-nvim",
+        "desc": "Remote development in neovim",
+        "file": "remote-nvim.lua",
         "enabled": false
     }
 ]

@@ -1,4 +1,4 @@
-local enable_logging = false
+local enable_logging = true
 
 local M = {}
 

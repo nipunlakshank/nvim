@@ -1,9 +1,5 @@
 local file_exists = true
-local functions = require("nipunlakshank.utils.functions")
 local config_path = vim.fn.stdpath("config")
-local log = functions.log
-
-log("", "", { silent = true, async = false, prefix = "" })
 
 if vim.fn.findfile("extras.json", config_path) == "" then
     if vim.fn.findfile("extras.json.example", config_path) == "" then
@@ -26,16 +22,13 @@ for _, plugin_config in pairs(extras or {}) do
     local enabled = plugin_config.enabled
     local file = plugin_config.file
     local plugin_exists = vim.fn.findfile(file, config_path .. "/lua/nipunlakshank/extras") ~= ""
-    local plugin_path = "nipunlakshank.extras." .. plugin_config.plugin
+    local plugin_path = "nipunlakshank.extras." .. string.gsub(plugin_config.file, ".lua", "")
 
     if plugin_exists then
-        log("Before requiring " .. plugin_config.plugin, "", { silent = true, async = false })
         local plugin = require(plugin_path)
-        log("After requiring " .. plugin_config.plugin, "", { silent = true, async = false })
         plugin.optional = plugin_config.optional and true or false
         plugin.enabled = enabled
         table.insert(M, plugin)
-        log("Inserted to spec " .. plugin_config.plugin, "", { silent = true, async = false })
     end
 end
 

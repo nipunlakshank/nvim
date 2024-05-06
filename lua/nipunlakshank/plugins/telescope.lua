@@ -9,6 +9,7 @@ return {
             "nvim-lua/popup.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-media-files.nvim",
+            "ThePrimeagen/harpoon"
         },
         config = function()
             local telescope = require("telescope")
@@ -35,7 +36,7 @@ return {
                         "^.git//*",
                         "node_modules",
                         "build",
-                        "dist",
+                        "^dist//*",
                         "yarn.lock",
                         "package-lock.json",
                     },
@@ -62,6 +63,7 @@ return {
             -- load extensions
             telescope.load_extension("ui-select")
             telescope.load_extension("media_files")
+            telescope.load_extension('harpoon')
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
@@ -69,10 +71,10 @@ return {
             vim.keymap.set("n", "<leader>fl", builtin.live_grep, { desc = "Find in files" })
             vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
             vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" })
+            vim.keymap.set("n", "<leader>fm", ":Telescope harpoon marks<CR>", { desc = "Find harpoon marks" })
             vim.keymap.set("n", "<leader>fF", builtin.git_files, { desc = "Find git files" })
             vim.keymap.set("n", "<leader>fgc", builtin.git_commits, { desc = "Find git commits" })
             vim.keymap.set("n", "<leader>fgb", builtin.git_branches, { desc = "Find git branches" })
-
         end,
     },
 }

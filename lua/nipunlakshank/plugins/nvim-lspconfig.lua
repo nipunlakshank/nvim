@@ -1,7 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "folke/neoconf.nvim",
         "folke/neodev.nvim",
         -- { "creativenull/efmls-configs-nvim" },
     },
@@ -27,17 +26,21 @@ return {
             on_attach = on_attach,
             settings = { -- custom settings for lua
                 Lua = {
+                    runtime = {
+                        version = "LuaJIT",
+                    },
                     -- make the language server recognize "vim" global
                     diagnostics = {
                         globals = { "vim" },
-                        disable = { "missing-parameters", "missing-fields" },
+                        -- disable = { "missing-parameters", "missing-fields" },
                     },
                     workspace = {
-                        -- make language server aware of runtime files
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
-                        },
+                        checkThirdParty = false,
+                        library = vim.api.nvim_get_runtime_file("lua", true),
+                        -- library = {
+                        --     -- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                        --     vim.env.VIMRUNTIME,
+                        -- },
                     },
                 },
             },

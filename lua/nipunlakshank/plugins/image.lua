@@ -6,12 +6,10 @@ return {
         "theHamsta/nvim_rocks",
     },
     config = function()
-        local log = require("nipunlakshank.utils.functions").log
-        log("Loading image.nvim", "", { silent = false, async = false })
-
         local backend = "kitty"
 
         if vim.fn.has("win32") == 1 then
+            -- BUG: Currently not supports Windows
             return
         end
 

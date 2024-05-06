@@ -10,8 +10,6 @@ return {
         { "3rd/image.nvim", optional = true }, -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
-        local log = require("nipunlakshank.utils.functions").log
-        log("NeoTree setup")
         local opts = {
             filesystem = {
                 filtered_items = {
