@@ -3,6 +3,7 @@ local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
+local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
 
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim_enter_group,
@@ -41,6 +42,26 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
             name = "dot",
             cmd = { "dot-language-server", "--stdio" },
         })
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+    group = colorscheme_group,
+    callback = function()
+        local colorscheme = vim.g.colors_name
+        local keymap = "<leader>tt"
+        -- local themes = require("nipunlakshank.plugins.themes")
+
+        if string.match(colorscheme, "catppuccin") ~= -1 then
+            vim.keymap.set("n", keymap, function()
+                local catppuccin = require("catppuccin")
+                local opts = catppuccin.options
+                opts.transparent_background = not opts.transparent_background
+                catppuccin.setup(opts)
+                vim.cmd.colorscheme(vim.g.colors_name)
+            end, { noremap = false, silent = true, desc = "Toggle transparency (" .. colorscheme .. ")" })
+            return
+        end
     end,
 })
 
