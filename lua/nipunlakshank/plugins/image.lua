@@ -1,7 +1,5 @@
 return {
     "3rd/image.nvim",
-    -- optional = true,
-    event = "VeryLazy",
     dependencies = {
         "theHamsta/nvim_rocks",
     },
