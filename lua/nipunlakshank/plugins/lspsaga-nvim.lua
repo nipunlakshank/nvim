@@ -1,6 +1,6 @@
 return {
 	"glepnir/lspsaga.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("lspsaga").setup({
 			-- keybinds for navigation in lspsaga window

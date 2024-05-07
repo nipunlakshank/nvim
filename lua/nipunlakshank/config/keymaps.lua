@@ -93,6 +93,9 @@ vim.keymap.set(
     { silent = true, noremap = true, desc = "Replace in selected area" }
 )
 
+-- Search
+vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
+
 -- Backspace motions
 vim.keymap.set("i", '<C-BS>', '<Esc>"_ddk$', { noremap = true, silent = true, desc = "Delete current line" })
 
@@ -121,11 +124,14 @@ vim.keymap.set("v", "<leader>d", '"_d', { noremap = true, desc = "Delete into vo
 vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true, desc = "Insert a new line below" })
 vim.keymap.set("i", "<C-CR>", "<Esc>jA", { noremap = true, silent = true, desc = "Append to line below" })
 
--- Noice
-vim.keymap.set("n", "<leader>cn", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
+-- Diagnostics (Currently handled through Lspsaga)
+-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic message"})
+-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto next diagnostic message"})
+-- vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, {desc = "Show diagnostic message"})
+-- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, {desc = "Open diagnostics quickfix list"})
 
--- Dashboard
-vim.keymap.set("n", "<C-d>", "<Cmd>Alpha<CR>", {})
+-- Noice
+vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 
 -- Snapshots
 vim.keymap.set("n", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
@@ -182,9 +188,6 @@ vim.keymap.set("n", "<leader>wl", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>wm", "<Cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })
 
--- Lazy stats
-vim.keymap.set("n", "<leader>ls", function()
-    local lazy = require("lazy")
-    local stats = lazy.stats()
-    print("Startup time: " .. stats.startuptime)
-end, { desc = "Show startup time" })
+-- Cloak
+vim.keymap.set("n", "<leader>ct", "<Cmd>CloakPreviewLine<CR>", {desc = "Preview cloaked value in current line"})
+vim.keymap.set("n", "<leader>cT", "<Cmd>CloakToggle<CR>", {desc = "Toggle cloak in current file"})
