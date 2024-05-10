@@ -36,6 +36,12 @@
         "enabled": false
     },
     {
+        "plugin": "mini.animate",
+        "desc": "Aniamte common neovim actions",
+        "file": "mini.animate.lua",
+        "enabled": false
+    },
+    {
         "plugin": "remote-nvim",
         "desc": "Remote development in neovim",
         "file": "remote-nvim.lua",

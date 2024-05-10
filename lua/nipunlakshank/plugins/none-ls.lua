@@ -13,6 +13,8 @@ return {
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.markdownlint,
+                null_ls.builtins.diagnostics.markdownlint,
 
                 null_ls.builtins.formatting.prettier.with({
                     filetypes = {
@@ -20,7 +22,6 @@ return {
                         "scss",
                         "json",
                         "yaml",
-                        "markdown",
                         "html",
                         "vue",
                         "svelte",
@@ -28,6 +29,7 @@ return {
                         "angular",
                         "flow",
                         "javascript",
+                        -- "markdown",
                     },
                 }),
 

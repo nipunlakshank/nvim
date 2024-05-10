@@ -36,7 +36,7 @@ return {
                         workspace = {
                             checkThirdParty = false,
                             library = vim.api.nvim_get_runtime_file("lua", true),
-                       },
+                        },
                     },
                 },
             })
@@ -48,13 +48,13 @@ return {
                 root_dir = function(pattern)
                     local cwd = vim.loop.cwd()
                     local root = util.root_pattern(
-                        "composer.json",
                         ".git",
                         ".gitignore",
                         ".env",
                         ".env.example",
-                        ".htaccess",
-                        ".htpasswd"
+                        "composer.json",
+                        "composer.lock",
+                        "composer.yaml"
                     )(pattern)
 
                     if not root then
@@ -91,42 +91,7 @@ return {
             lspconfig.bashls.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
-                filetypes = { "sh", "zsh", "aliasrc" },
-            })
-
-            -- solidity
-            lspconfig.solidity.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = { "solidity" },
-            })
-
-            -- java
-            lspconfig.jdtls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = { "java" },
-                cmd = { "jdtls" },
-                root_dir = function(pattern)
-                    local cwd = vim.loop.cwd()
-                    local root = lspconfig.util.root_pattern("gradlew", ".git", "mvnw", "pom.xml")(pattern)
-
-                    if not root then
-                        return cwd
-                    end
-
-                    return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant
-                end,
-            })
-
-            -- C/C++
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                cmd = {
-                    "clangd",
-                    "--offset-encoding=utf-16",
-                },
+                filetypes = { "sh", "bash", "zsh", "aliasrc" },
             })
 
             -- emmet
@@ -149,28 +114,6 @@ return {
                     "sass",
                     "scss",
                     "pug",
-                },
-                -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
-                -- **Note:** only the options listed in the table are supported.
-                init_options = {
-                    ---@type table<string, string>
-                    includeLanguages = {},
-                    --- @type string[]
-                    excludeLanguages = {},
-                    --- @type string[]
-                    extensionsPath = {},
-                    --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
-                    preferences = {},
-                    --- @type boolean Defaults to `true`
-                    showAbbreviationSuggestions = true,
-                    --- @type "always" | "never" Defaults to `"always"`
-                    showExpandedAbbreviation = "always",
-                    --- @type boolean Defaults to `false`
-                    showSuggestionsAsSnippets = true,
-                    --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
-                    syntaxProfiles = {},
-                    --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
-                    variables = {},
                 },
             })
         end,
@@ -205,6 +148,41 @@ return {
                         lspconfig[server_name].setup({
                             capabilities = capabilities,
                             on_attach = on_attach,
+                        })
+                    end,
+
+                    -- java
+                    jdtls = function()
+                        lspconfig.jdtls.setup({
+                            capabilities = capabilities,
+                            on_attach = on_attach,
+                            filetypes = { "java" },
+                            cmd = { "jdtls" },
+                            root_dir = function(pattern)
+                                local cwd = vim.loop.cwd()
+                                local root = lspconfig.util.root_pattern("gradlew", ".git", "mvnw", "pom.xml")(pattern)
+
+                                if not root then
+                                    return cwd
+                                end
+
+                                return util.path.is_descendant(cwd, root) and cwd or
+                                root                              -- prefer cwd if root is a descendant
+                            end,
+                        })
+                    end,
+
+                    -- C/C++
+                    clangd = function()
+                        lspconfig.clangd.setup({
+                            capabilities = capabilities,
+                            on_attach = on_attach,
+                            cmd = {
+                                "clangd",
+                                "--background-index",
+                                "--offset-encoding=utf-16",
+                            },
+                            root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
                         })
                     end,
                 },

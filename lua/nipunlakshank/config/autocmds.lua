@@ -1,9 +1,10 @@
 local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 -- local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
-local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
+-- local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
+local file_type_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
 
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim_enter_group,
@@ -35,13 +36,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    group = lsp_attach_group,
-    pattern = { "*.dot" },
+    group = file_type_group,
+    pattern = { ".env*" },
     callback = function()
-        vim.lsp.start({
-            name = "dot",
-            cmd = { "dot-language-server", "--stdio" },
-        })
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        if string.endswith(buf_name, ".example") then
+            vim.cmd("set filetype=conf")
+            return
+        end
+        vim.cmd("set filetype=config")
     end,
 })
 

@@ -19,6 +19,7 @@ opt.shiftwidth = 4
 opt.softtabstop = 4
 opt.expandtab = true
 opt.smartindent = true
+opt.smarttab = true
 
 -- Word wrap
 opt.wrap = true

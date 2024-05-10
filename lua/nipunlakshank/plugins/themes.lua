@@ -26,6 +26,32 @@ local themes = {
                 dark = "mocha",
             },
             transparent_background = true,
+            color_overrides = {},
+            --[[ custom_highlights = function(colors)
+                return {
+                    GitSignsCurrentLineBlame = { fg = "#8c8c8c" },
+                }
+            end, ]]
+            highlight_overrides = {
+                ---@diagnostic disable-next-line: unused-local
+                all = function(colors)
+                    return {
+                        GitSignsCurrentLineBlame = { fg = "#8c8c8c" },
+                    }
+                end,
+            },
+            default_integrations = true,
+            integrations = {
+                cmp = true,
+                gitsigns = true,
+                nvimtree = true,
+                treesitter = true,
+                notify = true,
+                mini = {
+                    enabled = true,
+                    indentscope_color = "",
+                },
+            },
         },
     },
     onedarkpro = {

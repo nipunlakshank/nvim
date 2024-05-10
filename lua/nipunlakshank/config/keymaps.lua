@@ -167,11 +167,8 @@ vim.keymap.set("n", "<leader>ut", function()
     require("undotree").toggle()
 end, { noremap = true, silent = true, desc = "Toggle undo tree" })
 
--- Markdown preview
-vim.keymap.set("n", "<leader>mp", "<Cmd>MarkdownPreviewToggle<CR>", { desc = "Preview markdown" })
-
 -- DBUI
-vim.keymap.set("n", "<leader>db", "<Cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
+vim.keymap.set("n", "<leader>DB", "<Cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
 
 -- Oil (File Explorer)
 vim.keymap.set("n", "-", "<Cmd>Oil<CR>", { desc = "Open parent directory in oil" })

@@ -14,7 +14,7 @@ if not file_exists then
 end
 
 local lines = vim.fn.readfile(config_path .. "/extras.json", "")
-local extras = vim.json.decode(table.concat(lines, "\n") or "", { luanil = { object = true, array = true } })
+local extras = vim.json.decode(table.concat(lines, "\n") or "", {})
 
 local M = {}
 
