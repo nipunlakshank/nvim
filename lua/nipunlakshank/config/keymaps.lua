@@ -5,7 +5,6 @@ local f = require("nipunlakshank.utils.functions")
 mapkey("<leader>bn", "bnext", "n")     -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
 mapkey("<leader>bb", "e #", "n")       -- Switch to Other Buffer
-mapkey("<leader>`", "e #", "n")        -- SWitch to Other Buffer
 
 -- File Explorer
 mapkey("<leader>ef", "Neotree", "n")
@@ -34,9 +33,14 @@ mapkey("<A-Left>", "vertical resize +2", "n")
 mapkey("<A-Right>", "vertical resize -2", "n")
 
 -- Toggle word wrapping
-mapkey("gw", "set wrap!", "n", {desc = "Toggle word wrapping"})
-mapkey("gw", "set wrap!", "v", {desc = "Toggle word wrapping"})
--- mapkey("<C-w>", "set wrap!", "i")
+mapkey("<leader>tw", "set wrap!", "n", {desc = "Toggle word wrapping"})
+mapkey("<leader>tw", "set wrap!", "v", {desc = "Toggle word wrapping"})
+
+-- New tmux pane below (terminal)
+vim.keymap.set("n", "<leader>`", function()
+    local cwd = vim.loop.cwd()
+    vim.cmd("silent !tmux splitw -vl 15 -c " .. cwd)
+end, { silent = true, desc = "Create new tmux pane below" })
 
 -- Show Full File-Path
 vim.keymap.set(
