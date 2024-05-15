@@ -25,12 +25,12 @@ mapkey("<C-k>", "TmuxNavigateUp", "n")    -- Navigate Up
 mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
 -- Window Management
-mapkey("<leader>%", "vsplit", "n") -- Split Vertically
-mapkey('<leader>"', "split", "n")  -- Split Horizontally
-mapkey("<A-Up>", "horizontal resize +2", "n")
-mapkey("<A-Down>", "horizontal resize -2", "n")
-mapkey("<A-Left>", "vertical resize +2", "n")
-mapkey("<A-Right>", "vertical resize -2", "n")
+mapkey("<leader>%", "vsplit", "n", {desc = "Split window vertically"})
+mapkey('<leader>"', "split", "n", {desc = "Split window horizontally"})
+mapkey("<A-Up>", "horizontal resize +2", "n", {desc = "Resize window up"})
+mapkey("<A-Down>", "horizontal resize -2", "n", {desc = "Resize window down"})
+mapkey("<A-Left>", "vertical resize -2", "n", {desc = "Resize window left"})
+mapkey("<A-Right>", "vertical resize +2", "n", {desc = "Resize window right"})
 
 -- Toggle word wrapping
 mapkey("<leader>tw", "set wrap!", "n", {desc = "Toggle word wrapping"})

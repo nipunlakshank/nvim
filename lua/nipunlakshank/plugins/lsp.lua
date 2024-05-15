@@ -129,6 +129,7 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local on_attach = require("nipunlakshank.utils.lsp").on_attach
             local lspconfig = require("lspconfig")
+            local util = require("lspconfig.util")
 
             mason_lspconfig.setup({
                 automatic_installation = {
