@@ -134,6 +134,10 @@ vim.keymap.set("i", "<C-CR>", "<Esc>jA", { noremap = true, silent = true, desc =
 -- vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, {desc = "Show diagnostic message"})
 -- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, {desc = "Open diagnostics quickfix list"})
 
+-- Lsp
+vim.keymap.set("n", "<leader>th", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+end, { desc = "Show inlay hints" })
 -- Noice
 vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 

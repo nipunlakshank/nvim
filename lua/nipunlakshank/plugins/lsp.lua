@@ -21,6 +21,7 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
+            -- lua
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -140,6 +141,7 @@ return {
                 },
                 ensure_installed = {
                     "lua_ls",
+                    "jsonls",
                 },
                 handlers = {
                     -- The first entry (without a key) will be the default handler
@@ -192,6 +194,7 @@ return {
     },
     {
         "williamboman/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonUpdate", "MasonLog" },
         dependencies = {
             "jay-babu/mason-null-ls.nvim",
             "nvimtools/none-ls.nvim",

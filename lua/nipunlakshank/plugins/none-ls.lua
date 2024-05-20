@@ -40,7 +40,7 @@ return {
                     },
                 }),
 
-                require("none-ls.formatting.rustfmt"),
+                -- require("none-ls.formatting.rustfmt"),
             },
             border = "rounded",
         }

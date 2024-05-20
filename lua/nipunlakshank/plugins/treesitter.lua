@@ -4,6 +4,7 @@ local config = function()
         ensure_installed = {
             "lua",
             "regex",
+            "jsonc",
             "markdown",
             "markdown_inline",
         },
@@ -89,6 +90,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },

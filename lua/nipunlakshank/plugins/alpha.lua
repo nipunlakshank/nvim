@@ -34,12 +34,19 @@ return {
             local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
             local f = {
                 "",
-                "\t⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+                "\t ⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
             }
 
-            local sep = "\n"
-            for str in string.gmatch(fortune, "([^" .. sep .. "]+)") do
-                table.insert(f, str)
+            -- BUG: fortune is sometimes a table and sometimes a string
+            if type(fortune) == "table" then
+                for _, str in ipairs(fortune) do
+                    table.insert(f, str)
+                end
+            else
+                local sep = "\n"
+                for str in string.gmatch(fortune, "([^" .. sep .. "]+)") do
+                    table.insert(f, str)
+                end
             end
 
             return f

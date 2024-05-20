@@ -1,17 +1,18 @@
 local opt = vim.opt
 
 -- general
--- vim.g.loaded_netrwPlugin = 0
-opt.filetype = "on"
 opt.confirm = true
 opt.encoding = "UTF-8"
 opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
----@diagnostic disable-next-line: assign-type-mismatch
 opt.undodir = vim.fn.expand("$XDG_STATE_HOME/nvim/undo//")
 opt.undofile = true
 opt.mouse = "a"
+opt.number = true
+opt.relativenumber = true
+opt.smoothscroll = true
+opt.completeopt = "menuone,noinsert,noselect"
 
 -- Tab / Indentation
 opt.tabstop = 4
@@ -35,14 +36,11 @@ opt.hlsearch = true
 
 -- Appearance
 opt.guifont = "Jetbrains Mono:h16"
-opt.number = true
-opt.relativenumber = true
 opt.termguicolors = true
 opt.signcolumn = "yes"
 opt.cursorline = true
 opt.cmdheight = 1
 opt.scrolloff = 10
-opt.completeopt = "menuone,noinsert,noselect"
 opt.fillchars = { eob = " " }
 opt.guicursor =
 "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"

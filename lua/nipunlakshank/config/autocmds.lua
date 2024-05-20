@@ -4,7 +4,15 @@ local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
-local file_type_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
+local syntax_group = vim.api.nvim_create_augroup("SyntaxGroup", {})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = syntax_group,
+    pattern = "*",
+    callback = function()
+        -- vim.bo.syntax = "on"
+    end,
+})
 
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim_enter_group,
@@ -36,7 +44,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    group = file_type_group,
+    group = syntax_group,
     pattern = { ".env*" },
     callback = function()
         local buf_name = vim.api.nvim_buf_get_name(0)
@@ -75,14 +83,27 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
             local f = require("nipunlakshank.utils.functions")
             local python_env_path = vim.fn.stdpath("data") .. "/python"
 
-            f.async_cmd("mkdir -p " .. python_env_path)
-            f.async_cmd("python3 -m venv " .. python_env_path)
-            f.async_cmd(
-                "source "
-                .. python_env_path
-                .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
-            )
-            vim.g.python3_host_prog = python_env_path .. "/bin/python3"
+            if f.os.is_windows then
+                f.async_cmd(
+                    "python -m venv "
+                    .. python_env_path
+                    .. ";  "
+                    .. python_env_path
+                    .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
+                )
+                vim.g.python3_host_prog = python_env_path .. "/Scripts/python"
+            else
+                f.async_cmd(
+                    "mkdir -p "
+                    .. python_env_path
+                    .. " && python3 -m venv "
+                    .. python_env_path
+                    .. " && source "
+                    .. python_env_path
+                    .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
+                )
+                vim.g.python3_host_prog = python_env_path .. "/bin/python3"
+            end
         end)
     end,
 })
