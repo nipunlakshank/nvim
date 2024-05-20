@@ -25,16 +25,16 @@ mapkey("<C-k>", "TmuxNavigateUp", "n")    -- Navigate Up
 mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
 -- Window Management
-mapkey("<leader>%", "vsplit", "n", {desc = "Split window vertically"})
-mapkey('<leader>"', "split", "n", {desc = "Split window horizontally"})
-mapkey("<A-Up>", "horizontal resize +2", "n", {desc = "Resize window up"})
-mapkey("<A-Down>", "horizontal resize -2", "n", {desc = "Resize window down"})
-mapkey("<A-Left>", "vertical resize -2", "n", {desc = "Resize window left"})
-mapkey("<A-Right>", "vertical resize +2", "n", {desc = "Resize window right"})
+mapkey("<leader>%", "vsplit", "n", { desc = "Split window vertically" })
+mapkey('<leader>"', "split", "n", { desc = "Split window horizontally" })
+mapkey("<A-Up>", "horizontal resize +2", "n", { desc = "Resize window up" })
+mapkey("<A-Down>", "horizontal resize -2", "n", { desc = "Resize window down" })
+mapkey("<A-Left>", "vertical resize -2", "n", { desc = "Resize window left" })
+mapkey("<A-Right>", "vertical resize +2", "n", { desc = "Resize window right" })
 
 -- Toggle word wrapping
-mapkey("<leader>tw", "set wrap!", "n", {desc = "Toggle word wrapping"})
-mapkey("<leader>tw", "set wrap!", "v", {desc = "Toggle word wrapping"})
+mapkey("<leader>tw", "set wrap!", "n", { desc = "Toggle word wrapping" })
+mapkey("<leader>tw", "set wrap!", "v", { desc = "Toggle word wrapping" })
 
 -- New tmux pane below (terminal)
 vim.keymap.set("n", "<leader>`", function()
@@ -98,23 +98,43 @@ vim.keymap.set(
 )
 
 -- Search
-vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
+vim.keymap.set(
+    { "n", "s", "x" },
+    "<Esc>",
+    "<Cmd>nohlsearch<CR>",
+    { noremap = true, silent = true, desc = "Clear search highlights" }
+)
 
 -- Backspace motions
-vim.keymap.set("i", '<C-BS>', '<Esc>"_ddk$', { noremap = true, silent = true, desc = "Delete current line" })
+vim.keymap.set("i", "<C-BS>", '<Esc>"_ddk$', { noremap = true, silent = true, desc = "Delete current line" })
 
 -- Enter new lines without leaving normal mode
 if f.os.is_mac() then
     vim.keymap.set("n", "ø", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below (<A-o>)" })
-    vim.keymap.set("n", "Ø", 'mzO<Esc>0"_D`z', { noremap = true, silent = true, desc = "Insert newline above (<A-O>)" })
+    vim.keymap.set(
+        "n",
+        "Ø",
+        'mzO<Esc>0"_D`z',
+        { noremap = true, silent = true, desc = "Insert newline above (<A-O>)" }
+    )
 else
     vim.keymap.set("n", "<A-o>", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below" })
     vim.keymap.set("n", "<A-O>", 'mzO<Esc>0"_D`z', { noremap = true, silent = true, desc = "Insert newline above" })
 end
 
 -- Usefull when jumping from a commented line to a new line
-vim.keymap.set("n", "<leader>o", 'o<Esc>"_S', { noremap = true, silent = true, desc = "Insert newline below and clear before changing to insert mode" })
-vim.keymap.set("n", "<leader>O", 'O<Esc>"_S', { noremap = true, silent = true, desc = "Insert newline above and clear before changing to insert mode" })
+vim.keymap.set(
+    "n",
+    "<leader>o",
+    'o<Esc>"_S',
+    { noremap = true, silent = true, desc = "Insert newline below and clear before changing to insert mode" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>O",
+    'O<Esc>"_S',
+    { noremap = true, silent = true, desc = "Insert newline above and clear before changing to insert mode" }
+)
 
 -- Copy, Paste and Delete
 vim.keymap.set("n", "<leader>y", '"+y', { noremap = true, desc = "Yank into system clipboard" })
@@ -145,7 +165,7 @@ vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, des
 vim.keymap.set("n", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
 vim.keymap.set("v", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
 vim.keymap.set("n", "<C-s>c", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
-vim.keymap.set( "v", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
+vim.keymap.set("v", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
 
 -- Auto save
 vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })
@@ -163,10 +183,10 @@ vim.keymap.set("n", "<leader>tl", "<Cmd>TestLast<CR>", { desc = "Run last test" 
 vim.keymap.set("n", "<leader>tv", "<Cmd>TestVisit<CR>", { desc = "Visit test file" })
 
 -- Plenary tests
-vim.keymap.set("n", "<leader>pd", function ()
+vim.keymap.set("n", "<leader>pd", function()
     require("plenary.test_harness").test_directory(vim.loop.cwd(), {})
 end, { desc = "Run tests in directory" })
-vim.keymap.set("n", "<leader>pf", function ()
+vim.keymap.set("n", "<leader>pf", function()
     require("plenary.test_harness").test_file(vim.fn.expand("%"))
 end, { desc = "Run tests in file" })
 
@@ -194,5 +214,5 @@ vim.keymap.set("n", "<leader>wm", "<Cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })
 
 -- Cloak
-vim.keymap.set("n", "<leader>ct", "<Cmd>CloakPreviewLine<CR>", {desc = "Preview cloaked value in current line"})
-vim.keymap.set("n", "<leader>cT", "<Cmd>CloakToggle<CR>", {desc = "Toggle cloak in current file"})
+vim.keymap.set("n", "<leader>ct", "<Cmd>CloakPreviewLine<CR>", { desc = "Preview cloaked value in current line" })
+vim.keymap.set("n", "<leader>cT", "<Cmd>CloakToggle<CR>", { desc = "Toggle cloak in current file" })

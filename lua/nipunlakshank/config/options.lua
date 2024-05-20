@@ -1,6 +1,6 @@
 local opt = vim.opt
 
--- general
+-- General
 opt.confirm = true
 opt.encoding = "UTF-8"
 opt.errorbells = false
@@ -12,7 +12,16 @@ opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true
 opt.smoothscroll = true
-opt.completeopt = "menuone,noinsert,noselect"
+opt.hidden = true
+opt.backspace = "indent,eol,start"
+opt.splitright = true
+opt.splitbelow = true
+opt.autochdir = false
+opt.modifiable = true
+opt.showmode = false
+opt.completeopt = { "menu", "menuone", "noinsert" }
+-- opt.iskeyword:append("-")
+-- opt.clipboard:append("unnamedplus")
 
 -- Tab / Indentation
 opt.tabstop = 4
@@ -44,17 +53,6 @@ opt.scrolloff = 10
 opt.fillchars = { eob = " " }
 opt.guicursor =
 "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
-
--- Behaviour
-opt.hidden = true
-opt.backspace = "indent,eol,start"
-opt.splitright = true
-opt.splitbelow = true
-opt.autochdir = false
-opt.modifiable = true
-opt.showmode = false
--- opt.iskeyword:append("-")
--- opt.clipboard:append("unnamedplus")
 
 -- folds
 opt.foldmethod = "expr"
