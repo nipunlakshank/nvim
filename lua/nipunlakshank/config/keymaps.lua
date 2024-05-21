@@ -99,7 +99,7 @@ vim.keymap.set(
 
 -- Search
 vim.keymap.set(
-    { "n", "s", "x" },
+    { "n", "s" },
     "<Esc>",
     "<Cmd>nohlsearch<CR>",
     { noremap = true, silent = true, desc = "Clear search highlights" }
