@@ -1,5 +1,4 @@
 {
-  "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
   "LuaSnip": { "branch": "master", "commit": "de1a287c9cb525ae52bc846e8f6207e5ef1da5ac" },
   "alpha-nvim": { "branch": "main", "commit": "41283fb402713fc8b327e60907f74e46166f4cfd" },
   "alpha-nvim-fortune": { "branch": "main", "commit": "6b78cecae736dcf69d2f41403c3f6b48e3df326e" },
@@ -75,6 +74,7 @@
   "tokyonight.nvim": { "branch": "main", "commit": "634015fff1457ed66cf5364213a2bbbc51a82d6c" },
   "treesj": { "branch": "main", "commit": "e1e82ab4237619d342c7102c9f13d4b9833bfd39" },
   "trouble.nvim": { "branch": "dev", "commit": "578da6d9485b9a87bec5ba2b076141012cbb6c15" },
+  "ts-comments.nvim": { "branch": "main", "commit": "57e6c133c6091e1eba25ffd77697563d3f8ffc68" },
   "undotree": { "branch": "main", "commit": "eab459ab87dd249617b5f7187bb69e614a083047" },
   "vim-dadbod": { "branch": "master", "commit": "37523ffe0849b51db07fa7f48430c2aca5420a0e" },
   "vim-dadbod-completion": { "branch": "master", "commit": "5d5ad196fcde223509d7dabbade0148f7884c5e3" },
