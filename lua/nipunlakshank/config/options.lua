@@ -20,6 +20,7 @@ opt.autochdir = false
 opt.modifiable = true
 opt.showmode = false
 opt.completeopt = { "menu", "menuone", "noinsert" }
+opt.updatetime = 200
 -- opt.iskeyword:append("-")
 -- opt.clipboard:append("unnamedplus")
 
