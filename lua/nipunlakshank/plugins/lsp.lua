@@ -27,6 +27,11 @@ return {
                 on_attach = on_attach,
                 settings = { -- custom settings for lua
                     Lua = {
+                        format = {
+                            enable = false,
+                            -- formatter = "lua-format",
+                            -- formatter = "stylua",
+                        },
                         runtime = {
                             version = "LuaJIT",
                         },
