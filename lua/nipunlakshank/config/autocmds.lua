@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
         if string.match(colorscheme, "catppuccin") ~= -1 then
             vim.keymap.set("n", keymap, function()
                 local catppuccin = require("catppuccin")
-                local opts = catppuccin.options
+                local opts = catppuccin.options or {}
                 opts.transparent_background = not opts.transparent_background
                 catppuccin.setup(opts)
                 vim.cmd.colorscheme(vim.g.colors_name)
