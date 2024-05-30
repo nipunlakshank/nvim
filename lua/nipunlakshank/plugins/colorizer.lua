@@ -1,7 +1,7 @@
 return {
     "norcalli/nvim-colorizer.lua",
     -- ft = { "css", "html", "javascript", "typescript", "php", "javascriptreact", "typescriptreact" },
-    ft = { "*" },
+    event = { "BufRead" },
     cmd = { "ColorizerToggle", "ColorizerReloadAllBuffers" },
     config = function()
         local defaults = {
