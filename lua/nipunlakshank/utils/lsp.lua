@@ -6,8 +6,8 @@ M.on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
 	mapkey("<leader>gr", "Lspsaga finder", "n", opts) -- go to definition
-	mapkey("<leader>gd", "Lspsaga peek_definition", "n", opts) -- peak definition
-	mapkey("<leader>gD", "Lspsaga goto_definition", "n", opts) -- go to definition
+	mapkey("<leader>gp", "Lspsaga peek_definition", "n", opts) -- peak definition
+	mapkey("<leader>gd", "Lspsaga goto_definition", "n", opts) -- go to definition
 	mapkey("<leader>gh", "split | Lspsaga goto_definition", "n", opts) -- open definition in a horizontal split pane
 	mapkey("<leader>gv", "vsplit | Lspsaga goto_definition", "n", opts) -- open definition in a vertical split pane
 	mapkey("<leader>ca", "Lspsaga code_action", "n", opts) -- see available code actions
