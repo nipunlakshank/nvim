@@ -2,23 +2,6 @@ local themes = {
     catppuccin = {
         "catppuccin/nvim",
         name = "catppuccin",
-
-        -- init = function()
-        --     local mini_indent_scope_hi_group = vim.api.nvim_create_augroup("MiniIndentScopeHighlightGroup", {})
-        --     vim.api.nvim_create_autocmd({ "UIEnter", "Colorscheme" }, {
-        --         group = mini_indent_scope_hi_group,
-        --         pattern = "*",
-        --         callback = function()
-        --             local colorscheme = vim.g.colors_name
-        --             if not string.match(colorscheme, "catppuccin") then
-        --                 return
-        --             end
-        --             vim.schedule(function()
-        --                 vim.cmd("highlight MiniIndentScopeSymbol guifg=#f5e0dd")
-        --             end)
-        --         end,
-        --     })
-        -- end,
         opts = {
             flavour = "mocha",
             background = {
@@ -27,11 +10,6 @@ local themes = {
             },
             transparent_background = true,
             color_overrides = {},
-            --[[ custom_highlights = function(colors)
-                return {
-                    GitSignsCurrentLineBlame = { fg = "#8c8c8c" },
-                }
-            end, ]]
             highlight_overrides = {
                 ---@diagnostic disable-next-line: unused-local
                 all = function(colors)
@@ -123,23 +101,6 @@ local themes = {
                 h5 = "pine",
                 h6 = "foam",
             },
-
-            highlight_groups = {
-                -- Comment = { fg = "foam" },
-                -- VertSplit = { fg = "muted", bg = "muted" },
-            },
-
-            before_highlight = function(group, highlight, palette)
-                -- Disable all undercurls
-                -- if highlight.undercurl then
-                --     highlight.undercurl = false
-                -- end
-                --
-                -- Change palette colour
-                -- if highlight.fg == palette.pine then
-                --     highlight.fg = palette.foam
-                -- end
-            end,
         },
     },
 }
