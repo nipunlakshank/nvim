@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
                 local catppuccin = require("catppuccin")
                 local opts = catppuccin.options or {}
                 opts.transparent_background = not opts.transparent_background
-                catppuccin.setup(opts)
+                catppuccin.compile()
                 vim.cmd.colorscheme(vim.g.colors_name)
             end, { noremap = false, silent = true, desc = "Toggle transparency (" .. colorscheme .. ")" })
             return
