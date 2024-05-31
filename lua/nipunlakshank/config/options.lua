@@ -21,6 +21,7 @@ opt.modifiable = true
 opt.showmode = false
 opt.completeopt = { "menu", "menuone", "noinsert" }
 opt.updatetime = 200
+opt.laststatus = 3
 -- opt.iskeyword:append("-")
 -- opt.clipboard:append("unnamedplus")
 
