@@ -216,3 +216,14 @@ vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })
 -- Cloak
 vim.keymap.set("n", "<leader>ct", "<Cmd>CloakPreviewLine<CR>", { desc = "Preview cloaked value in current line" })
 vim.keymap.set("n", "<leader>cT", "<Cmd>CloakToggle<CR>", { desc = "Toggle cloak in current file" })
+
+-- Compiler
+-- Open compiler
+vim.api.nvim_set_keymap('n', '<F6>', "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
+-- Redo last selected option
+vim.api.nvim_set_keymap('n', '<S-F6>', "<cmd>CompilerStop<cr>" .. "<cmd>CompilerRedo<cr>", { noremap = true, silent = true })
+-- Toggle compiler results
+vim.api.nvim_set_keymap('n', '<S-F7>', "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
+
+-- Neogit
+vim.keymap.set("n", "<leader>G", "<Cmd>Neogit<CR>", { desc = "Open Neogit" })
