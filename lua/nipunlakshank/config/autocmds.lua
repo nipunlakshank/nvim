@@ -110,3 +110,11 @@ autocmd({ "VimEnter" }, {
         end)
     end,
 })
+
+autocmd({ "FileType" }, {
+    group = ft_group,
+    pattern = { "fugitive" },
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<CR>", { noremap = true, silent = true })
+    end,
+})
