@@ -175,8 +175,7 @@ return {
                                     return cwd
                                 end
 
-                                return util.path.is_descendant(cwd, root) and cwd or
-                                root                              -- prefer cwd if root is a descendant
+                                return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant
                             end,
                         })
                     end,
