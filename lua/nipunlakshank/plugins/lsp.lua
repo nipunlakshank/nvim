@@ -3,7 +3,8 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            "folke/neodev.nvim",
+            { "folke/neodev.nvim", optional = true },
+            { "folke/lazydev.nvim", optional = true },
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },

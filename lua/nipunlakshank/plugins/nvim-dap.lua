@@ -4,7 +4,8 @@ return {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
         "leoluz/nvim-dap-go",
-        "folke/neodev.nvim",
+        { "folke/neodev.nvim", optional = true },
+        { "folke/lazydev.nvim", optional = true },
     },
     config = function()
         local dap, dapui = require("dap"), require("dapui")
