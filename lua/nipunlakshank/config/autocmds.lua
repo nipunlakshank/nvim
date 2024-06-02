@@ -1,3 +1,5 @@
+local autocmd = vim.api.nvim_create_autocmd
+
 local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 -- local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 -- local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
@@ -5,8 +7,9 @@ local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
 local syntax_group = vim.api.nvim_create_augroup("SyntaxGroup", {})
+local ft_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
 
-vim.api.nvim_create_autocmd("BufEnter", {
+autocmd("BufEnter", {
     group = syntax_group,
     pattern = "*",
     callback = function()
@@ -14,7 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
+autocmd("VimEnter", {
     group = vim_enter_group,
     callback = function()
         vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
@@ -22,7 +25,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 -- auto-format on save
--- vim.api.nvim_create_autocmd("BufWritePre", {
+-- autocmd("BufWritePre", {
 --     group = lsp_fmt_group,
 --     callback = function()
 --         local efm = vim.lsp.get_active_clients({ name = "efm" })
@@ -36,14 +39,14 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- })
 
 -- highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
     group = highlight_yank_group,
     callback = function()
         vim.highlight.on_yank()
     end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
+autocmd({ "BufEnter" }, {
     group = syntax_group,
     pattern = { ".env*" },
     callback = function()
@@ -56,7 +59,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+autocmd({ "UIEnter", "ColorScheme" }, {
     group = colorscheme_group,
     callback = function()
         local colorscheme = vim.g.colors_name
@@ -76,7 +79,7 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+autocmd({ "VimEnter" }, {
     group = python_env_group,
     callback = function()
         vim.schedule(function()
