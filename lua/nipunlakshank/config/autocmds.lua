@@ -89,21 +89,21 @@ autocmd({ "VimEnter" }, {
             if f.os.is_windows then
                 f.async_cmd(
                     "python -m venv "
-                    .. python_env_path
-                    .. ";  "
-                    .. python_env_path
-                    .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
+                        .. python_env_path
+                        .. ";  "
+                        .. python_env_path
+                        .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
                 )
                 vim.g.python3_host_prog = python_env_path .. "/Scripts/python"
             else
                 f.async_cmd(
                     "mkdir -p "
-                    .. python_env_path
-                    .. " && python3 -m venv "
-                    .. python_env_path
-                    .. " && source "
-                    .. python_env_path
-                    .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
+                        .. python_env_path
+                        .. " && python3 -m venv "
+                        .. python_env_path
+                        .. " && source "
+                        .. python_env_path
+                        .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
                 )
                 vim.g.python3_host_prog = python_env_path .. "/bin/python3"
             end
