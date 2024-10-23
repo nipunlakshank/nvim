@@ -7,6 +7,8 @@ local config = function()
             "jsonc",
             "markdown",
             "markdown_inline",
+            "phpdoc",
+            "jsdoc",
         },
         auto_install = true,
         sync_install = false,
