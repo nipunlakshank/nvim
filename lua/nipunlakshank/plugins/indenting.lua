@@ -26,6 +26,7 @@ return {
 						"notify",
 						"toggleterm",
 						"lazyterm",
+                        "dbui",
 					},
 				},
 			}
@@ -59,6 +60,7 @@ return {
 					"notify",
 					"toggleterm",
 					"lazyterm",
+                    "dbui",
 				},
 				callback = function()
 					---@diagnostic disable-next-line: inject-field
