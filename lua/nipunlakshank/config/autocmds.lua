@@ -8,12 +8,24 @@ local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
 local syntax_group = vim.api.nvim_create_augroup("SyntaxGroup", {})
 local ft_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
+local indenting_group = vim.api.nvim_create_augroup("IndentationGroup", {})
 
 autocmd("BufEnter", {
     group = syntax_group,
     pattern = "*",
     callback = function()
         -- vim.bo.syntax = "on"
+    end,
+})
+
+autocmd("FileType", {
+    group = indenting_group,
+    pattern = { "nix" },
+    callback = function()
+        vim.bo.expandtab = true
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
+        vim.bo.softtabstop = 2
     end,
 })
 
