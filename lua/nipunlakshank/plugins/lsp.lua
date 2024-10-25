@@ -48,6 +48,19 @@ return {
                 },
             })
 
+            -- nix
+            lspconfig.nil_ls.setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                filetypes = { "nix" },
+                cmd = { "nil" },
+                settings = {
+                    ['nil'] = {
+                        formatting = { command = { "nixfmt" } },
+                    },
+                },
+            })
+
             -- php
             lspconfig.intelephense.setup({
                 capabilities = capabilities,
