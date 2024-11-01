@@ -70,7 +70,6 @@ return {
                 { name = "luasnip",               priority = 750 },
                 { name = "buffer",                priority = 500 },
                 { name = "path",                  priority = 250 },
-                { name = "vim-dadbod-completion", priority = 700 },
             }, {
                 { name = "buffer" },
             }),
@@ -84,13 +83,11 @@ return {
                 { name = "buffer" },
             }),
         })
-        cmp.setup.filetype({ "mysql", "sql" }, {
+        cmp.setup.filetype({ "sql" }, {
             sources = cmp.config.sources({
                 { name = "vim-dadbod-completion", priority = 1000 },
                 { name = "buffer",                priority = 750 },
                 { name = "path",                  priority = 500 },
-            }, {
-                { name = "buffer" },
             }),
         })
 
