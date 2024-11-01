@@ -97,6 +97,10 @@ autocmd({ "VimEnter" }, {
         vim.schedule(function()
             local f = require("nipunlakshank.utils.functions")
             local python_env_path = vim.fn.stdpath("data") .. "/python"
+            local stat = vim.loop.fs_stat(python_env_path)
+            if not (stat and stat.type == "directory") then
+                local success, err = vim.loop.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
+            end
 
             if f.os.is_windows then
                 f.async_cmd(
