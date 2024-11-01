@@ -1,6 +1,7 @@
 require("nipunlakshank.config.paths")
 require("nipunlakshank.config.globals")
 require("nipunlakshank.config.options")
+require("nipunlakshank.config.filetypes")
 require("nipunlakshank.config.lazy")
 require("nipunlakshank.config.keymaps")
 require("nipunlakshank.config.autocmds")
