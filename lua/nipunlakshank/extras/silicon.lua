@@ -3,9 +3,12 @@ return {
     cmd = "Silicon",
     build = "./install.sh build",
     config = function()
+        local snapshopDirectory = vim.fn.expand("$HOME") .. "/dev/CodeSnapshots"
+        vim.fn.mkdir(snapshopDirectory, "-p")
         local opts = {
             background = "#87f",
-            font = "MesloLGS NF=26",
+            -- font = "MesloLGS NF=26",
+            font = "JetBrainsMono Nerd Font Mono=26",
             theme = "Monokai Extended",
             line_number = true,
             pad_vert = 80,
@@ -19,7 +22,7 @@ return {
             window_controls = true, -- (boolean) Whether to show window controls (minimize, maximize, close) in the screenshot.
             output = {
                 file = "",
-                path = vim.fn.expand("$HOME") .. "/dev/CodeSnapshots",
+                path = snapshopDirectory,
                 format = "snapshot_[year][month][day]_[hour][minute][second].png",
             },
             watermark = {
