@@ -28,6 +28,9 @@ return {
                 on_attach = on_attach,
                 settings = { -- custom settings for lua
                     Lua = {
+                        hint = {
+                            enable = true, -- necessary
+                        },
                         format = {
                             enable = false,
                             -- formatter = "lua-format",
@@ -36,13 +39,8 @@ return {
                         runtime = {
                             version = "LuaJIT",
                         },
-                        diagnostics = {
-                            -- globals = { "vim" },
-                            -- disable = { "missing-parameters", "missing-fields" },
-                        },
                         workspace = {
                             checkThirdParty = false,
-                            library = vim.api.nvim_get_runtime_file("lua", true),
                         },
                     },
                 },
@@ -55,7 +53,7 @@ return {
                 filetypes = { "nix" },
                 cmd = { "nil" },
                 settings = {
-                    ['nil'] = {
+                    ["nil"] = {
                         formatting = { command = { "nixfmt" } },
                     },
                 },
@@ -65,15 +63,15 @@ return {
             lspconfig.intelephense.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
+                filetypes = { "php", "blade" },
                 root_dir = function(pattern)
-                    local cwd = vim.loop.cwd()
+                    local cwd = vim.uv.cwd()
                     local root = util.root_pattern(
                         ".git",
                         ".gitignore",
                         ".env",
                         ".env.example",
                         "composer.json",
-                        "composer.lock",
                         "composer.yaml"
                     )(pattern)
 
@@ -84,6 +82,13 @@ return {
                     return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant end,
                 end,
             })
+
+            -- laravel blade
+            --[[ lspconfig.blade.setup({
+                -- Capabilities is specific to my setup.
+                capabilities = capabilities,
+                on_attach = on_attach,
+            }) ]]
 
             -- typescript
             lspconfig.ts_ls.setup({

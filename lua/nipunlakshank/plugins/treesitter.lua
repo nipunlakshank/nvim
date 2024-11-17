@@ -1,5 +1,6 @@
 local config = function()
     local treesitter = require("nvim-treesitter.configs")
+
     treesitter.setup({
         ensure_installed = {
             "lua",
@@ -7,8 +8,10 @@ local config = function()
             "jsonc",
             "markdown",
             "markdown_inline",
-            "phpdoc",
             "jsdoc",
+            "php",
+            "php_only",
+            "phpdoc",
         },
         auto_install = true,
         sync_install = false,
