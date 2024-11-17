@@ -1,34 +1,40 @@
 return {
-    "Pocco81/auto-save.nvim",
+    "okuuva/auto-save.nvim",
+    version = "*",
     cmd = "ASToggle",
-    config = function()
-        local autosave = require("auto-save")
-        autosave.setup({
-            dim = 0.18,
-            cleaning_interval = 1000,
-            callbacks = { -- functions to be executed at different intervals
-                enabling = nil, -- ran when enabling auto-save
-                disabling = nil, -- ran when disabling auto-save
+    event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+    opts = {
+        enabled = false, -- whether to enable autosave when the plugin is loaded
+        debounce_delay = 1000, -- delay after which a pending save is executed
+        trigger_events = { -- See :h events
+            immediate_save = { "BufLeave", "FocusLost" }, -- vim events that trigger an immediate save
+            defer_save = { "InsertLeave", "TextChanged" }, -- vim events that trigger a deferred save (saves after `debounce_delay`)
+            cancel_deferred_save = { "InsertEnter" }, -- vim events that cancel a pending deferred save
+        },
+        condition = function(buf)
+            local fn = vim.fn
+            local utils = require("auto-save.utils.data")
 
-                condition = function(buf)
+            local disabled_filetypes = {
+                "harpoon",
+                "sql",
+            }
 
-                    if vim.bo.filetype == "harpoon" then
-                        return false
-                    end
+            -- don't save for special-buffers
+            if fn.getbufvar(buf, "&buftype") ~= "" then
+                return false
+            end
 
-                    local fn = vim.fn
-                    local utils = require("auto-save.utils.data")
+            if utils.not_in(fn.getbufvar(buf, "&filetype"), disabled_filetypes) then
+                return true -- met condition(s), can save
+            end
 
-                    if fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(fn.getbufvar(buf, "&filetype"), {}) then
-                        return true -- met condition(s), can save
-                    end
-                    return false -- can't save
-                end,
-
-                before_saving = nil, -- ran before doing the actual save
-                after_saving = nil, -- ran after doing the actual save
-            },
-        })
-        autosave.toggle()
-    end,
+            return false -- can't save
+        end,
+        write_all_buffers = false, -- write all buffers when the current one meets `condition`
+        noautocmd = false, -- do not execute autocmds when saving
+        lockmarks = false, -- lock marks when saving, see `:h lockmarks` for more details
+        -- log debug messages to 'auto-save.log' file in neovim cache directory, set to `true` to enable
+        debug = false,
+    },
 }
