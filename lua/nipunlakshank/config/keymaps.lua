@@ -7,8 +7,7 @@ mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
 mapkey("<leader>bb", "e #", "n")       -- Switch to Other Buffer
 
 -- File Explorer
-mapkey("<leader>ef", "Neotree", "n")
-mapkey("<leader>et", "Neotree toggle", "n")
+mapkey("<leader>e", "Neotree toggle", "n")
 
 -- Pane and Window Navigation
 mapkey("<C-h>", "<C-w>h", "n")            -- Navigate Left
@@ -38,7 +37,7 @@ mapkey("<leader>tw", "set wrap!", "v", { desc = "Toggle word wrapping" })
 
 -- New tmux pane below (terminal)
 vim.keymap.set("n", "<leader>`", function()
-    local cwd = vim.loop.cwd()
+    local cwd = vim.uv.cwd()
     vim.cmd("silent !tmux splitw -vl 15 -c " .. cwd)
 end, { silent = true, desc = "Create new tmux pane below" })
 
@@ -51,7 +50,7 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>rp", "<Cmd>file<CR>", { noremap = true, silent = true, desc = "Show relative file path" })
 
-if f.os.is_mac() then
+if f.sys.is_mac() then
     -- Move lines vertically (MacOS)
     vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
     vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
@@ -109,7 +108,7 @@ vim.keymap.set(
 vim.keymap.set("i", "<C-BS>", '<Esc>"_ddk$', { noremap = true, silent = true, desc = "Delete current line" })
 
 -- Enter new lines without leaving normal mode
-if f.os.is_mac() then
+if f.sys.is_mac() then
     vim.keymap.set("n", "ø", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below (<A-o>)" })
     vim.keymap.set(
         "n",
@@ -157,7 +156,7 @@ vim.keymap.set("i", "<C-CR>", "<Esc>jA", { noremap = true, silent = true, desc =
 -- Lsp
 vim.keymap.set("n", "<leader>th", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-end, { desc = "Show inlay hints" })
+end, { desc = "Toggle inlay hints" })
 -- Noice
 vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 
@@ -175,16 +174,16 @@ vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto sav
 -- vim.keymap.set("n", "<leader>lsx", "<Cmd>LiveServerStop<CR>", { desc = "Stop live server" })
 
 -- Vim Tests
-vim.keymap.set("n", "<leader>tn", "<Cmd>TestNearest<CR>", { desc = "Run nearest test" })
-vim.keymap.set("n", "<leader>tf", "<Cmd>TestFile<CR>", { desc = "Run all tests in file" })
-vim.keymap.set("n", "<leader>tc", "<Cmd>TestClass<CR>", { desc = "Run all tests in class" })
-vim.keymap.set("n", "<leader>ts", "<Cmd>TestSuite<CR>", { desc = "Run all tests in suite" })
-vim.keymap.set("n", "<leader>tl", "<Cmd>TestLast<CR>", { desc = "Run last test" })
-vim.keymap.set("n", "<leader>tv", "<Cmd>TestVisit<CR>", { desc = "Visit test file" })
+vim.keymap.set("n", "<leader>Tn", "<Cmd>TestNearest<CR>", { desc = "Run nearest test" })
+vim.keymap.set("n", "<leader>Tf", "<Cmd>TestFile<CR>", { desc = "Run all tests in file" })
+vim.keymap.set("n", "<leader>Tc", "<Cmd>TestClass<CR>", { desc = "Run all tests in class" })
+vim.keymap.set("n", "<leader>Ts", "<Cmd>TestSuite<CR>", { desc = "Run all tests in suite" })
+vim.keymap.set("n", "<leader>Tl", "<Cmd>TestLast<CR>", { desc = "Run last test" })
+vim.keymap.set("n", "<leader>Tv", "<Cmd>TestVisit<CR>", { desc = "Visit test file" })
 
 -- Plenary tests
 vim.keymap.set("n", "<leader>pd", function()
-    require("plenary.test_harness").test_directory(vim.loop.cwd(), {})
+    require("plenary.test_harness").test_directory(vim.uv.cwd(), {})
 end, { desc = "Run tests in directory" })
 vim.keymap.set("n", "<leader>pf", function()
     require("plenary.test_harness").test_file(vim.fn.expand("%"))
@@ -227,3 +226,11 @@ vim.api.nvim_set_keymap('n', '<S-F7>', "<cmd>CompilerToggleResults<cr>", { norem
 
 -- Neogit
 vim.keymap.set("n", "<leader>G", "<Cmd>Neogit<CR>", { desc = "Open Neogit" })
+
+-- mini indent scope
+vim.keymap.set("n", "<leader>ti", function ()
+    vim.b.miniindentscope_disable = not vim.b.miniindentscope_disable
+end, {desc = "Toggle mini.indentscope"})
+
+-- tailwindcss
+vim.keymap.set("n", "<leader>tc", "<Cmd>TailwindConcealToggle<CR>", { desc = "Toggle conceal classes" })
