@@ -1,31 +1,23 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
--- local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
--- local lsp_attach_group = vim.api.nvim_create_augroup("LspAttachGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
 local syntax_group = vim.api.nvim_create_augroup("SyntaxGroup", {})
 local ft_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
 local indenting_group = vim.api.nvim_create_augroup("IndentationGroup", {})
+local group = vim.api.nvim_create_augroup("autosave", {})
 
-autocmd("BufEnter", {
-    group = syntax_group,
-    pattern = "*",
-    callback = function()
-        -- vim.bo.syntax = "on"
-    end,
-})
-
-autocmd("FileType", {
-    group = indenting_group,
-    pattern = { "nix" },
-    callback = function()
-        vim.bo.expandtab = true
-        vim.bo.shiftwidth = 2
-        vim.bo.tabstop = 2
-        vim.bo.softtabstop = 2
+vim.api.nvim_create_autocmd("User", {
+    pattern = "AutoSaveWritePost",
+    group = group,
+    callback = function(opts)
+        if opts.data.saved_buffer ~= nil then
+            local filename = vim.api.nvim_buf_get_name(opts.data.saved_buffer)
+            local rel_path = string.gsub(filename, vim.uv.cwd() and vim.uv.cwd() .. "/" or "", "")
+            print("AutoSave: saved " .. rel_path .. " at " .. vim.fn.strftime("%H:%M:%S"))
+        end
     end,
 })
 
@@ -58,18 +50,18 @@ autocmd("TextYankPost", {
     end,
 })
 
-autocmd({ "BufEnter" }, {
-    group = syntax_group,
-    pattern = { ".env*" },
-    callback = function()
-        local buf_name = vim.api.nvim_buf_get_name(0)
-        if string.endswith(buf_name, ".example") then
-            vim.cmd("set filetype=conf")
-            return
-        end
-        vim.cmd("set filetype=config")
-    end,
-})
+-- autocmd({ "BufEnter" }, {
+--     group = syntax_group,
+--     pattern = { ".env*" },
+--     callback = function()
+--         local buf_name = vim.api.nvim_buf_get_name(0)
+--         if string.endswith(buf_name, ".example") then
+--             vim.cmd("set filetype=conf")
+--             return
+--         end
+--         vim.cmd("set filetype=config")
+--     end,
+-- })
 
 autocmd({ "UIEnter", "ColorScheme" }, {
     group = colorscheme_group,
@@ -97,12 +89,12 @@ autocmd({ "VimEnter" }, {
         vim.schedule(function()
             local f = require("nipunlakshank.utils.functions")
             local python_env_path = vim.fn.stdpath("data") .. "/python"
-            local stat = vim.loop.fs_stat(python_env_path)
+            local stat = vim.uv.fs_stat(python_env_path)
             if not (stat and stat.type == "directory") then
-                local success, err = vim.loop.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
+                local success, err = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
             end
 
-            if f.os.is_windows then
+            if vim.fn.has("win32") == 1 then
                 f.async_cmd(
                     "python -m venv "
                         .. python_env_path

@@ -6,7 +6,7 @@ return {
             library = {
                 -- See the configuration section for more details
                 -- Load luvit types when the `vim.uv` word is found
-                { path = "luvit-meta/library", words = { "vim%.uv" } },
+                { path = "luvit-meta/library", words = { "vim%.uv", "vim%.loop" } },
                 { path = "LazyVim", words = { "LazyVim" } },
                 { path = "wezterm-types", mods = { "wezterm" } },
             },

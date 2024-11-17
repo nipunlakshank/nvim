@@ -2,35 +2,35 @@ local enable_logging = true
 
 local M = {}
 
-local os = {}
+local sys = {}
 local cmd = {}
 
-function os.get()
+function sys.get()
     local os_name = "linux"
 
-    if os.is_windows() then
+    if sys.is_windows() then
         os_name = "windows"
     end
-    if os.is_mac() then
+    if sys.is_mac() then
         os_name = "macos"
     end
 
     return os_name
 end
 
-function os.is_unix()
+function sys.is_unix()
     return vim.fn.has("unix") == 1
 end
 
-function os.is_linux()
+function sys.is_linux()
     return vim.fn.has("linux") == 1
 end
 
-function os.is_mac()
+function sys.is_mac()
     return vim.fn.has("mac") == 1
 end
 
-function os.is_windows()
+function sys.is_windows()
     return vim.fn.has("win32") == 1
 end
 
@@ -88,7 +88,7 @@ local function log(message, file, opts)
     end
 
     if vim.fn.finddir(file) ~= "" then
-        file = file .. "/nvim.log"
+        file = cwd .. "/nvim.log"
     end
 
     opts = opts or {}
@@ -127,7 +127,7 @@ local function log(message, file, opts)
     log_opts.callback(final_command)
 end
 
-M.os = os
+M.sys = sys
 M.cmd = cmd
 M.async_cmd = cmd_async
 M.log = log

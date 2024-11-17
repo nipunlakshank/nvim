@@ -5,7 +5,7 @@ if vim.fn.findfile("extras.json", config_path) == "" then
     if vim.fn.findfile("extras.json.example", config_path) == "" then
         return {}
     end
-    vim.loop.fs_copyfile(config_path .. "/extras.json.example", config_path .. "/extras.json")
+    vim.uv.fs_copyfile(config_path .. "/extras.json.example", config_path .. "/extras.json")
     file_exists = vim.fn.findfile("extras.json", config_path) ~= ""
 end
 

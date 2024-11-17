@@ -1,10 +1,16 @@
-local extension = {}
+local extension = {
+    http = "http",
+}
 
-local filename = {}
+local filename = {
+    -- [".env"] = "dotenv"
+}
 
 local pattern = {
     [".*/git/config"] = "gitconfig",
     [".*_git/config"] = "gitconfig",
+    [".*/%.env"] = "dotenv",
+    [".*/%.env%..*"] = "dotenv",
 }
 
 vim.filetype.add({
