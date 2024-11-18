@@ -28,7 +28,7 @@ return {
                     only_render_image_at_cursor = false,
                     filetypes = { "norg" },
                 },
-                html = { enabled = true },
+                html = { enabled = false },
             },
             max_width = nil,
             max_height = nil,
