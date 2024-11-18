@@ -55,6 +55,7 @@
   "nvim-dap-go": { "branch": "main", "commit": "6aa88167ea1224bcef578e8c7160fe8afbb44848" },
   "nvim-dap-ui": { "branch": "master", "commit": "ffa89839f97bad360e78428d5c740fdad9a0ff02" },
   "nvim-emmet": { "branch": "main", "commit": "cde4fb2968704aae5c18b7f8a9bc2508767bb78d" },
+  "nvim-html-css": { "branch": "main", "commit": "4e406d4f1d12b716c1a0805ae63525442f4baf93" },
   "nvim-java": { "branch": "main", "commit": "905013eb83c58bda992724b3ecbe20f60b58513f" },
   "nvim-java-core": { "branch": "main", "commit": "5b03dca22fee76524a89e1c2dc1d73a9f0b1a3bb" },
   "nvim-java-dap": { "branch": "main", "commit": "55f239532f7a3789d21ea68d1e795abc77484974" },

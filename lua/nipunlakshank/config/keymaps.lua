@@ -161,10 +161,10 @@ end, { desc = "Toggle inlay hints" })
 vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
 
 -- Snapshots
-vim.keymap.set("n", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
-vim.keymap.set("v", "<C-s>s", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
-vim.keymap.set("n", "<C-s>c", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
-vim.keymap.set("v", "<leader>Sc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
+vim.keymap.set("n", "<leader>cs", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
+vim.keymap.set("v", "<leader>cs", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
+vim.keymap.set("n", "<leader>cc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
+vim.keymap.set("v", "<leader>cc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
 
 -- Auto save
 vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })

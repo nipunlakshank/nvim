@@ -50,7 +50,7 @@ return {
                     --[[ before = function(entry, vim_item)
                         return vim_item
                     end, ]]
-                    before = require("tailwind-tools.cmp").lspkind_format,
+                    before = require("nipunlakshank.utils.cmp").format,
                 }),
             },
             window = {
@@ -67,10 +67,29 @@ return {
                 ["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             }),
             sources = cmp.config.sources({
-                { name = "nvim_lsp",              priority = 1000 },
-                { name = "luasnip",               priority = 750 },
-                { name = "buffer",                priority = 500 },
-                { name = "path",                  priority = 250 },
+                { name = "nvim_lsp", priority = 1000 },
+                { name = "luasnip", priority = 750 },
+                { name = "buffer", priority = 500 },
+                { name = "path", priority = 250 },
+                {
+                    name = "html-css",
+                    option = {
+                        -- your configuration here
+                        enable_on = {
+                            "html",
+                            "php",
+                            "blade",
+                        }, -- set the file types you want the plugin to work on
+                        dir_to_exclude = { "node_modules" },
+                        file_extensions = { "css", "sass", "less", "scss" }, -- set the local filetypes from which you want to derive classes
+                        style_sheets = {
+                            -- example of remote styles, only css no js for now
+                            "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+                            -- "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
+                        },
+                    },
+                    priority = 550,
+                },
             }, {
                 { name = "buffer" },
             }),
@@ -87,8 +106,8 @@ return {
         cmp.setup.filetype({ "sql" }, {
             sources = cmp.config.sources({
                 { name = "vim-dadbod-completion", priority = 1000 },
-                { name = "buffer",                priority = 750 },
-                { name = "path",                  priority = 500 },
+                { name = "buffer", priority = 750 },
+                { name = "path", priority = 500 },
             }),
         })
 
@@ -110,7 +129,7 @@ return {
             }),
         })
 
-        vim.keymap.set({"i", "s"}, "<C-y>", function()
+        vim.keymap.set({ "i", "s" }, "<C-y>", function()
             if ls.expand_or_jumpable() then
                 ls.expand_or_jump()
             end
