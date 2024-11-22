@@ -24,6 +24,8 @@ return {
             "javascript",
             "typescript",
             "php",
+            "blade",
+            "astro",
         }
 
         require("colorizer").setup(opts, defaults)
