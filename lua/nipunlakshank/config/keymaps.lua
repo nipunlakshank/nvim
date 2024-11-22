@@ -2,25 +2,25 @@ local mapkey = require("nipunlakshank.utils.keymapper").mapvimkey
 local f = require("nipunlakshank.utils.functions")
 
 -- Buffer Navigation
-mapkey("<leader>bn", "bnext", "n")     -- Next buffer
+mapkey("<leader>bn", "bnext", "n") -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
-mapkey("<leader>bb", "e #", "n")       -- Switch to Other Buffer
+mapkey("<leader>bb", "e #", "n") -- Switch to Other Buffer
 
 -- File Explorer
 mapkey("<leader>e", "Neotree toggle", "n")
 
 -- Pane and Window Navigation
-mapkey("<C-h>", "<C-w>h", "n")            -- Navigate Left
-mapkey("<C-j>", "<C-w>j", "n")            -- Navigate Down
-mapkey("<C-k>", "<C-w>k", "n")            -- Navigate Up
-mapkey("<C-l>", "<C-w>l", "n")            -- Navigate Right
-mapkey("<C-h>", "wincmd h", "t")          -- Navigate Left
-mapkey("<C-j>", "wincmd j", "t")          -- Navigate Down
-mapkey("<C-k>", "wincmd k", "t")          -- Navigate Up
-mapkey("<C-l>", "wincmd l", "t")          -- Navigate Right
-mapkey("<C-h>", "TmuxNavigateLeft", "n")  -- Navigate Left
-mapkey("<C-j>", "TmuxNavigateDown", "n")  -- Navigate Down
-mapkey("<C-k>", "TmuxNavigateUp", "n")    -- Navigate Up
+mapkey("<C-h>", "<C-w>h", "n") -- Navigate Left
+mapkey("<C-j>", "<C-w>j", "n") -- Navigate Down
+mapkey("<C-k>", "<C-w>k", "n") -- Navigate Up
+mapkey("<C-l>", "<C-w>l", "n") -- Navigate Right
+mapkey("<C-h>", "wincmd h", "t") -- Navigate Left
+mapkey("<C-j>", "wincmd j", "t") -- Navigate Down
+mapkey("<C-k>", "wincmd k", "t") -- Navigate Up
+mapkey("<C-l>", "wincmd l", "t") -- Navigate Right
+mapkey("<C-h>", "TmuxNavigateLeft", "n") -- Navigate Left
+mapkey("<C-j>", "TmuxNavigateDown", "n") -- Navigate Down
+mapkey("<C-k>", "TmuxNavigateUp", "n") -- Navigate Up
 mapkey("<C-l>", "TmuxNavigateRight", "n") -- Navigate Right
 
 -- Window Management
@@ -164,7 +164,12 @@ vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, des
 vim.keymap.set("n", "<leader>cs", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
 vim.keymap.set("v", "<leader>cs", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
 vim.keymap.set("n", "<leader>cc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
-vim.keymap.set("v", "<leader>cc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current selection into clipboard" })
+vim.keymap.set(
+    "v",
+    "<leader>cc",
+    "<Cmd>Silicon<CR>",
+    { desc = "Take a snapshot of the current selection into clipboard" }
+)
 
 -- Auto save
 vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })
@@ -218,19 +223,24 @@ vim.keymap.set("n", "<leader>cT", "<Cmd>CloakToggle<CR>", { desc = "Toggle cloak
 
 -- Compiler
 -- Open compiler
-vim.api.nvim_set_keymap('n', '<F6>', "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F6>", "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
 -- Redo last selected option
-vim.api.nvim_set_keymap('n', '<S-F6>', "<cmd>CompilerStop<cr>" .. "<cmd>CompilerRedo<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+    "n",
+    "<S-F6>",
+    "<cmd>CompilerStop<cr>" .. "<cmd>CompilerRedo<cr>",
+    { noremap = true, silent = true }
+)
 -- Toggle compiler results
-vim.api.nvim_set_keymap('n', '<S-F7>', "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
 
--- Neogit
-vim.keymap.set("n", "<leader>G", "<Cmd>Neogit<CR>", { desc = "Open Neogit" })
+-- Git
+vim.keymap.set("n", "<leader>G", "<Cmd>G<CR>", { desc = "Open vim-fugitive" })
 
 -- mini indent scope
-vim.keymap.set("n", "<leader>ti", function ()
+vim.keymap.set("n", "<leader>ti", function()
     vim.b.miniindentscope_disable = not vim.b.miniindentscope_disable
-end, {desc = "Toggle mini.indentscope"})
+end, { desc = "Toggle mini.indentscope" })
 
 -- tailwindcss
 vim.keymap.set("n", "<leader>tc", "<Cmd>TailwindConcealToggle<CR>", { desc = "Toggle conceal classes" })
