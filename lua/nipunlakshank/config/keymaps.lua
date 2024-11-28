@@ -35,6 +35,10 @@ mapkey("<A-Right>", "vertical resize +2", "n", { desc = "Resize window right" })
 mapkey("<leader>tw", "set wrap!", "n", { desc = "Toggle word wrapping" })
 mapkey("<leader>tw", "set wrap!", "v", { desc = "Toggle word wrapping" })
 
+-- Scrolling
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Scroll half page up" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Scroll half page down" })
+
 -- New tmux pane below (terminal)
 vim.keymap.set("n", "<leader>`", function()
     local cwd = vim.uv.cwd()
