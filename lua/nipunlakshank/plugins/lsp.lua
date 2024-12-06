@@ -211,6 +211,20 @@ return {
                             root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"),
                         })
                     end,
+
+                    -- Arduino
+                    arduino_language_server = function()
+                        lspconfig.arduino_language_server.setup({
+                            capabilities = capabilities,
+                            on_attach = on_attach,
+                            filetypes = { "arduino" },
+                            cmd = {
+                                "arduino-language-server",
+                                "-cli-config",
+                                vim.fn.expand("$XDG_CONFIG_HOME") .. "/arduino-cli/arduino-cli.yaml", -- Path to XDG config
+                            },
+                        })
+                    end,
                 },
             })
         end,
