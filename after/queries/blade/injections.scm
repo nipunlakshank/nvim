@@ -10,5 +10,5 @@
 )
 
 ((parameter) @injection.content
-    (#set! injection.language "php_only") ; Corrected "php_only" to "php" for compatibility
+    (#set! injection.language "php_only")
 )

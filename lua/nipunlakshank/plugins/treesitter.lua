@@ -1,6 +1,16 @@
 local config = function()
     local treesitter = require("nvim-treesitter.configs")
 
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.blade = {
+        install_info = {
+            url = "https://github.com/EmranMR/tree-sitter-blade",
+            files = { "src/parser.c" },
+            branch = "main",
+        },
+        filetype = "blade",
+    }
+
     treesitter.setup({
         ensure_installed = {
             "lua",
@@ -12,13 +22,21 @@ local config = function()
             "php",
             "php_only",
             "phpdoc",
+            "blade",
         },
         auto_install = true,
         sync_install = false,
         ignore_install = {},
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = true,
+            additional_vim_regex_highlighting = { "php", "blade", "ruby" },
+            disable = function(lang, buf)
+                local max_filesize = 1 * 1024 * 1024 -- 1MB
+                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                if ok and stats and stats.size > max_filesize then
+                    return true
+                end
+            end,
         },
         indent = { enable = true },
         modules = {},
@@ -29,6 +47,11 @@ local config = function()
         },
         endwise = {
             enable = true,
+        },
+        matchup = {
+            enable = true, -- mandatory, false will disable the whole extension
+            -- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
+            -- [options]
         },
         incremental_selection = {
             enable = true,
