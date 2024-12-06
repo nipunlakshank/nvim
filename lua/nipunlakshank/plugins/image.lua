@@ -3,13 +3,11 @@ return {
     dependencies = {
         "vhyrro/luarocks.nvim",
     },
+    enabled = function()
+        return vim.g.neovide == nil and vim.fn.has("win32") == 0
+    end,
     config = function()
         local backend = "kitty"
-
-        if vim.fn.has("win32") == 1 then
-            -- ISSUE: Currently not supports Windows
-            return
-        end
 
         require("image").setup({
             backend = backend,
