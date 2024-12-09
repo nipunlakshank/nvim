@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+local usercmd = vim.api.nvim_create_user_command
 
 local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
@@ -75,11 +76,7 @@ autocmd({ "UIEnter", "ColorScheme" }, {
                 opts.transparent_background = not opts.transparent_background
                 catppuccin.compile()
                 vim.cmd.colorscheme(vim.g.colors_name)
-            end, {
-                noremap = false,
-                silent = true,
-                desc = "Toggle transparency (" .. colorscheme .. ")",
-            })
+            end, { noremap = false, silent = true, desc = "Toggle transparency (" .. colorscheme .. ")" })
             return
         end
     end,
@@ -124,7 +121,12 @@ autocmd({ "VimEnter" }, {
 autocmd({ "FileType" }, {
     group = ft_group,
     pattern = { "fugitive" },
-    callback = function()
-        vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<CR>", { noremap = true, silent = true })
-    end,
+    callback = function() vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<CR>", { noremap = true, silent = true }) end,
 })
+
+-- stylua: ignore
+usercmd(
+    "Snacks",
+    function(opts) Snacks[opts.args]() end,
+    { nargs = 1 }
+)
