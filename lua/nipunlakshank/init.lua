@@ -1,4 +1,4 @@
-require("nipunlakshank.config.paths")
+require("nipunlakshank.config.path")
 require("nipunlakshank.config.globals")
 require("nipunlakshank.config.options")
 require("nipunlakshank.config.filetypes")
