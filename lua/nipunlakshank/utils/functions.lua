@@ -71,11 +71,11 @@ end
 ---@field suffix string default: "" The string to append to the message
 ---@field escape boolean default: true If true, the message will be escaped
 
+---Log a message to a file
 ---@param message string The message to log
 ---@param file ?string default: <cwd>/tmp/nvim.log
----@param opts ?log.opts
+---@param opts ?log.opts default: nil
 ---@return nil
----@description Log a message to a file
 local function log(message, file, opts)
     if not enable_logging then
         return
@@ -93,7 +93,7 @@ local function log(message, file, opts)
 
     opts = opts or {}
 
-    local log_opts = {
+    local cmd_opts = {
         silent = "silent ",
         callback = opts.async and cmd_async or vim.cmd,
         op = opts.overwrite and " > " or " >> ",
@@ -104,27 +104,27 @@ local function log(message, file, opts)
     }
 
     if opts.silent == nil then
-        log_opts.silent = "silent "
+        cmd_opts.silent = "silent "
     elseif not opts.silent then
-        log_opts.silent = ""
+        cmd_opts.silent = ""
     end
 
     local dir = vim.fs.dirname(file)
-    local final_command = log_opts.silent
-        .. log_opts.bang
+    local final_command = cmd_opts.silent
+        .. cmd_opts.bang
         .. "mkdir -p "
         .. dir
         .. " && echo "
-        .. log_opts.escape
+        .. cmd_opts.escape
         .. ' "'
-        .. log_opts.prefix
+        .. cmd_opts.prefix
         .. message
-        .. log_opts.suffix
+        .. cmd_opts.suffix
         .. '"'
-        .. log_opts.op
+        .. cmd_opts.op
         .. file
 
-    log_opts.callback(final_command)
+    cmd_opts.callback(final_command)
 end
 
 M.sys = sys
