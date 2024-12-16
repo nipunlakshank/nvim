@@ -4,68 +4,80 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         local harpoon = require("harpoon")
+        local keymap = require("nipunlakshank.utils.keymap")
 
         -- REQUIRED
         harpoon:setup()
         -- REQUIRED
 
-        vim.keymap.set("n", "<leader>A", function()
-            harpoon:list():add()
-        end, { desc = "Add current buffer to Harpoon list" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-h>", mac = "˙" })
+            .rhs(function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+            .opts({ desc = "Toggle Harpoon quick menu" })
+            .set()
 
-        vim.keymap.set("n", "<C-e>", function()
-            harpoon.ui:toggle_quick_menu(harpoon:list())
-        end, { desc = "Toggle Harpoon quick menu" })
+        keymap
+            .modes("n")
+            .lhs("<leader>A")
+            .rhs(function() harpoon:list():add() end)
+            .opts({ desc = "Add current buffer to Harpoon list" })
+            .set()
 
-        -- Toggle previous & next buffers stored within Harpoon list
-        vim.keymap.set("n", "<leader>P", function()
-            harpoon:list():prev()
-        end, { desc = "Toggle to previous buffer" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-.>", mac = "≥" })
+            .rhs(function() harpoon:list():next() end)
+            .opts({ desc = "Harpoon go to next buffer" })
+            .set()
 
-        vim.keymap.set("n", "<leader>N", function()
-            harpoon:list():next()
-        end, { desc = "Toggle to next buffer" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-,>", mac = "≤" })
+            .rhs(function() harpoon:list():prev() end)
+            .opts({ desc = "Harpoon go to previous buffer" })
+            .set()
 
-        if vim.fn.has("mac") then -- for mac
-            vim.keymap.set("n", "¡", function()
-                harpoon:list():select(1)
-            end, { desc = "Select Harpoon list 1" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-a>", mac = "å" })
+            .rhs(function() harpoon:list():select(1) end)
+            .opts({ desc = "Select Harpoon list 1" })
+            .set()
 
-            vim.keymap.set("n", "™", function()
-                harpoon:list():select(2)
-            end, { desc = "Select Harpoon list 2" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-s>", mac = "ß" })
+            .rhs(function() harpoon:list():select(2) end)
+            .opts({ desc = "Select Harpoon list 2" })
+            .set()
 
-            vim.keymap.set("n", "£", function()
-                harpoon:list():select(3)
-            end, { desc = "Select Harpoon list 3" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-d>", mac = "∂" })
+            .rhs(function() harpoon:list():select(3) end)
+            .opts({ desc = "Select Harpoon list 3" })
+            .set()
 
-            vim.keymap.set("n", "¢", function()
-                harpoon:list():select(4)
-            end, { desc = "Select Harpoon list 4" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-f>", mac = "ƒ" })
+            .rhs(function() harpoon:list():select(4) end)
+            .opts({ desc = "Select Harpoon list 4" })
+            .set()
 
-            vim.keymap.set("n", "∞", function()
-                harpoon:list():select(5)
-            end, { desc = "Select Harpoon list 5" })
-        else -- for windows and linux
-            vim.keymap.set("n", "<A-1>", function()
-                harpoon:list():select(1)
-            end, { desc = "Select Harpoon list 1" })
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-q>", mac = "œ" })
+            .rhs(function() harpoon:list():select(5) end)
+            .opts({ desc = "Select Harpoon list 5" })
+            .set()
 
-            vim.keymap.set("n", "<A-2>", function()
-                harpoon:list():select(2)
-            end, { desc = "Select Harpoon list 2" })
-
-            vim.keymap.set("n", "<A-3>", function()
-                harpoon:list():select(3)
-            end, { desc = "Select Harpoon list 3" })
-
-            vim.keymap.set("n", "<A-4>", function()
-                harpoon:list():select(4)
-            end, { desc = "Select Harpoon list 4" })
-
-            vim.keymap.set("n", "<A-5>", function()
-                harpoon:list():select(5)
-            end, { desc = "Select Harpoon list 5" })
-        end
+        keymap
+            .modes("n")
+            .lhs({ default = "<A-w>", mac = "∑" })
+            .rhs(function() harpoon:list():select(6) end)
+            .opts({ desc = "Select Harpoon list 6" })
+            .set()
     end,
 }
