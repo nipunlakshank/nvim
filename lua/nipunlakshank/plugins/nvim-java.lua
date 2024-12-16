@@ -11,6 +11,12 @@ return {
     },
     ft = "java",
     config = function()
-        require("java").setup()
+        local opts = {
+            jdk = {
+                auto_install = false,
+            },
+        }
+
+        require("java").setup(opts)
     end,
 }

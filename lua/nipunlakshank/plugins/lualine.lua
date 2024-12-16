@@ -12,6 +12,23 @@ return {
             return vim.g.remote_neovim_host and ("Remote: %s"):format(vim.uv.os_gethostname()) or ""
         end
 
+        local buffers = function()
+            return "buffers"
+        end
+
+        local fileformat = function()
+            local symbols = {
+                unix = "",
+                dos = "",
+                mac = "",
+            }
+
+            return {
+                "fileformat",
+                symbols = symbols,
+            }
+        end
+
         lualine.setup({
             options = {
                 theme = auto,
@@ -22,16 +39,20 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "filename", "diff" },
-                lualine_c = { "%=", "buffers" },
+                lualine_c = { "%=", buffers() },
                 --[[ lualine_x = {
                     { "FugitiveHead", icon = { "", color = { fg = "Orange" } } },
                 }, ]]
                 lualine_x = {
-                    { remote, padding = { right = 1, left = 1 }, separator = { left = "", right = "" } },
+                    {
+                        remote,
+                        padding = { right = 1, left = 1 },
+                        separator = { left = "", right = "" },
+                    },
                     { "FugitiveHead", icon = { "", color = { fg = "Orange" } } },
                     -- { "branch", icon = { "", color = { fg = "Orange" } } },
                 },
-                lualine_y = { "encoding", "fileformat", "filetype" },
+                lualine_y = { "encoding", fileformat(), "filetype" },
                 lualine_z = { "progress", "location" },
             },
             inactive_sections = {

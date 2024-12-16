@@ -13,23 +13,18 @@ return {
             else
                 vim.g.disable_autoformat = true
             end
-        end, {
-            desc = "Disable autoformat-on-save",
-            bang = true,
-        })
+        end, { desc = "Disable autoformat-on-save", bang = true })
         vim.api.nvim_create_user_command("FormatEnable", function()
             vim.b.disable_autoformat = false
             vim.g.disable_autoformat = false
-        end, {
-            desc = "Re-enable autoformat-on-save",
-        })
+        end, { desc = "Re-enable autoformat-on-save" })
     end,
     config = function()
         ---@module "conform"
         ---@type conform.setupOpts
         local opts = {
             formatters_by_ft = {
-                lua = { "stylua" },
+                lua = { "stylua", "lua-format", stop_after_first = true },
                 python = { "isort", "black" },
                 -- javascript = { "prettierd", "prettier", stop_after_first = true },
                 css = { "prettierd", "prettier", stop_after_first = true },
@@ -37,20 +32,23 @@ return {
                 html = { "prettierd", "prettier", stop_after_first = true },
                 json = { "prettierd", "prettier", stop_after_first = true },
                 yaml = { "prettierd", "prettier", stop_after_first = true },
-                markdown = { "markdownlint", "prettierd", "prettier", stop_after_first = true },
+                sh = { "shfmt", "beautysh", stop_after_first = true },
+                bash = { "shfmt", "beautysh", stop_after_first = true },
+                zsh = { "beautysh", "shfmt", stop_after_first = true },
+                markdown = {
+                    "markdownlint",
+                    "prettierd",
+                    "prettier",
+                    stop_after_first = true,
+                },
                 blade = { "blade-formatter" },
             },
             -- Set default options
-            default_format_opts = {
-                lsp_format = "fallback",
-            },
+            default_format_opts = { lsp_format = "fallback" },
             -- Set up format-on-save
             format_on_save = function(bufnr)
                 -- Disable autoformat on certain filetypes
-                local ignore_filetypes = {
-                    "sql",
-                    "harpoon",
-                }
+                local ignore_filetypes = { "sql", "harpoon" }
 
                 if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
                     return
@@ -67,14 +65,14 @@ return {
                     return
                 end
 
-                return { async = false, timeout_ms = 500, lsp_format = "fallback" }
+                return {
+                    async = false,
+                    timeout_ms = 500,
+                    lsp_format = "fallback",
+                }
             end,
             -- Customize formatters
-            formatters = {
-                shfmt = {
-                    prepend_args = { "-i", "2" },
-                },
-            },
+            formatters = { shfmt = { prepend_args = { "-i", "2" } } },
         }
         require("conform").setup(opts)
     end,
@@ -91,7 +89,11 @@ return {
                     if not err then
                         local mode = vim.api.nvim_get_mode().mode
                         if vim.startswith(string.lower(mode), "v") then
-                            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                            vim.api.nvim_feedkeys(
+                                vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+                                "n",
+                                true
+                            )
                         end
                     end
                 end)
