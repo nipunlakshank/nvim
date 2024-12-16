@@ -2,6 +2,10 @@ local M = {}
 
 local config = require("tailwind-tools.config")
 local utils = require("tailwind-tools.utils")
+local icons = require("nipunlakshank.utils.icons").cmp_icons
+
+-- NOTE: cmp is not used here, but it is shown to lazy load (by lazydev.nvim) types
+-- local cmp = require("cmp")
 
 -- Formatting utility for https://github.com/onsails/lspkind.nvim
 ---@param entry cmp.Entry
@@ -24,6 +28,16 @@ M.format = function(entry, vim_item)
     -- nvim-html-css
     if entry.source.name == "html-css" then
         vim_item.menu = entry.completion_item.kind
+    end
+
+    -- blade-nav
+    if vim_item.kind == "BladeNav" then
+        vim_item.kind_hl_group = utils.set_hl_from(243, 139, 169, "inline")
+    end
+
+    -- icons
+    if icons[vim_item.kind] then
+        vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
     end
 
     return vim_item

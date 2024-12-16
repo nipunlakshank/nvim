@@ -1,8 +1,9 @@
 local config = function()
     local treesitter = require("nvim-treesitter.configs")
+    local parsers = require("nvim-treesitter.parsers").get_parser_configs()
 
-    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    parser_config.blade = {
+    ---@diagnostic disable-next-line: inject-field
+    parsers.blade = {
         install_info = {
             url = "https://github.com/EmranMR/tree-sitter-blade",
             files = { "src/parser.c" },
@@ -12,6 +13,7 @@ local config = function()
     }
 
     treesitter.setup({
+
         ensure_installed = {
             "lua",
             "regex",
@@ -24,20 +26,22 @@ local config = function()
             "phpdoc",
             "blade",
         },
+
         auto_install = true,
-        sync_install = false,
         ignore_install = {},
+        sync_install = false,
+
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = { "php", "blade", "ruby" },
+
             disable = function(lang, buf)
                 local max_filesize = 1 * 1024 * 1024 -- 1MB
                 local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then
-                    return true
-                end
+                if ok and stats and stats.size > max_filesize then return true end
             end,
         },
+
         indent = { enable = true },
         modules = {},
         autotag = {
@@ -45,14 +49,17 @@ local config = function()
             enable_rename = true,
             enable_close_on_slash = true,
         },
+
         endwise = {
             enable = true,
         },
+
         matchup = {
             enable = true, -- mandatory, false will disable the whole extension
             -- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
             -- [options]
         },
+
         incremental_selection = {
             enable = true,
             keymaps = {
@@ -62,7 +69,9 @@ local config = function()
                 node_decremental = "<BS>",
             },
         },
+
         textobjects = {
+
             select = {
                 enable = true,
                 lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -81,6 +90,7 @@ local config = function()
                     ["at"] = "@comment.outer",
                 },
             },
+
             move = {
                 enable = true,
                 set_jumps = true, -- whether to set jumps in the jumplist
@@ -101,6 +111,7 @@ local config = function()
                     ["[]"] = "@class.outer",
                 },
             },
+
             swap = {
                 enable = true,
                 swap_next = {

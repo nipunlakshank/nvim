@@ -15,6 +15,20 @@ return {
             local lspconfig = require("lspconfig")
             local util = require("lspconfig.util")
 
+            -- BUG: not working as expected. need some work in the actual repo
+            --[[ 
+            local configs = require("lspconfig.configs")
+            configs.blade = {
+                default_config = {
+                    -- Path to the executable: laravel-dev-generators
+                    cmd = { "laravel-dev-tools", "lsp" },
+                    filetypes = { "blade" },
+                    root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
+                    settings = {},
+                },
+            } 
+            ]]
+
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
             for type, icon in pairs(diagnostic_signs) do
@@ -63,7 +77,7 @@ return {
             lspconfig.intelephense.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
-                filetypes = { "php", "blade" },
+                filetypes = { "php", "phtml" },
                 root_dir = function(pattern)
                     local cwd = vim.uv.cwd()
                     local root = util.root_pattern(
@@ -128,6 +142,7 @@ return {
                     "eruby",
                     "html",
                     "php",
+                    "blade",
                     "phtml",
                     "javascript",
                     "typescript",
@@ -179,7 +194,7 @@ return {
                     end,
 
                     -- java
-                    jdtls = function()
+                    --[[ jdtls = function()
                         lspconfig.jdtls.setup({
                             capabilities = capabilities,
                             on_attach = on_attach,
@@ -187,7 +202,12 @@ return {
                             cmd = { "jdtls" },
                             root_dir = function(pattern)
                                 local cwd = vim.loop.cwd()
-                                local root = lspconfig.util.root_pattern("gradlew", ".git", "mvnw", "pom.xml")(pattern)
+                                local root = lspconfig.util.root_pattern(
+                                    "gradlew",
+                                    ".git",
+                                    "mvnw",
+                                    "pom.xml"
+                                )(pattern)
 
                                 if not root then
                                     return cwd
@@ -196,7 +216,7 @@ return {
                                 return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant
                             end,
                         })
-                    end,
+                    end, ]]
 
                     -- C/C++
                     clangd = function()
@@ -221,7 +241,8 @@ return {
                             cmd = {
                                 "arduino-language-server",
                                 "-cli-config",
-                                vim.fn.expand("$XDG_CONFIG_HOME") .. "/arduino-cli/arduino-cli.yaml", -- Path to XDG config
+                                vim.fn.expand("$XDG_CONFIG_HOME")
+                                    .. "/arduino-cli/arduino-cli.yaml", -- Path to XDG config
                             },
                         })
                     end,
