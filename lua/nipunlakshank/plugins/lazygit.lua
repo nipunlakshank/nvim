@@ -1,4 +1,7 @@
 -- nvim v0.8.0
+if true then
+    return {}
+end
 return {
     "kdheepak/lazygit.nvim",
     cmd = {

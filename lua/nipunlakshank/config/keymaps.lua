@@ -36,8 +36,18 @@ mapkey("<leader>tw", "set wrap!", "n", { desc = "Toggle word wrapping" })
 mapkey("<leader>tw", "set wrap!", "v", { desc = "Toggle word wrapping" })
 
 -- Scrolling
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true, desc = "Scroll half page up" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true, desc = "Scroll half page down" })
+vim.keymap.set(
+    "n",
+    "<C-u>",
+    "<C-u>zz",
+    { noremap = true, silent = true, desc = "Scroll half page up" }
+)
+vim.keymap.set(
+    "n",
+    "<C-d>",
+    "<C-d>zz",
+    { noremap = true, silent = true, desc = "Scroll half page down" }
+)
 
 -- New tmux pane below (terminal)
 vim.keymap.set("n", "<leader>`", function()
@@ -52,24 +62,89 @@ vim.keymap.set(
     "<Cmd>echo expand('%:p')<CR>",
     { noremap = true, silent = true, desc = "Show full file path" }
 )
-vim.keymap.set("n", "<leader>rp", "<Cmd>file<CR>", { noremap = true, silent = true, desc = "Show relative file path" })
+vim.keymap.set(
+    "n",
+    "<leader>rp",
+    "<Cmd>file<CR>",
+    { noremap = true, silent = true, desc = "Show relative file path" }
+)
 
 if f.sys.is_mac() then
     -- Move lines vertically (MacOS)
-    vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
-    vim.keymap.set("v", "˚", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
-    vim.keymap.set("n", "∆", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
-    vim.keymap.set("n", "˚", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
-    vim.keymap.set("i", "∆", "<Esc>:m .+1<CR>==gi", { noremap = true, silent = true, desc = "Move line down" }) -- Option + j
-    vim.keymap.set("i", "˚", "<Esc>:m .-2<CR>==gi", { noremap = true, silent = true, desc = "Move line up" }) -- Option + k
+    vim.keymap.set(
+        "v",
+        "∆",
+        ":m '>+1<CR>gv=gv",
+        { noremap = true, silent = true, desc = "Move line down" }
+    ) -- Option + j
+    vim.keymap.set(
+        "v",
+        "˚",
+        ":m '<-2<CR>gv=gv",
+        { noremap = true, silent = true, desc = "Move line up" }
+    ) -- Option + k
+    vim.keymap.set(
+        "n",
+        "∆",
+        ":m .+1<CR>==",
+        { noremap = true, silent = true, desc = "Move line down" }
+    ) -- Option + j
+    vim.keymap.set(
+        "n",
+        "˚",
+        ":m .-2<CR>==",
+        { noremap = true, silent = true, desc = "Move line up" }
+    ) -- Option + k
+    vim.keymap.set(
+        "i",
+        "∆",
+        "<Esc>:m .+1<CR>==gi",
+        { noremap = true, silent = true, desc = "Move line down" }
+    ) -- Option + j
+    vim.keymap.set(
+        "i",
+        "˚",
+        "<Esc>:m .-2<CR>==gi",
+        { noremap = true, silent = true, desc = "Move line up" }
+    ) -- Option + k
 else
     -- Move lines vertically (Linux, Windows)
-    vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move line down" })
-    vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move line up" })
-    vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
-    vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
-    vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { noremap = true, silent = true, desc = "Move line down" })
-    vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { noremap = true, silent = true, desc = "Move line up" })
+    vim.keymap.set(
+        "v",
+        "<A-j>",
+        ":m '>+1<CR>gv=gv",
+        { noremap = true, silent = true, desc = "Move line down" }
+    )
+    vim.keymap.set(
+        "v",
+        "<A-k>",
+        ":m '<-2<CR>gv=gv",
+        { noremap = true, silent = true, desc = "Move line up" }
+    )
+    vim.keymap.set(
+        "n",
+        "<A-j>",
+        ":m .+1<CR>==",
+        { noremap = true, silent = true, desc = "Move line down" }
+    )
+    vim.keymap.set(
+        "n",
+        "<A-k>",
+        ":m .-2<CR>==",
+        { noremap = true, silent = true, desc = "Move line up" }
+    )
+    vim.keymap.set(
+        "i",
+        "<A-j>",
+        "<Esc>:m .+1<CR>==gi",
+        { noremap = true, silent = true, desc = "Move line down" }
+    )
+    vim.keymap.set(
+        "i",
+        "<A-k>",
+        "<Esc>:m .-2<CR>==gi",
+        { noremap = true, silent = true, desc = "Move line up" }
+    )
 end
 
 -- Formatting
@@ -80,7 +155,12 @@ vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true })
 vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 
 -- Find and Replace
-vim.keymap.set("n", "<leader>R", ":%s///g<left><left>", { silent = true, noremap = true, desc = "Replace in file" })
+vim.keymap.set(
+    "n",
+    "<leader>R",
+    ":%s///g<left><left>",
+    { silent = true, noremap = true, desc = "Replace in file" }
+)
 vim.keymap.set(
     "n",
     "<leader>Rc",
@@ -109,11 +189,21 @@ vim.keymap.set(
 )
 
 -- Backspace motions
-vim.keymap.set("i", "<C-BS>", '<Esc>"_ddk$', { noremap = true, silent = true, desc = "Delete current line" })
+vim.keymap.set(
+    "i",
+    "<C-BS>",
+    '<Esc>"_ddk$',
+    { noremap = true, silent = true, desc = "Delete current line" }
+)
 
 -- Enter new lines without leaving normal mode
 if f.sys.is_mac() then
-    vim.keymap.set("n", "ø", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below (<A-o>)" })
+    vim.keymap.set(
+        "n",
+        "ø",
+        'o<Esc>0"_D',
+        { noremap = true, silent = true, desc = "Insert newline below (<A-o>)" }
+    )
     vim.keymap.set(
         "n",
         "Ø",
@@ -121,35 +211,68 @@ if f.sys.is_mac() then
         { noremap = true, silent = true, desc = "Insert newline above (<A-O>)" }
     )
 else
-    vim.keymap.set("n", "<A-o>", 'o<Esc>0"_D', { noremap = true, silent = true, desc = "Insert newline below" })
-    vim.keymap.set("n", "<A-O>", 'mzO<Esc>0"_D`z', { noremap = true, silent = true, desc = "Insert newline above" })
+    vim.keymap.set(
+        "n",
+        "<A-o>",
+        'o<Esc>0"_D',
+        { noremap = true, silent = true, desc = "Insert newline below" }
+    )
+    vim.keymap.set(
+        "n",
+        "<A-O>",
+        'mzO<Esc>0"_D`z',
+        { noremap = true, silent = true, desc = "Insert newline above" }
+    )
 end
 
 -- Usefull when jumping from a commented line to a new line
-vim.keymap.set(
-    "n",
-    "<leader>o",
-    'o<Esc>"_S',
-    { noremap = true, silent = true, desc = "Insert newline below and clear before changing to insert mode" }
-)
-vim.keymap.set(
-    "n",
-    "<leader>O",
-    'O<Esc>"_S',
-    { noremap = true, silent = true, desc = "Insert newline above and clear before changing to insert mode" }
-)
+vim.keymap.set("n", "<leader>o", 'o<Esc>"_S', {
+    noremap = true,
+    silent = true,
+    desc = "Insert newline below and clear before changing to insert mode",
+})
+vim.keymap.set("n", "<leader>O", 'O<Esc>"_S', {
+    noremap = true,
+    silent = true,
+    desc = "Insert newline above and clear before changing to insert mode",
+})
 
 -- Copy, Paste and Delete
 vim.keymap.set("n", "<leader>y", '"+y', { noremap = true, desc = "Yank into system clipboard" })
-vim.keymap.set("v", "<leader>y", '"+y', { noremap = true, desc = "Yank selection into system clipboard" })
-vim.keymap.set("n", "<leader>Y", '"+y$', { noremap = true, desc = "Yank to end of line to system clipboard" })
-vim.keymap.set("n", "<leader>yy", '"+yy', { noremap = true, desc = "Yank line into system clipboard" })
+vim.keymap.set(
+    "v",
+    "<leader>y",
+    '"+y',
+    { noremap = true, desc = "Yank selection into system clipboard" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>Y",
+    '"+y$',
+    { noremap = true, desc = "Yank to end of line to system clipboard" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>yy",
+    '"+yy',
+    { noremap = true, desc = "Yank line into system clipboard" }
+)
 vim.keymap.set("v", "<leader>p", '"_dP', { noremap = true, desc = "Paste without yanking" })
 vim.keymap.set("v", "<leader>d", '"_d', { noremap = true, desc = "Delete into void" })
 
 -- New lines and appending
-vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true, desc = "Insert a new line below" })
-vim.keymap.set("i", "<C-CR>", "<Esc>jA", { noremap = true, silent = true, desc = "Append to line below" })
+vim.keymap.set(
+    "i",
+    "<S-CR>",
+    "<Esc>o",
+    { noremap = true, silent = true, desc = "Insert a new line below" }
+)
+vim.keymap.set(
+    "i",
+    "<C-CR>",
+    "<Esc>jA",
+    { noremap = true, silent = true, desc = "Append to line below" }
+)
 
 -- Diagnostics (Currently handled through Lspsaga)
 -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto previous diagnostic message"})
@@ -162,12 +285,32 @@ vim.keymap.set("n", "<leader>th", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 end, { desc = "Toggle inlay hints" })
 -- Noice
-vim.keymap.set("n", "<leader>nc", "<Cmd>NoiceDismiss<CR>", { noremap = true, desc = "Clear Noice messages" })
+vim.keymap.set(
+    "n",
+    "<leader>nc",
+    "<Cmd>NoiceDismiss<CR>",
+    { noremap = true, desc = "Clear Noice messages" }
+)
 
 -- Snapshots
-vim.keymap.set("n", "<leader>cs", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current buffer" })
-vim.keymap.set("v", "<leader>cs", "<Cmd>Silicon!<CR>", { desc = "Take a snapshot of the current selection" })
-vim.keymap.set("n", "<leader>cc", "<Cmd>Silicon<CR>", { desc = "Take a snapshot of the current buffer into clipboard" })
+vim.keymap.set(
+    "n",
+    "<leader>cs",
+    "<Cmd>Silicon!<CR>",
+    { desc = "Take a snapshot of the current buffer" }
+)
+vim.keymap.set(
+    "v",
+    "<leader>cs",
+    "<Cmd>Silicon!<CR>",
+    { desc = "Take a snapshot of the current selection" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>cc",
+    "<Cmd>Silicon<CR>",
+    { desc = "Take a snapshot of the current buffer into clipboard" }
+)
 vim.keymap.set(
     "v",
     "<leader>cc",
@@ -176,7 +319,7 @@ vim.keymap.set(
 )
 
 -- Auto save
-vim.keymap.set("n", "<leader>as", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })
+vim.keymap.set("n", "<leader>ts", "<Cmd>ASToggle<CR>", { desc = "Toggle auto save" })
 
 -- Live Server
 -- vim.keymap.set("n", "<leader>lss", "<Cmd>LiveServerStart<CR>", { desc = "Start live server" })
@@ -211,7 +354,12 @@ vim.keymap.set("n", "-", "<Cmd>Oil<CR>", { desc = "Open parent directory in oil"
 
 -- Colorizer
 vim.keymap.set("n", "<leader>cl", "<Cmd>ColorizerToggle<CR>", { desc = "Toggle Colorizer" })
-vim.keymap.set("n", "<leader>cL", "<Cmd>ColorizerReloadAllBuffers<CR>", { desc = "Reload Colorizer" })
+vim.keymap.set(
+    "n",
+    "<leader>cL",
+    "<Cmd>ColorizerReloadAllBuffers<CR>",
+    { desc = "Reload Colorizer" }
+)
 
 -- TODO Comments
 vim.keymap.set("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "Find TODO comments" })
@@ -222,7 +370,12 @@ vim.keymap.set("n", "<leader>wm", "<Cmd>Mason<CR>", { desc = "Open Mason" })
 vim.keymap.set("n", "<leader>wi", "<Cmd>LspInfo<CR>", { desc = "Open LspInfo" })
 
 -- Cloak
-vim.keymap.set("n", "<leader>ct", "<Cmd>CloakPreviewLine<CR>", { desc = "Preview cloaked value in current line" })
+vim.keymap.set(
+    "n",
+    "<leader>ct",
+    "<Cmd>CloakPreviewLine<CR>",
+    { desc = "Preview cloaked value in current line" }
+)
 vim.keymap.set("n", "<leader>cT", "<Cmd>CloakToggle<CR>", { desc = "Toggle cloak in current file" })
 
 -- Compiler
@@ -236,7 +389,12 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 -- Toggle compiler results
-vim.api.nvim_set_keymap("n", "<S-F7>", "<cmd>CompilerToggleResults<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+    "n",
+    "<S-F7>",
+    "<cmd>CompilerToggleResults<cr>",
+    { noremap = true, silent = true }
+)
 
 -- Git
 vim.keymap.set("n", "<leader>G", "<Cmd>G<CR>", { desc = "Open vim-fugitive" })
@@ -247,4 +405,23 @@ vim.keymap.set("n", "<leader>ti", function()
 end, { desc = "Toggle mini.indentscope" })
 
 -- tailwindcss
-vim.keymap.set("n", "<leader>tc", "<Cmd>TailwindConcealToggle<CR>", { desc = "Toggle conceal classes" })
+vim.keymap.set(
+    "n",
+    "<leader>tc",
+    "<Cmd>TailwindConcealToggle<CR>",
+    { desc = "Toggle conceal classes" }
+)
+
+-- terminal
+vim.keymap.set("t", "<C-_>", function()
+    Snacks.terminal.toggle()
+end, { noremap = true, silent = true })
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { noremap = true, silent = true })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { noremap = true, silent = true })
+
+vim.keymap.set("t", "<A-Up>", "<cmd>horizontal resize +2<cr>", { noremap = true, silent = true })
+vim.keymap.set("t", "<A-Down>", "<cmd>horizontal resize -2<cr>", { noremap = true, silent = true })
+vim.keymap.set("t", "<A-Left>", "<cmd>vertical resize -2<cr>", { noremap = true, silent = true })
+vim.keymap.set("t", "<A-Right>", "<cmd>vertical resize +2<cr>", { noremap = true, silent = true })
