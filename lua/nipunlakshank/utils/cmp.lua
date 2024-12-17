@@ -30,6 +30,11 @@ M.format = function(entry, vim_item)
         vim_item.menu = entry.completion_item.kind
     end
 
+    -- nvim-lsp
+    if entry.source.name == "nvim_lsp" and vim_item.kind == "Text" then
+        vim_item.kind = "Emmet"
+    end
+
     -- blade-nav
     if vim_item.kind == "BladeNav" then
         vim_item.kind_hl_group = utils.set_hl_from(243, 139, 169, "inline")

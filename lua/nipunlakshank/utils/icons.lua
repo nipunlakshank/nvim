@@ -17,6 +17,7 @@ M.diagnostic_signs = {
 
 M.cmp_icons = {
     BladeNav = "",
+    Emmet = "",
 }
 
 return M
