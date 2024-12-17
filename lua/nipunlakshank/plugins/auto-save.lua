@@ -18,6 +18,7 @@ return {
             local disabled_filetypes = {
                 "harpoon",
                 "sql",
+                "mysql",
             }
 
             -- don't save for special-buffers
