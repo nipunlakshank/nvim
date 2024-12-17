@@ -14,6 +14,7 @@ return {
                 vim.g.disable_autoformat = true
             end
         end, { desc = "Disable autoformat-on-save", bang = true })
+
         vim.api.nvim_create_user_command("FormatEnable", function()
             vim.b.disable_autoformat = false
             vim.g.disable_autoformat = false
@@ -48,7 +49,7 @@ return {
             -- Set up format-on-save
             format_on_save = function(bufnr)
                 -- Disable autoformat on certain filetypes
-                local ignore_filetypes = { "sql", "harpoon" }
+                local ignore_filetypes = { "sql", "mysql", "harpoon" }
 
                 if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
                     return

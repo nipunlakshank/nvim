@@ -3,12 +3,10 @@ return {
     event = "BufReadPost",
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-buffer",
         "onsails/lspkind.nvim",
-
         { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
@@ -19,12 +17,13 @@ return {
         local lspkind = require("lspkind")
         local cmp = require("cmp")
         local luasnip = require("luasnip")
+        local utils = require("nipunlakshank.utils.cmp")
 
         cmp.setup({
             snippet = {
                 -- REQUIRED - you must specify a snippet engine
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+                    luasnip.lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
             formatting = {
@@ -50,7 +49,7 @@ return {
                     --[[ before = function(entry, vim_item)
                         return vim_item
                     end, ]]
-                    before = require("nipunlakshank.utils.cmp").format,
+                    before = utils.format,
                 }),
             },
             window = {
@@ -103,7 +102,7 @@ return {
                 { name = "buffer" },
             }),
         })
-        cmp.setup.filetype({ "sql" }, {
+        cmp.setup.filetype({ "sql", "mysql" }, {
             sources = cmp.config.sources({
                 { name = "vim-dadbod-completion", priority = 1000 },
                 { name = "buffer", priority = 750 },
