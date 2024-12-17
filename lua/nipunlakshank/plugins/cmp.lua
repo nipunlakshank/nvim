@@ -29,17 +29,19 @@ return {
             },
             formatting = {
                 format = lspkind.cmp_format({
-                    -- menu = { -- showing type in menu
-                    --     nvim_lsp = "[LSP]",
-                    --     path = "[Path]",
-                    --     buffer = "[Buffer]",
-                    --     luasnip = "[LuaSnip]",
-                    --     vim_dadbod_completion = "[DB]",
-                    -- },
+                    --[[ menu = { -- showing type in menu
+                        nvim_lsp = "[LSP]",
+                        path = "[Path]",
+                        buffer = "[Buffer]",
+                        luasnip = "[LuaSnip]",
+                        vim_dadbod_completion = "[DB]",
+                    }, ]]
                     -- mode = "symbol", -- show only symbol annotations
                     -- maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                     -- can also be a function to dynamically calculate max width such as
-                    maxwidth = function() return math.floor(0.40 * vim.o.columns) end,
+                    maxwidth = function()
+                        return math.floor(0.40 * vim.o.columns)
+                    end,
                     ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                     show_labelDetails = false, -- show labelDetails in menu. Disabled by default
 
@@ -128,7 +130,9 @@ return {
         })
 
         vim.keymap.set({ "i", "s" }, "<C-y>", function()
-            if luasnip.expand_or_jumpable() then luasnip.expand_or_jump() end
+            if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            end
         end, { silent = true })
     end,
 }
