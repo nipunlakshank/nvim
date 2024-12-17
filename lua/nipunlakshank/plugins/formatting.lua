@@ -35,7 +35,7 @@ return {
                 yaml = { "prettierd", "prettier", stop_after_first = true },
                 sh = { "shfmt", "beautysh", stop_after_first = true },
                 bash = { "shfmt", "beautysh", stop_after_first = true },
-                zsh = { "beautysh", "shfmt", stop_after_first = true },
+                zsh = { "shfmt", "beautysh", stop_after_first = true },
                 markdown = {
                     "markdownlint",
                     "prettierd",
