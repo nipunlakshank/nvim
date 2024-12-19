@@ -5,7 +5,7 @@ local utils = require("tailwind-tools.utils")
 local icons = require("nipunlakshank.utils.icons").cmp_icons
 
 -- NOTE: cmp is not used here, but it is shown to lazy load (by lazydev.nvim) types
--- local cmp = require("cmp")
+-- require("cmp")
 
 -- Formatting utility for https://github.com/onsails/lspkind.nvim
 ---@param entry cmp.Entry
