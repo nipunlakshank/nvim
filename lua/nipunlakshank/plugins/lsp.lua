@@ -97,12 +97,12 @@ return {
                 end,
             })
 
-            -- laravel blade
-            --[[ lspconfig.blade.setup({
-                -- Capabilities is specific to my setup.
+            -- html
+            lspconfig.html.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
-            }) ]]
+                filetypes = { "html", "blade", "phtml" },
+            })
 
             -- typescript
             lspconfig.ts_ls.setup({
@@ -190,6 +190,38 @@ return {
                         lspconfig[server_name].setup({
                             capabilities = capabilities,
                             on_attach = on_attach,
+                        })
+                    end,
+
+                    -- phpactor
+                    phpactor = function()
+                        lspconfig.phpactor.setup({
+                            capabilities = capabilities,
+                            on_attach = on_attach,
+                            root_dir = function(pattern)
+                                local cwd = vim.loop.cwd()
+                                local root = util.root_pattern(
+                                    ".git",
+                                    ".gitignore",
+                                    ".env",
+                                    ".env.example",
+                                    "composer.json"
+                                )(pattern)
+
+                                if not root then
+                                    return cwd
+                                end
+
+                                return util.path.is_descendant(cwd, root) and cwd or root -- prefer cwd if root is a descendant
+                            end,
+                            init_options = {
+                                ["language_server_phpstan.enabled"] = true,
+                                ["phpunit.enabled"] = true,
+                                ["language_server_reference_reference_finder.reference_timeout"] = 600,
+                                -- ['worse_reflection.stub_dir'] = '%project_root%/_ide_helper',
+                                -- ['composer.autoloader_path'] = '%project_root%/.autoload.php',
+                                -- ['indexer.exclude_patterns'] = {'/**/_ide_helper*.php'},
+                            },
                         })
                     end,
 
