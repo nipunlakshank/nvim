@@ -74,6 +74,7 @@
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
   "pseudo-syntax": { "branch": "main", "commit": "ab329e8721e2ab86a55e7bae799f60af42348dab" },
   "remote-nvim.nvim": { "branch": "main", "commit": "66fc20fd259401c7bb6ac5189ecb6283c2eb65d2" },
+  "render-markdown.nvim": { "branch": "main", "commit": "0022a579ac7355966be5ade77699b88c76b6a549" },
   "rest.nvim": { "branch": "main", "commit": "e82dc524894b1b55bcc3296d3644f15c9e06d5ad" },
   "rose-pine": { "branch": "main", "commit": "91548dca53b36dbb9d36c10f114385f759731be1" },
   "snacks.nvim": { "branch": "main", "commit": "fe1751ef64a1ec072fa3b2b3d454d07eb1f7c7f7" },
