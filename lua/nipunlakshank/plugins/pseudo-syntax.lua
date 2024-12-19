@@ -1,4 +1,0 @@
-return {
-    "joelbeedle/pseudo-syntax",
-}
-

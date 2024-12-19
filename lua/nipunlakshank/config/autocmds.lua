@@ -1,12 +1,9 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-local vim_enter_group = vim.api.nvim_create_augroup("VimEnterGroup", {})
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
-local syntax_group = vim.api.nvim_create_augroup("SyntaxGroup", {})
 local ft_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
-local indenting_group = vim.api.nvim_create_augroup("IndentationGroup", {})
 local group = vim.api.nvim_create_augroup("autosave", {})
 
 vim.api.nvim_create_autocmd("User", {
@@ -21,52 +18,26 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
+-- highlight on yank
+autocmd("TextYankPost", {
+    group = highlight_yank_group,
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
+
 autocmd("VimEnter", {
-    group = vim_enter_group,
+    group = colorscheme_group,
     callback = function()
         vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
     end,
 })
-
--- auto-format on save
--- autocmd("BufWritePre", {
---     group = lsp_fmt_group,
---     callback = function()
---         local efm = vim.lsp.get_active_clients({ name = "efm" })
---
---         if vim.tbl_isempty(efm) then
---             return
---         end
---
---         vim.lsp.buf.format({ name = "efm", async = true })
---     end,
--- })
-
--- highlight on yank
-autocmd("TextYankPost", {
-    group = highlight_yank_group,
-    callback = function() vim.highlight.on_yank() end,
-})
-
--- autocmd({ "BufEnter" }, {
---     group = syntax_group,
---     pattern = { ".env*" },
---     callback = function()
---         local buf_name = vim.api.nvim_buf_get_name(0)
---         if string.endswith(buf_name, ".example") then
---             vim.cmd("set filetype=conf")
---             return
---         end
---         vim.cmd("set filetype=config")
---     end,
--- })
 
 autocmd({ "UIEnter", "ColorScheme" }, {
     group = colorscheme_group,
     callback = function()
         local colorscheme = vim.g.colors_name
         local keymap = "<leader>tt"
-        -- local themes = require("nipunlakshank.plugins.themes")
 
         if string.match(colorscheme, "catppuccin") ~= -1 then
             vim.keymap.set("n", keymap, function()
@@ -93,7 +64,11 @@ autocmd({ "VimEnter" }, {
             local python_env_path = vim.fn.stdpath("data") .. "/python"
             local stat = vim.uv.fs_stat(python_env_path)
             if not (stat and stat.type == "directory") then
-                local success, err = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
+                local success, err, _ = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
+                if not success then
+                    vim.print("Failed to create python env directory: " .. err)
+                    return
+                end
             end
 
             if vim.fn.has("win32") == 1 then
