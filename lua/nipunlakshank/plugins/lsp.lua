@@ -77,7 +77,7 @@ return {
             lspconfig.intelephense.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
-                filetypes = { "php", "phtml" },
+                filetypes = { "php" },
                 root_dir = function(pattern)
                     local cwd = vim.uv.cwd()
                     local root = util.root_pattern(
