@@ -26,75 +26,75 @@ autocmd("TextYankPost", {
     end,
 })
 
-autocmd("VimEnter", {
-    group = colorscheme_group,
-    callback = function()
-        vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
-    end,
-})
+-- autocmd("VimEnter", {
+--     group = colorscheme_group,
+--     callback = function()
+--         vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
+--     end,
+-- })
 
-autocmd({ "UIEnter", "ColorScheme" }, {
-    group = colorscheme_group,
-    callback = function()
-        local colorscheme = vim.g.colors_name
-        local keymap = "<leader>tt"
+-- autocmd({ "UIEnter", "ColorScheme" }, {
+--     group = colorscheme_group,
+--     callback = function()
+--         local colorscheme = vim.g.colors_name
+--         local keymap = "<leader>tt"
+--
+--         if string.match(colorscheme, "catppuccin") ~= -1 then
+--             vim.keymap.set("n", keymap, function()
+--                 local catppuccin = require("catppuccin")
+--                 local opts = catppuccin.options or {}
+--                 opts.transparent_background = not opts.transparent_background
+--                 catppuccin.compile()
+--                 vim.cmd.colorscheme(vim.g.colors_name)
+--             end, {
+--                 noremap = false,
+--                 silent = true,
+--                 desc = "Toggle transparency (" .. colorscheme .. ")",
+--             })
+--             return
+--         end
+--     end,
+-- })
 
-        if string.match(colorscheme, "catppuccin") ~= -1 then
-            vim.keymap.set("n", keymap, function()
-                local catppuccin = require("catppuccin")
-                local opts = catppuccin.options or {}
-                opts.transparent_background = not opts.transparent_background
-                catppuccin.compile()
-                vim.cmd.colorscheme(vim.g.colors_name)
-            end, {
-                noremap = false,
-                silent = true,
-                desc = "Toggle transparency (" .. colorscheme .. ")",
-            })
-            return
-        end
-    end,
-})
-
-autocmd({ "VimEnter" }, {
-    group = python_env_group,
-    callback = function()
-        vim.schedule(function()
-            local f = require("nipunlakshank.utils.functions")
-            local python_env_path = vim.fn.stdpath("data") .. "/python"
-            local stat = vim.uv.fs_stat(python_env_path)
-            if not (stat and stat.type == "directory") then
-                local success, err, _ = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
-                if not success then
-                    vim.print("Failed to create python env directory: " .. err)
-                    return
-                end
-            end
-
-            if vim.fn.has("win32") == 1 then
-                f.async_cmd(
-                    "python -m venv "
-                        .. python_env_path
-                        .. ";  "
-                        .. python_env_path
-                        .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
-                )
-                vim.g.python3_host_prog = python_env_path .. "/Scripts/python"
-            else
-                f.async_cmd(
-                    "mkdir -p "
-                        .. python_env_path
-                        .. " && python3 -m venv "
-                        .. python_env_path
-                        .. " && source "
-                        .. python_env_path
-                        .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
-                )
-                vim.g.python3_host_prog = python_env_path .. "/bin/python3"
-            end
-        end)
-    end,
-})
+-- autocmd({ "VimEnter" }, {
+--     group = python_env_group,
+--     callback = function()
+--         vim.schedule(function()
+--             local f = require("nipunlakshank.utils.functions")
+--             local python_env_path = vim.fn.stdpath("data") .. "/python"
+--             local stat = vim.uv.fs_stat(python_env_path)
+--             if not (stat and stat.type == "directory") then
+--                 local success, err, _ = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
+--                 if not success then
+--                     vim.print("Failed to create python env directory: " .. err)
+--                     return
+--                 end
+--             end
+--
+--             if vim.fn.has("win32") == 1 then
+--                 f.async_cmd(
+--                     "python -m venv "
+--                         .. python_env_path
+--                         .. ";  "
+--                         .. python_env_path
+--                         .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
+--                 )
+--                 vim.g.python3_host_prog = python_env_path .. "/Scripts/python"
+--             else
+--                 f.async_cmd(
+--                     "mkdir -p "
+--                         .. python_env_path
+--                         .. " && python3 -m venv "
+--                         .. python_env_path
+--                         .. " && source "
+--                         .. python_env_path
+--                         .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
+--                 )
+--                 vim.g.python3_host_prog = python_env_path .. "/bin/python3"
+--             end
+--         end)
+--     end,
+-- })
 
 autocmd({ "FileType" }, {
     group = ft_group,

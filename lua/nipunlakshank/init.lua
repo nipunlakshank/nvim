@@ -1,5 +1,6 @@
 require("nipunlakshank.config.globals")
 require("nipunlakshank.config.options")
+require("nipunlakshank.config.lazy")
 require("nipunlakshank.config.filetype")
 require("nipunlakshank.config.autocmds")
 require("nipunlakshank.config.usercmds")

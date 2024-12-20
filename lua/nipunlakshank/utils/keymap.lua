@@ -19,34 +19,36 @@
 ---@field opts fun(opts: table): mapper
 ---@field set fun()
 
+local M = {}
+
 ---@type keymap
 local keymap = {}
 
 ---@type mapper
-local M = {}
+local mapper = {}
 
-M.modes = function(...)
+mapper.modes = function(...)
     keymap.modes = ...
-    return M
+    return mapper
 end
 
-M.lhs = function(lhs)
+mapper.lhs = function(lhs)
     if type(lhs) == "string" then
         keymap.lhs = { default = lhs }
     else
         keymap.lhs = lhs
     end
-    return M
+    return mapper
 end
 
-M.rhs = function(rhs)
+mapper.rhs = function(rhs)
     keymap.rhs = rhs
-    return M
+    return mapper
 end
 
-M.opts = function(opts)
+mapper.opts = function(opts)
     keymap.opts = opts
-    return M
+    return mapper
 end
 
 local validate = function()
@@ -56,7 +58,7 @@ local validate = function()
     return true
 end
 
-M.set = function()
+mapper.set = function()
     if not validate() then
         bt()
         return
@@ -77,5 +79,38 @@ M.set = function()
         vim.keymap.set(keymap.modes, keymap.lhs.default, keymap.rhs, keymap.opts)
     end
 end
+
+--- Get merged opts with default opts
+--- defaults: { buffer = true, silent = true }
+---@param opts string|table
+---@return table merged table
+local get_opts = function(opts, defaults)
+    local merged = defaults or { silent = true }
+    local desc_is_set = false
+
+    if type(opts) == "string" then
+        merged.desc = opts
+        return merged
+    end
+
+    for key, value in pairs(opts) do
+        if type(key) == "number" then
+            if desc_is_set then
+                dd("invalid option: '" .. value .. "'", "error")
+                bt()
+                break
+            end
+            merged.desc = value
+            desc_is_set = true
+        else
+            merged[key] = value
+        end
+    end
+
+    return merged
+end
+
+M.mapper = mapper
+M.get_opts = get_opts
 
 return M
