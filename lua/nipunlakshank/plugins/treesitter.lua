@@ -1,64 +1,137 @@
-local opts = {
-    -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-    ensure_installed = { 
-        "c",
-        "lua",
-        "luadoc",
-        "vim",
-        "vimdoc",
-        "query",
-        "markdown",
-        "markdown_inline",
-        "html",
-        "php",
-        "phpdoc",
-        "json",
-        "jsonc",
-    },
+local config = function()
+    local treesitter = require("nvim-treesitter.configs")
+    local parsers = require("nvim-treesitter.parsers").get_parser_configs()
 
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
+    ---@diagnostic disable-next-line: inject-field
+    parsers.blade = {
+        install_info = {
+            url = "https://github.com/EmranMR/tree-sitter-blade",
+            files = { "src/parser.c" },
+            branch = "main",
+        },
+        filetype = "blade",
+    }
 
-    -- Automatically install missing parsers when entering buffer
-    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-    auto_install = true,
+    treesitter.setup({
 
-    -- List of parsers to ignore installing (or "all")
-    -- ignore_install = { "javascript" },
+        ensure_installed = {
+            "lua",
+            "luadoc",
+            "regex",
+            "jsonc",
+            "markdown",
+            "markdown_inline",
+            "jsdoc",
+            "php_only",
+            "phpdoc",
+            "blade",
+        },
 
-    ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-    -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+        auto_install = true,
+        ignore_install = {},
+        sync_install = false,
 
-    highlight = {
-        enable = true,
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = true,
 
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        -- disable = { "c", "rust" },
-        -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-        disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-                return true
-            end
-        end,
+            disable = function(lang, buf)
+                local max_filesize = 1 * 1024 * 1024 -- 1MB
+                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                if ok and stats and stats.size > max_filesize then return true end
+            end,
+        },
 
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = false,
-    },
-}
+        indent = { enable = true },
+        modules = {},
+        autotag = {
+            enable = true,
+            enable_rename = true,
+            enable_close_on_slash = true,
+        },
+
+        endwise = {
+            enable = true,
+        },
+
+        matchup = {
+            enable = true, -- mandatory, false will disable the whole extension
+            -- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
+            -- [options]
+        },
+
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "<C-g>",
+                node_incremental = "<C-g>",
+                scope_incremental = false,
+                node_decremental = "<BS>",
+            },
+        },
+
+        textobjects = {
+
+            select = {
+                enable = true,
+                lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+                keymaps = {
+                    -- You can use the capture groups defined in textobjects.scm
+                    ["aa"] = "@parameter.outer",
+                    ["ia"] = "@parameter.inner",
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = "@class.inner",
+                    ["ii"] = "@conditional.inner",
+                    ["ai"] = "@conditional.outer",
+                    ["il"] = "@loop.inner",
+                    ["al"] = "@loop.outer",
+                    ["at"] = "@comment.outer",
+                },
+            },
+
+            move = {
+                enable = true,
+                set_jumps = true, -- whether to set jumps in the jumplist
+                goto_next_start = {
+                    ["]f"] = "@function.outer",
+                    ["]]"] = "@class.outer",
+                },
+                goto_next_end = {
+                    ["]F"] = "@function.outer",
+                    ["]["] = "@class.outer",
+                },
+                goto_previous_start = {
+                    ["[f"] = "@function.outer",
+                    ["[["] = "@class.outer",
+                },
+                goto_previous_end = {
+                    ["[F"] = "@function.outer",
+                    ["[]"] = "@class.outer",
+                },
+            },
+
+            swap = {
+                enable = true,
+                swap_next = {
+                    ["<leader>ps"] = "@parameter.inner",
+                },
+                swap_previous = {
+                    ["<leader>pS"] = "@parameter.inner",
+                },
+            },
+        },
+    })
+end
 
 return {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "windwp/nvim-ts-autotag",
+    },
     build = ":TSUpdate",
-    event = "VeryLazy",
-    config = function()
-        require'nvim-treesitter.configs'.setup(opts)
-    end,
+    event = { "BufReadPre", "BufNewFile" },
+    config = config,
 }

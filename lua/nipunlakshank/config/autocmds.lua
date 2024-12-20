@@ -33,28 +33,28 @@ autocmd("TextYankPost", {
 --     end,
 -- })
 
--- autocmd({ "UIEnter", "ColorScheme" }, {
---     group = colorscheme_group,
---     callback = function()
---         local colorscheme = vim.g.colors_name
---         local keymap = "<leader>tt"
---
---         if string.match(colorscheme, "catppuccin") ~= -1 then
---             vim.keymap.set("n", keymap, function()
---                 local catppuccin = require("catppuccin")
---                 local opts = catppuccin.options or {}
---                 opts.transparent_background = not opts.transparent_background
---                 catppuccin.compile()
---                 vim.cmd.colorscheme(vim.g.colors_name)
---             end, {
---                 noremap = false,
---                 silent = true,
---                 desc = "Toggle transparency (" .. colorscheme .. ")",
---             })
---             return
---         end
---     end,
--- })
+autocmd({ "UIEnter", "ColorScheme" }, {
+    group = colorscheme_group,
+    callback = function()
+        local colorscheme = vim.g.colors_name
+        local keymap = "<leader>tt"
+
+        if string.match(colorscheme, "catppuccin") ~= -1 then
+            vim.keymap.set("n", keymap, function()
+                local catppuccin = require("catppuccin")
+                local opts = catppuccin.options or {}
+                opts.transparent_background = not opts.transparent_background
+                catppuccin.compile()
+                vim.cmd.colorscheme(vim.g.colors_name)
+            end, {
+                noremap = false,
+                silent = true,
+                desc = "Toggle transparency (" .. colorscheme .. ")",
+            })
+            return
+        end
+    end,
+})
 
 -- autocmd({ "VimEnter" }, {
 --     group = python_env_group,

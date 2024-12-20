@@ -1,5 +1,5 @@
 local get_opts = require("nipunlakshank.utils.keymap").get_opts
-local default_opts = { buffer = true, silent = true }
+local default_opts = { buffer = true, silent = true, noremap = true }
 
 -- execute lua
 vim.keymap.set("v", "<leader>x", ":lua<CR>", get_opts("Execute selection (lua)", default_opts))
