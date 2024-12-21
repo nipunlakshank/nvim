@@ -5,10 +5,43 @@ local get_opts = keymap.get_opts
 -- general
 vim.keymap.set("n", "<esc>", ":nohlsearch<cr>", get_opts("Clear search highlights"))
 vim.keymap.set("n", "-", "<cmd>Oil<cr>", get_opts("Parent directory"))
+vim.keymap.set("n", "<leader>o", "o<esc>\"_S", get_opts("New line below without comment"))
+vim.keymap.set("n", "<leader>O", "O<esc>\"_S", get_opts("New line above without comment"))
+
+-- move lines vertically
+mapper.modes("n")
+    .key({ "<M-j>", mac = "∆" }).action(":m .+1<cr>==")
+    .opts(get_opts("Move line down"))
+    .set()
+mapper.modes("v")
+    .key({ "<M-j>", mac = "∆" }).action(":m '>+1<cr>gv=gv")
+    .opts(get_opts("Move selection down"))
+    .set()
+mapper.modes("n")
+    .key({ "<M-k>", mac = "˚" }).action(":m .-2<cr>==")
+    .opts(get_opts("Move line up"))
+    .set()
+mapper.modes("v")
+    .key({ "<M-k>", mac = "˚" }).action(":m '<-2<cr>gv=gv")
+    .opts(get_opts("Move selection up"))
+    .set()
+
+-- Indenting
+vim.keymap.set("v", "<", "<gv", get_opts("Indent left"))
+vim.keymap.set("v", ">", ">gv", get_opts("Indent right"))
+
+-- Scrolling
+vim.keymap.set("n", "<C-u>", "<C-u>zz", get_opts("Scroll half page up"))
+vim.keymap.set("n", "<C-d>", "<C-d>zz", get_opts("Scroll half page down"))
+
+-- buffer navigation
+vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", get_opts("Alternate buffer"))
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", get_opts("Next buffer"))
+vim.keymap.set("n", "<leader>bp", "<cmd>bprev<cr>", get_opts("Previous buffer"))
 
 -- yanking
-vim.keymap.set({"n", "v"}, "<leader>y", "\"+y", get_opts("Yank to system clipboard"))
-vim.keymap.set("n", "<leader>Y", function() 
+vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", get_opts("Yank to system clipboard"))
+vim.keymap.set("n", "<leader>Y", function()
     vim.cmd [[normal my]]
     vim.cmd [[normal gg"+yG`y]]
     vim.cmd [[delmarks y]]
@@ -19,6 +52,10 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", get_opts("Go to left window"))
 vim.keymap.set("n", "<C-j>", "<C-w>j", get_opts("Go to above window"))
 vim.keymap.set("n", "<C-k>", "<C-w>k", get_opts("Go to below window"))
 vim.keymap.set("n", "<C-l>", "<C-w>l", get_opts("Go to right window"))
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", get_opts("Go to left window"))
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", get_opts("Go to above window"))
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", get_opts("Go to below window"))
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", get_opts("Go to right window"))
 
 -- window splitting
 vim.keymap.set("n", "<leader>%", "<cmd>vsplit<cr>", get_opts("Split window vertically"))
@@ -44,7 +81,7 @@ vim.keymap.set("n", "<leader>fC", "<cmd>FzfLua git_commits<cr>", get_opts("Find 
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoFzfLua<cr>", get_opts("Find todo-comments"))
 
 -- formatting
-vim.keymap.set("n", "<leader>lf", function() 
+vim.keymap.set("n", "<leader>lf", function()
     vim.cmd [[normal mf]]
     vim.cmd [[normal gg=G`f]]
     vim.cmd [[delmarks f]]
@@ -61,3 +98,24 @@ vim.keymap.set("n", "<leader>cl", "<cmd>ColorizerToggle<cr>", get_opts("Toggle C
 
 -- autosave
 vim.keymap.set("n", "<leader>ts", "<cmd>ASToggle<cr>", get_opts("Toggle auto-save"))
+
+-- Snacks
+vim.keymap.set("n", "<leader>cn", function()
+    ---@module "snacks"
+    ---@diagnostic disable-next-line: missing-fields
+    Snacks.input.input({
+        prompt = "New file",
+        default = vim.fs.dirname(vim.fn.expand("%")) .. "/",
+    }, function(value)
+        if not value then return end
+        local dir = vim.fs.dirname(value)
+        local result = vim.system({ "mkdir", "-p", dir }):wait()
+        if result.code == 1 and result.stderr then
+            dd(result.stderr)
+            bt()
+        else
+            vim.cmd({ cmd = "e", args = { value } })
+        end
+    end)
+end
+)

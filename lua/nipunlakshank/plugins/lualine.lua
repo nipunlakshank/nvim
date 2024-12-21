@@ -1,6 +1,6 @@
 return {
     'nvim-lualine/lualine.nvim',
-    event = {"VeryLazy"},
+    event = { "VeryLazy" },
     dependencies = { 'echasnovski/mini.icons' },
     config = function()
         -- Bubbles config for lualine
@@ -8,7 +8,7 @@ return {
         -- MIT license, see LICENSE for more details.
 
         -- stylua: ignore
-        local colors = {
+        --[[ local colors = {
             blue   = '#80a0ff',
             cyan   = '#79dac8',
             black  = '#080808',
@@ -34,19 +34,21 @@ return {
                 b = { fg = colors.white, bg = colors.black },
                 c = { fg = colors.white },
             },
-        }
+        } ]]
 
-        require('lualine').setup {
+        require('lualine').setup({
             options = {
                 -- theme = bubbles_theme,
                 component_separators = '',
                 section_separators = { left = '', right = '' },
+                globalstatus = true,
             },
             sections = {
                 lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
                 lualine_b = { 'filename', 'branch' },
                 lualine_c = {
-                    '%=', --[[ add your center compoentnts here in place of this comment ]]
+                    '%=',
+                    --[[ add your center compoentnts here in place of this comment ]]
                 },
                 lualine_x = {},
                 lualine_y = { 'filetype', 'progress' },
@@ -64,6 +66,6 @@ return {
             },
             tabline = {},
             extensions = {},
-        }
+        })
     end
 }
