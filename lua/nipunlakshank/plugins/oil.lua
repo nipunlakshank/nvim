@@ -2,9 +2,7 @@
 return {
     "stevearc/oil.nvim",
     cmd = { "Oil" },
-    dependencies = {
-        "nvim-tree/nvim-web-devicons",
-    },
+    dependencies = { 'echasnovski/mini.icons' },
     config = function()
         local oil = require("oil")
         local opts = {
@@ -74,7 +72,7 @@ return {
                 ["<C-p>"] = "actions.preview",
                 ["<C-c>"] = "actions.close",
                 ["<C-l>"] = false,
-                ["®"] = "actions.refresh", -- Option+r (for mac)
+                ["®"] = "actions.refresh",     -- Option+r (for mac)
                 ["<A-r>"] = "actions.refresh", -- Alt+r (for windows & linux)
                 ["-"] = "actions.parent",
                 ["_"] = "actions.open_cwd",
