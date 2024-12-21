@@ -1,30 +1,30 @@
 -- My custom keymap module
 
----@class lhs_map
----@field default string
----@field mac string
----@field linux string
----@field windows string
+---@class keymap.opts.key
+---@field default? string
+---@field mac? string
+---@field linux? string
+---@field windows? string
 
----@class keymap
+---@class keymap.opts
 ---@field modes string|string[]
----@field lhs lhs_map
----@field rhs string|function
+---@field key keymap.opts.key
+---@field action string|function
 ---@field opts table
 
----@class mapper
----@field modes fun(...: string): mapper
----@field lhs fun(lhs: string|lhs_map): mapper
----@field rhs fun(rhs: string|function): mapper
----@field opts fun(opts: table): mapper
+---@class keymap.mapper
+---@field modes fun(...: string): keymap.mapper
+---@field key fun(lhs: string|keymap.opts.key): keymap.mapper
+---@field action fun(rhs: string|function): keymap.mapper
+---@field opts fun(opts: table): keymap.mapper
 ---@field set fun()
 
 local M = {}
 
----@type keymap
+---@type keymap.opts
 local keymap = {}
 
----@type mapper
+---@type keymap.mapper
 local mapper = {}
 
 mapper.modes = function(...)
@@ -32,17 +32,17 @@ mapper.modes = function(...)
     return mapper
 end
 
-mapper.lhs = function(lhs)
+mapper.key = function(lhs)
     if type(lhs) == "string" then
-        keymap.lhs = { default = lhs }
+        keymap.key = { default = lhs }
     else
-        keymap.lhs = lhs
+        keymap.key = lhs
     end
     return mapper
 end
 
-mapper.rhs = function(rhs)
-    keymap.rhs = rhs
+mapper.action = function(rhs)
+    keymap.action = rhs
     return mapper
 end
 
@@ -52,7 +52,7 @@ mapper.opts = function(opts)
 end
 
 local validate = function()
-    if keymap.lhs == nil or keymap.rhs == nil then return false end
+    if keymap.key == nil or keymap.action == nil then return false end
     if keymap.modes == nil then keymap.modes = "n" end
     if not keymap.opts then keymap.opts = {} end
     return true
@@ -68,15 +68,15 @@ mapper.set = function()
         or vim.fn.has("win32") == 1 and "windows"
         or "linux"
 
-    for pf, lhs in pairs(keymap.lhs) do
+    for pf, lhs in pairs(keymap.key) do
         if pf == platform then
-            vim.keymap.set(keymap.modes, lhs, keymap.rhs, keymap.opts)
+            vim.keymap.set(keymap.modes, lhs, keymap.action, keymap.opts)
             return
         end
     end
 
-    if keymap.lhs.default ~= nil then
-        vim.keymap.set(keymap.modes, keymap.lhs.default, keymap.rhs, keymap.opts)
+    if keymap.key.default ~= nil then
+        vim.keymap.set(keymap.modes, keymap.key.default, keymap.action, keymap.opts)
     end
 end
 
