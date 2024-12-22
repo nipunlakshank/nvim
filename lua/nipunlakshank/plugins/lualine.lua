@@ -1,7 +1,7 @@
 return {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     event = { "VeryLazy" },
-    dependencies = { 'echasnovski/mini.icons' },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         -- Bubbles config for lualine
         -- Author: lokesh-krishna
@@ -67,5 +67,5 @@ return {
             tabline = {},
             extensions = {},
         })
-    end
+    end,
 }
