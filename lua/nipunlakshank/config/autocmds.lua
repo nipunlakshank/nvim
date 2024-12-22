@@ -26,12 +26,13 @@ autocmd("TextYankPost", {
     end,
 })
 
--- autocmd("VimEnter", {
---     group = colorscheme_group,
---     callback = function()
---         vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
---     end,
--- })
+autocmd("VimEnter", {
+    group = colorscheme_group,
+    callback = function()
+        vim.cmd.colorscheme "catppuccin"
+        -- vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
+    end,
+})
 
 autocmd({ "UIEnter", "ColorScheme" }, {
     group = colorscheme_group,

@@ -1,60 +1,125 @@
-return { 
-    "catppuccin/nvim",
-    name = "catppuccin", 
-    dependencies = { "folke/snacks.nvim" },
-    lazy = false,
-    priority = 999,
-    config = function()
-        require("catppuccin").setup({
-            flavour = "auto", -- latte, frappe, macchiato, mocha
-            background = { -- :h background
+local M = {
+    catppuccin = {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        opts = {
+            flavour = "mocha",
+            background = {
                 light = "latte",
                 dark = "mocha",
             },
-            transparent_background = true, -- disables setting the background color.
-            show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-            term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
-            dim_inactive = {
-                enabled = false, -- dims the background color of inactive window
-                shade = "dark",
-                percentage = 0.15, -- percentage of the shade to apply to the inactive window
-            },
-            no_italic = false, -- Force no italic
-            no_bold = false, -- Force no bold
-            no_underline = false, -- Force no underline
-            styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-                comments = { "italic" }, -- Change the style of comments
-                conditionals = { "italic" },
-                loops = {},
-                functions = {},
-                keywords = {},
-                strings = {},
-                variables = {},
-                numbers = {},
-                booleans = {},
-                properties = {},
-                types = {},
-                operators = {},
-                -- miscs = {}, -- Uncomment to turn off hard-coded styles
-            },
+            transparent_background = true,
             color_overrides = {},
-            custom_highlights = {},
+            highlight_overrides = {
+                ---@diagnostic disable-next-line: unused-local
+                all = function(colors)
+                    return {
+                        GitSignsCurrentLineBlame = { fg = "#8c8c8c" },
+                    }
+                end,
+            },
             default_integrations = true,
             integrations = {
                 cmp = true,
                 gitsigns = true,
                 nvimtree = true,
                 treesitter = true,
-                notify = false,
+                notify = true,
                 mini = {
                     enabled = true,
                     indentscope_color = "",
                 },
-                -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
             },
-        })
+        },
+    },
+    onedarkpro = {
+        "olimorris/onedarkpro.nvim",
+        opts = {
+            options = {
+                transparency = true,
+            },
+        },
+    },
 
-        -- setup must be called before loading
-        vim.cmd.colorscheme "catppuccin"
-    end
+    tokyonight = {
+        "folke/tokyonight.nvim",
+        opts = {
+            style = "night",
+            light_style = "day",
+            transparent = true,
+            terminal_colors = true,
+        },
+    },
+    ["rose-pine"] = {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        opts = {
+            variant = "auto",      -- auto, main, moon, or dawn
+            dark_variant = "main", -- main, moon, or dawn
+            dim_inactive_windows = false,
+            extend_background_behind_borders = true,
+
+            enable = {
+                terminal = true,
+                legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+                migrations = true,        -- Handle deprecated options automatically
+            },
+
+            styles = {
+                bold = true,
+                italic = true,
+                transparency = true,
+            },
+
+            groups = {
+                border = "muted",
+                link = "iris",
+                panel = "surface",
+
+                error = "love",
+                hint = "iris",
+                info = "foam",
+                note = "pine",
+                todo = "rose",
+                warn = "gold",
+
+                git_add = "foam",
+                git_change = "rose",
+                git_delete = "love",
+                git_dirty = "rose",
+                git_ignore = "muted",
+                git_merge = "iris",
+                git_rename = "pine",
+                git_stage = "iris",
+                git_text = "rose",
+                git_untracked = "subtle",
+
+                h1 = "iris",
+                h2 = "foam",
+                h3 = "rose",
+                h4 = "gold",
+                h5 = "pine",
+                h6 = "foam",
+            },
+        },
+    },
 }
+
+local function get_themes(active_theme)
+    local result = {}
+    for name, theme in pairs(M) do
+        if active_theme == name then
+            theme.event = theme.event or { "VimEnter" }
+        else
+            theme.event = theme.event or { "VeryLazy" }
+        end
+        table.insert(result, theme)
+    end
+    return result
+end
+
+-- Set active theme
+local active_theme = _G.colorscheme or M.catppuccin
+
+return get_themes(active_theme)
+
