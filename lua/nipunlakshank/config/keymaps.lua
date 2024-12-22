@@ -88,6 +88,11 @@ vim.keymap.set("n", "<leader>lf", function()
 end, get_opts("Format buffer"))
 vim.keymap.set("v", "<leader>lf", "=", get_opts("Format selection"))
 
+-- toggle windows
+vim.keymap.set("n", "<leader>wl", "<cmd>Lazy<cr>", get_opts("Open Lazy"))
+vim.keymap.set("n", "<leader>wi", "<cmd>LspInfo<cr>", get_opts("Open LspInfo"))
+vim.keymap.set("n", "<leader>wm", "<cmd>Mason<cr>", get_opts("Open Mason"))
+
 -- open github short urls
 vim.keymap.set("n", "<leader>gx", function()
     -- TODO: get short url under cursor, prepend 'https://github.com/', open it with system browser (vim.system("open " .. url))
