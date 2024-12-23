@@ -1,12 +1,12 @@
 ---@diagnostic disable: unused-local
 local blink = {
     url = "saghen/blink.cmp",
-    spec = "nipunlakshank.plugins.cmp.blink",
+    spec = "nipunlakshank.plugins.completions.blink",
     capabilities = function() return require('blink.cmp').get_lsp_capabilities() end,
 }
 local nvim_cmp = {
     url = "hrsh7th/nvim-cmp",
-    spec = "nipunlakshank.plugins.cmp.nvim-cmp",
+    spec = "nipunlakshank.plugins.completions.nvim-cmp",
     capabilities = function() return require('blink.cmp').get_lsp_capabilities() end,
 }
 
