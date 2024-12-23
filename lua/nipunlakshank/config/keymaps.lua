@@ -79,7 +79,7 @@ vim.keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", get_opts("Resize
 vim.keymap.set("n", "<leader>ff", "<cmd>FzfLua files<cr>", get_opts("Find files"))
 vim.keymap.set("n", "<leader>fF", "<cmd>FzfLua git_files<cr>", get_opts("Find git files"))
 vim.keymap.set("n", "<leader>fr", "<cmd>FzfLua oldfiles<cr>", get_opts("Find recent files"))
-vim.keymap.set("n", "<leader>fg", "<cmd>FzfLua live_grep<cr>", get_opts("Find text"))
+vim.keymap.set("n", "<leader>fg", "<cmd>FzfLua grep_project<cr>", get_opts("Find text"))
 vim.keymap.set("n", "<leader>fh", "<cmd>FzfLua helptags<cr>", get_opts("Find help"))
 vim.keymap.set("n", "<leader>fb", "<cmd>FzfLua buffers<cr>", get_opts("Find buffers"))
 vim.keymap.set("n", "<leader>fm", "<cmd>FzfLua marks<cr>", get_opts("Find marks"))
