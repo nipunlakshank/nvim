@@ -14,7 +14,7 @@ autocmd("User", {
             local filename = vim.api.nvim_buf_get_name(opts.data.saved_buffer)
             local rel_path = string.gsub(filename, vim.uv.cwd() and vim.uv.cwd() .. "/" or "", "")
             require("fidget.notification").notify(
-                vim.fn.strftime("%H:%M:%S") .. " AutoSaved: ", vim.log.levels.INFO,
+                "[" .. vim.fn.strftime("%H:%M:%S") .. "] AutoSaved: ", vim.log.levels.INFO,
                 { group = "auto-save", key = "auto-save-post-write", annote = rel_path, skip_history = true }
             )
         end
