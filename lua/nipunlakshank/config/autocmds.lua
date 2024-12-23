@@ -4,16 +4,19 @@ local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {
 local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
 local ft_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
-local group = vim.api.nvim_create_augroup("autosave", {})
+local autosave_group = vim.api.nvim_create_augroup("autosave", { clear = true })
 
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
     pattern = "AutoSaveWritePost",
-    group = group,
+    group = autosave_group,
     callback = function(opts)
         if opts.data.saved_buffer ~= nil then
             local filename = vim.api.nvim_buf_get_name(opts.data.saved_buffer)
             local rel_path = string.gsub(filename, vim.uv.cwd() and vim.uv.cwd() .. "/" or "", "")
-            print("AutoSave: saved " .. rel_path .. " at " .. vim.fn.strftime("%H:%M:%S"))
+            require("fidget.notification").notify(
+                vim.fn.strftime("%H:%M:%S") .. " AutoSaved: ", vim.log.levels.INFO,
+                { group = "auto-save", key = "auto-save-post-write", annote = rel_path, skip_history = true }
+            )
         end
     end,
 })
@@ -29,8 +32,8 @@ autocmd("TextYankPost", {
 autocmd("VimEnter", {
     group = colorscheme_group,
     callback = function()
-        vim.cmd.colorscheme "catppuccin"
-        -- vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
+        -- vim.cmd.colorscheme "catppuccin"
+        vim.cmd.colorscheme(_G.colorscheme) -- Set colorscheme
     end,
 })
 

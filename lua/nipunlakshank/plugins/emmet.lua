@@ -2,7 +2,6 @@ return {
     "olrtg/nvim-emmet",
     ft = {
         "html",
-        "php",
         "phtml",
         "css",
         "scss",
