@@ -25,6 +25,8 @@ local config = function()
             "php_only",
             "phpdoc",
             "blade",
+            "css",
+            "tsx",
         },
 
         auto_install = true,
