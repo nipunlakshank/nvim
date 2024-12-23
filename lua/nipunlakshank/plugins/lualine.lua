@@ -1,4 +1,4 @@
----@diagnostic disable: unused-local
+---@diagnostic disable: unused-local, unused-function
 return {
     "nvim-lualine/lualine.nvim",
     event = { "VeryLazy" },
@@ -10,6 +10,16 @@ return {
         local sep_left = { left = '' }
         local sep_right = { right = '' }
         local capsule = { left = '', right = '' }
+
+        -- TODO: replace git status with this function
+        -- this should check if the diff value is 0 or not and then include it or not
+        local diff = function()
+            local added = vim.b.gitsigns_status_dict.added
+            local icon = ''
+            local color = { fg = '#a6e3a1' }
+
+            return {}, {}, {}
+        end
 
         lualine.setup({
             options = {
