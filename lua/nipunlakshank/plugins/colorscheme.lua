@@ -61,8 +61,8 @@ local M = {
 
             enable = {
                 terminal = true,
-                legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-                migrations = true,        -- Handle deprecated options automatically
+                legacy_highlights = false, -- Improve compatibility for previous versions of Neovim
+                migrations = true,         -- Handle deprecated options automatically
             },
 
             styles = {
@@ -101,6 +101,19 @@ local M = {
                 h5 = "pine",
                 h6 = "foam",
             },
+            palette = {
+                -- Override the builtin palette per variant
+                -- moon = {
+                --     base = '#18191a',
+                --     overlay = '#363738',
+                -- },
+            },
+
+            highlight_groups = {
+                -- Comment = { fg = "foam" },
+                -- VertSplit = { fg = "muted", bg = "muted" },
+                Cursor = { bg = "#ececec" },
+            },
         },
     },
 }
@@ -122,4 +135,3 @@ end
 local active_theme = _G.colorscheme or M.catppuccin
 
 return get_themes(active_theme)
-

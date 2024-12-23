@@ -2,7 +2,10 @@ return {
     "ibhagwan/fzf-lua",
     event = { "VimEnter" },
     -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "nvim-treesitter/nvim-treesitter"
+    },
     config = function()
         -- calling `setup` is optional for customization
         require("fzf-lua").setup({

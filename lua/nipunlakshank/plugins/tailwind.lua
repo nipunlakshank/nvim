@@ -13,9 +13,9 @@ return {
         ---@type TailwindTools.Option
         local opts = {
             server = {
-                override = false,                         -- setup the server from the plugin if true
-                settings = {},                           -- shortcut for `settings.tailwindCSS`
-                on_attach = function(client, bufnr) end, -- callback triggered when the server attaches to a buffer
+                override = false, -- setup the server from the plugin if true
+                -- settings = {}, -- shortcut for `settings.tailwindCSS`
+                -- on_attach = function(client, bufnr) end, -- callback triggered when the server attaches to a buffer
             },
             document_color = {
                 enabled = true, -- can be toggled by commands
@@ -35,15 +35,15 @@ return {
             cmp = {
                 highlight = "foreground", -- color preview style, "foreground" | "background"
             },
-            telescope = {
+            --[[ telescope = {
                 utilities = {
                     callback = function(name, class) end, -- callback used when selecting an utility class in telescope
                 },
-            },
+            }, ]]
             -- see the extension section to learn more
             extension = {
                 queries = {}, -- a list of filetypes having custom `class` queries
-                patterns = {  -- a map of filetypes to Lua pattern lists
+                patterns = { -- a map of filetypes to Lua pattern lists
                     -- example:
                     -- rust = { "class=[\"']([^\"']+)[\"']" },
                     -- javascript = { "clsx%(([^)]+)%)" },
@@ -52,5 +52,6 @@ return {
         }
 
         require("tailwind-tools").setup(opts)
+        vim.cmd("TailwindConcealEnable")
     end,
 }

@@ -26,6 +26,7 @@ return {
                     luasnip.lsp_expand(args.body) -- For `luasnip` users.
                 end,
             },
+            ---@diagnostic disable-next-line: missing-fields
             formatting = {
                 format = lspkind.cmp_format({
                     --[[ menu = { -- showing type in menu
@@ -122,9 +123,8 @@ return {
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
-                { name = "path" },
-            }, {
-                { name = "cmdline" },
+                { name = "cmdline", priority = 1000 },
+                { name = "path",    priority = 900 },
             }),
         })
 

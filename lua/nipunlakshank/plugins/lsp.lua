@@ -16,12 +16,9 @@ return {
             local mason_lspconfig = require("mason-lspconfig")
             local cmp = require("nipunlakshank.utils.cmp").get_client()
 
-            local lsp_capabilities = require('lspconfig').util.default_config
-            lsp_capabilities.capabilities = vim.tbl_deep_extend(
-                'force',
-                lsp_capabilities.capabilities,
-                cmp.capabilities()
-            )
+            local lsp_capabilities = require("lspconfig").util.default_config
+            lsp_capabilities.capabilities = vim.tbl_deep_extend("force", lsp_capabilities.capabilities,
+                cmp.capabilities())
 
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -30,22 +27,22 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
+            ---@diagnostic disable-next-line: unused-local
             local on_attach = function(client, bufnr)
                 local opts = { noremap = true, silent = true, buffer = bufnr }
 
-                vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
-                vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
-                vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<cr>', opts)
-                vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                vim.keymap.set('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-                vim.keymap.set('n', 'go', '<cmd>Lspsaga goto_type_definition<cr>', opts)
-                vim.keymap.set('n', 'gr', '<cmd>Lspsaga finder<cr>', opts)
-                vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-                vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename<cr>', opts)
-                vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', opts)
-                vim.keymap.set('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
-                vim.keymap.set('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
-                vim.keymap.set({ 'n', 'x' }, '<leader>lf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+                vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+                vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+                vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<cr>", opts)
+                vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+                vim.keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+                vim.keymap.set("n", "go", "<cmd>Lspsaga goto_type_definition<cr>", opts)
+                vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
+                vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+                vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+                vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+                vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+                vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
             end
 
             local handlers = {
@@ -100,7 +97,6 @@ return {
                             "css",
                             "eruby",
                             "html",
-                            "php",
                             "blade",
                             "phtml",
                             "javascript",
@@ -115,7 +111,7 @@ return {
                             "pug",
                         },
                     })
-                end
+                end,
             }
 
             mason_lspconfig.setup({
@@ -132,14 +128,14 @@ return {
         end,
     },
     {
-        'nvimdev/lspsaga.nvim',
+        "nvimdev/lspsaga.nvim",
         event = { "LspAttach" },
         config = function()
-            require('lspsaga').setup({})
+            require("lspsaga").setup({})
         end,
         dependencies = {
-            'nvim-treesitter/nvim-treesitter', -- optional
-            'echasnovski/mini.icons',          -- optional
-        }
+            "nvim-treesitter/nvim-treesitter", -- optional
+            "nvim-tree/nvim-web-devicons",     -- optional
+        },
     },
 }
