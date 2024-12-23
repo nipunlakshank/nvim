@@ -1,42 +1,17 @@
+---@diagnostic disable: unused-local
 return {
     "nvim-lualine/lualine.nvim",
     event = { "VeryLazy" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-        -- Bubbles config for lualine
-        -- Author: lokesh-krishna
-        -- MIT license, see LICENSE for more details.
+        local lualine = require("lualine")
 
-        -- stylua: ignore
-        --[[ local colors = {
-            blue   = '#80a0ff',
-            cyan   = '#79dac8',
-            black  = '#080808',
-            white  = '#c6c6c6',
-            red    = '#ff5189',
-            violet = '#d183e8',
-            grey   = '#303030',
-        }
+        local space = { '%s', color = { bg = "" } }
+        local sep_left = { left = '' }
+        local sep_right = { right = '' }
+        local capsule = { left = '', right = '' }
 
-        local bubbles_theme = {
-            normal = {
-                a = { fg = colors.black, bg = colors.violet },
-                b = { fg = colors.white, bg = colors.grey },
-                c = { fg = colors.white },
-            },
-
-            insert = { a = { fg = colors.black, bg = colors.blue } },
-            visual = { a = { fg = colors.black, bg = colors.cyan } },
-            replace = { a = { fg = colors.black, bg = colors.red } },
-
-            inactive = {
-                a = { fg = colors.white, bg = colors.black },
-                b = { fg = colors.white, bg = colors.black },
-                c = { fg = colors.white },
-            },
-        } ]]
-
-        require('lualine').setup({
+        lualine.setup({
             options = {
                 -- theme = bubbles_theme,
                 component_separators = '',
@@ -44,11 +19,21 @@ return {
                 globalstatus = true,
             },
             sections = {
-                lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
-                lualine_b = { 'filename', 'branch' },
+                lualine_a = { { 'mode', separator = capsule --[[ , right_padding = 0 ]] } },
+                lualine_b = {
+                    space,
+                    { 'vim.b.gitsigns_head', icon = '', color = { fg = '#fab387', bg = '#313244' }, separator = capsule },
+                    space,
+                    { 'filename', separator = capsule },
+                    { 'vim.b.gitsigns_status_dict.added', icon = '', color = { fg = '#a6e3a1' } },
+                    { 'vim.b.gitsigns_status_dict.changed', icon = '', color = { fg = '#f9e2af' } },
+                    { 'vim.b.gitsigns_status_dict.removed', icon = '', color = { fg = '#f38ba8' } },
+                },
                 lualine_c = {
                     '%=',
                     --[[ add your center compoentnts here in place of this comment ]]
+                    -- { 'buffers' },
+                    '%=',
                 },
                 lualine_x = {},
                 lualine_y = { 'filetype', 'progress' },
