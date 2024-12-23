@@ -112,7 +112,7 @@ end, get_opts("Open github url"))
 vim.keymap.set("n", "<leader>cl", "<cmd>ColorizerToggle<cr>", get_opts("Toggle Colorizer"))
 
 -- autosave
-vim.keymap.set("n", "<leader>ts", "<cmd>ASToggle<cr>", get_opts("Toggle auto-save"))
+vim.keymap.set("n", "<leader><leader>s", "<cmd>ASToggle<cr>", get_opts("Toggle auto-save"))
 
 -- Snacks
 vim.keymap.set("n", "<leader>cn", function()

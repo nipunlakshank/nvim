@@ -5,7 +5,7 @@ return {
     keys = {
         {
             -- Customize or remove this keymap to your liking
-            "<leader>lf",
+            "<leader>F",
             function()
                 local async = false
                 if vim.tbl_contains({ "blade" }, vim.bo[0].filetype) then
