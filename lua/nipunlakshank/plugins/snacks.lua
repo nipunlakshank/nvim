@@ -1,3 +1,4 @@
+---@diagnostic disable, 113: 113
 return {
     "folke/snacks.nvim",
     dependencies = {
@@ -155,7 +156,21 @@ return {
             scroll = { enabled = false },
             statuscolumn = { enabled = true },
             words = { enabled = true },
-            styles = {},
+            scratch = {
+                win = {
+                    width = 100,
+                    height = 30,
+                    bo = { buftype = "", buflisted = false, bufhidden = "hide", swapfile = false },
+                    minimal = false,
+                    noautocmd = false,
+                    -- position = "right",
+                    zindex = 20,
+                    wo = { winhighlight = "NormalFloat:Normal" },
+                    border = "rounded",
+                    title_pos = "center",
+                    footer_pos = "center",
+                },
+            },
         }
 
         require("snacks").setup(opts)
