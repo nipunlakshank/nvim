@@ -5,24 +5,32 @@ local get_opts = keymap.get_opts
 -- general
 vim.keymap.set("n", "<esc>", ":nohlsearch<cr>", get_opts("Clear search highlights"))
 vim.keymap.set("n", "-", "<cmd>Oil<cr>", get_opts("Parent directory"))
-vim.keymap.set("n", "<leader>o", "o<esc>\"_S", get_opts("New line below without comment"))
-vim.keymap.set("n", "<leader>O", "O<esc>\"_S", get_opts("New line above without comment"))
+vim.keymap.set("n", "<leader>o", 'o<esc>"_S', get_opts("New line below without comment"))
+vim.keymap.set("n", "<leader>O", 'O<esc>"_S', get_opts("New line above without comment"))
 
 -- move lines vertically
-mapper.modes("n")
-    .key({ "<M-j>", mac = "∆" }).action(":m .+1<cr>==")
+mapper
+    .modes("n")
+    .key({ "<M-j>", mac = "∆" })
+    .action(":m .+1<cr>==")
     .opts(get_opts("Move line down"))
     .set()
-mapper.modes("v")
-    .key({ "<M-j>", mac = "∆" }).action(":m '>+1<cr>gv=gv")
+mapper
+    .modes("v")
+    .key({ "<M-j>", mac = "∆" })
+    .action(":m '>+1<cr>gv=gv")
     .opts(get_opts("Move selection down"))
     .set()
-mapper.modes("n")
-    .key({ "<M-k>", mac = "˚" }).action(":m .-2<cr>==")
+mapper
+    .modes("n")
+    .key({ "<M-k>", mac = "˚" })
+    .action(":m .-2<cr>==")
     .opts(get_opts("Move line up"))
     .set()
-mapper.modes("v")
-    .key({ "<M-k>", mac = "˚" }).action(":m '<-2<cr>gv=gv")
+mapper
+    .modes("v")
+    .key({ "<M-k>", mac = "˚" })
+    .action(":m '<-2<cr>gv=gv")
     .opts(get_opts("Move selection up"))
     .set()
 
@@ -40,11 +48,11 @@ vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", get_opts("Next buffer"))
 vim.keymap.set("n", "<leader>bp", "<cmd>bprev<cr>", get_opts("Previous buffer"))
 
 -- yanking
-vim.keymap.set({ "n", "v" }, "<leader>y", "\"+y", get_opts("Yank to system clipboard"))
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', get_opts("Yank to system clipboard"))
 vim.keymap.set("n", "<leader>Y", function()
-    vim.cmd [[normal my]]
-    vim.cmd [[normal gg"+yG`y]]
-    vim.cmd [[delmarks y]]
+    vim.cmd([[normal my]])
+    vim.cmd([[normal gg"+yG`y]])
+    vim.cmd([[delmarks y]])
 end, get_opts("Yank to system clipboard"))
 
 -- move between windows
@@ -59,7 +67,7 @@ vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", get_opts("Go to right window")
 
 -- window splitting
 vim.keymap.set("n", "<leader>%", "<cmd>vsplit<cr>", get_opts("Split window vertically"))
-vim.keymap.set("n", "<leader>\"", "<cmd>split<cr>", get_opts("Split window horizontally"))
+vim.keymap.set("n", '<leader>"', "<cmd>split<cr>", get_opts("Split window horizontally"))
 
 -- resize windows
 vim.keymap.set("n", "<A-Up>", "<cmd>horizontal resize +2<cr>", get_opts("Resize window up"))
@@ -79,12 +87,14 @@ vim.keymap.set("n", "<leader>fc", "<cmd>FzfLua colorschemes<cr>", get_opts("Find
 vim.keymap.set("n", "<leader>fB", "<cmd>FzfLua git_branches<cr>", get_opts("Find git branches"))
 vim.keymap.set("n", "<leader>fC", "<cmd>FzfLua git_commits<cr>", get_opts("Find git commits"))
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoFzfLua<cr>", get_opts("Find todo-comments"))
+vim.keymap.set("n", "<leader>fl", "<cmd>FzfLua resume<cr>", get_opts("FzfLua last state"))
+vim.keymap.set("n", "<leader>fp", "<cmd>FzfLua profiles<cr>", get_opts("Select FzfLua profile"))
 
 -- formatting
 vim.keymap.set("n", "<leader>lf", function()
-    vim.cmd [[normal mf]]
-    vim.cmd [[normal gg=G`f]]
-    vim.cmd [[delmarks f]]
+    vim.cmd([[normal mf]])
+    vim.cmd([[normal gg=G`f]])
+    vim.cmd([[delmarks f]])
 end, get_opts("Format buffer"))
 vim.keymap.set("v", "<leader>lf", "=", get_opts("Format selection"))
 
@@ -112,7 +122,9 @@ vim.keymap.set("n", "<leader>cn", function()
         prompt = "New file",
         default = vim.fs.dirname(vim.fn.expand("%")) .. "/",
     }, function(value)
-        if not value then return end
+        if not value then
+            return
+        end
         local dir = vim.fs.dirname(value)
         local result = vim.system({ "mkdir", "-p", dir }):wait()
         if result.code == 1 and result.stderr then
@@ -122,5 +134,4 @@ vim.keymap.set("n", "<leader>cn", function()
             vim.cmd({ cmd = "e", args = { value } })
         end
     end)
-end
-)
+end)
