@@ -47,13 +47,14 @@ vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", get_opts("Alternate buffer"))
 vim.keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", get_opts("Next buffer"))
 vim.keymap.set("n", "<leader>bp", "<cmd>bprev<cr>", get_opts("Previous buffer"))
 
--- yanking
+-- yanking/pasting
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', get_opts("Yank to system clipboard"))
 vim.keymap.set("n", "<leader>Y", function()
     vim.cmd([[normal my]])
     vim.cmd([[normal gg"+yG`y]])
     vim.cmd([[delmarks y]])
 end, get_opts("Yank to system clipboard"))
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', get_opts("Paste from system clipboard"))
 
 -- move between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", get_opts("Go to left window"))

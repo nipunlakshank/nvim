@@ -43,6 +43,7 @@ return {
                 vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
                 vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
                 vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+                vim.keymap.set("n", "ld", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
             end
 
             local handlers = {
