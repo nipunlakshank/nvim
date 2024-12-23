@@ -37,9 +37,10 @@ local config = function()
             enable = true,
             additional_vim_regex_highlighting = true,
 
+            ---@diagnostic disable-next-line: unused-local
             disable = function(lang, buf)
                 local max_filesize = 1 * 1024 * 1024 -- 1MB
-                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
                 if ok and stats and stats.size > max_filesize then return true end
             end,
         },
@@ -73,7 +74,6 @@ local config = function()
         },
 
         textobjects = {
-
             select = {
                 enable = true,
                 lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
@@ -98,33 +98,62 @@ local config = function()
                 set_jumps = true, -- whether to set jumps in the jumplist
                 goto_next_start = {
                     ["]f"] = "@function.outer",
-                    ["]]"] = "@class.outer",
+                    ["]c"] = "@class.outer",
                 },
                 goto_next_end = {
                     ["]F"] = "@function.outer",
-                    ["]["] = "@class.outer",
+                    ["]C"] = "@class.outer",
                 },
                 goto_previous_start = {
                     ["[f"] = "@function.outer",
-                    ["[["] = "@class.outer",
+                    ["[c"] = "@class.outer",
                 },
                 goto_previous_end = {
                     ["[F"] = "@function.outer",
-                    ["[]"] = "@class.outer",
+                    ["[C"] = "@class.outer",
                 },
             },
 
             swap = {
                 enable = true,
                 swap_next = {
-                    ["<leader>ps"] = "@parameter.inner",
+                    ["<leader>a"] = "@parameter.inner",
                 },
                 swap_previous = {
-                    ["<leader>pS"] = "@parameter.inner",
+                    ["<leader>A"] = "@parameter.inner",
+                },
+            },
+
+            lsp_interop = {
+                enable = true,
+                border = 'rounded',
+                floating_preview_opts = {},
+                peek_definition_code = {
+                    ["<leader>df"] = "@function.outer",
+                    ["<leader>dc"] = "@class.outer",
+                    ["<leader>dl"] = "@loop.outer",
+                    ["<leader>di"] = "@conditional.outer",
                 },
             },
         },
     })
+
+    local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+
+    -- Repeat movement with ; and ,
+    -- ensure ; goes forward and , goes backward regardless of the last direction
+    vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+    vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+
+    -- vim way: ; goes to the direction you were moving.
+    -- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+    -- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+    -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+    vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+    vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+    vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+    vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 end
 
 return {
