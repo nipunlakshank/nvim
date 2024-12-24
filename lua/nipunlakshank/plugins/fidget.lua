@@ -1,11 +1,18 @@
 return {
     "j-hui/fidget.nvim",
     event = { "LspAttach" },
-    opts = {
-        notification = {
-            window = {
-                winblend = 0,
+    config = function()
+        local fidget = require("fidget")
+        local opts = {
+            notification = {
+                window = {
+                    winblend = 0,
+                },
+                -- override_vim_notify = true,
             },
-        },
-    },
+        }
+
+        fidget.setup(opts)
+        vim.notify = fidget.notify
+    end,
 }
