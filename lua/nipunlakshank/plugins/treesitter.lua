@@ -35,7 +35,7 @@ local config = function()
 
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = true,
+            additional_vim_regex_highlighting = { "blade", "php" },
 
             ---@diagnostic disable-next-line: unused-local
             disable = function(lang, buf)
@@ -47,11 +47,6 @@ local config = function()
 
         indent = { enable = true },
         modules = {},
-        autotag = {
-            enable = true,
-            enable_rename = true,
-            enable_close_on_slash = true,
-        },
 
         endwise = {
             enable = true,
@@ -138,6 +133,23 @@ local config = function()
         },
     })
 
+    require('nvim-ts-autotag').setup({
+        opts = {
+            -- Defaults
+            enable_close = true,         -- Auto close tags
+            enable_rename = true,        -- Auto rename pairs of tags
+            enable_close_on_slash = true -- Auto close on trailing </
+        },
+        -- Also override individual filetype configs, these take priority.
+        -- Empty by default, useful if one of the "opts" global settings
+        -- doesn't work well in a specific filetype
+        per_filetype = {
+            -- ["html"] = {
+            --     enable_close = false
+            -- },
+        }
+    })
+
     local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
 
     -- Repeat movement with ; and ,
@@ -161,6 +173,7 @@ return {
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "windwp/nvim-ts-autotag",
+        "RRethy/nvim-treesitter-endwise",
     },
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
