@@ -8,11 +8,10 @@ return {
                 window = {
                     winblend = 0,
                 },
-                -- override_vim_notify = true,
+                override_vim_notify = true,
             },
         }
 
         fidget.setup(opts)
-        vim.notify = fidget.notify
     end,
 }
