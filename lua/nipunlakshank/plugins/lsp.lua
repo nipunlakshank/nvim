@@ -58,6 +58,10 @@ return {
                         signs = true,
                         update_in_insert = false
                     })
+
+                --[[ client.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+                    border = "rounded",
+                }) ]]
             end
 
             local handlers = {
