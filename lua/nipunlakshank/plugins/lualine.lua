@@ -2,7 +2,10 @@
 return {
     "nvim-lualine/lualine.nvim",
     event = { "VeryLazy" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        { 'AndreM222/copilot-lualine' },
+    },
     config = function()
         local lualine = require("lualine")
 
@@ -23,7 +26,7 @@ return {
 
         lualine.setup({
             options = {
-                -- theme = bubbles_theme,
+                theme = "catppuccin",
                 component_separators = '',
                 section_separators = { left = '', right = '' },
                 globalstatus = true,
@@ -35,9 +38,9 @@ return {
                     { 'vim.b.gitsigns_head', icon = '', color = { fg = '#fab387', bg = '#313244' }, separator = capsule },
                     space,
                     { 'filename', separator = capsule },
-                    { 'vim.b.gitsigns_status_dict.added', icon = '', color = { fg = '#a6e3a1' } },
-                    { 'vim.b.gitsigns_status_dict.changed', icon = '', color = { fg = '#f9e2af' } },
-                    { 'vim.b.gitsigns_status_dict.removed', icon = '', color = { fg = '#f38ba8' } },
+                    { 'vim.b.gitsigns_status_dict.added', icon = '', color = { fg = '#a6e3a1' } },
+                    { 'vim.b.gitsigns_status_dict.changed', icon = '〜', color = { fg = '#f9e2af' } },
+                    { 'vim.b.gitsigns_status_dict.removed', icon = '', color = { fg = '#f38ba8' } },
                 },
                 lualine_c = {
                     '%=',
@@ -45,7 +48,38 @@ return {
                     -- { 'buffers' },
                     '%=',
                 },
-                lualine_x = {},
+                lualine_x = {
+                    {
+                        'copilot',
+                        -- Default values
+                        symbols = {
+                            status = {
+                                icons = {
+                                    -- enabled = "",
+                                    enabled = "",
+                                    sleep = "", -- auto-trigger disabled
+                                    disabled = "",
+                                    warning = "",
+                                    unknown = ""
+                                },
+                                hl = {
+                                    enabled = "#a6e3a1",
+                                    sleep = "#AEB7D0",
+                                    disabled = "#6272A4",
+                                    warning = "#fab387",
+                                    unknown = "#f38ba8"
+                                }
+                            },
+                            spinners = require("copilot-lualine.spinners").dots,
+                            spinner_color = "#6272A4"
+                        },
+                        show_colors = true,
+                        show_loading = true,
+                        separator = capsule,
+                        color = { bg = "#313244" },
+                    },
+                    space,
+                },
                 lualine_y = { 'filetype', 'progress' },
                 lualine_z = {
                     { 'location', separator = { right = '' }, left_padding = 2 },
