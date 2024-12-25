@@ -60,45 +60,87 @@ autocmd({ "UIEnter", "ColorScheme" }, {
     end,
 })
 
--- autocmd({ "VimEnter" }, {
---     group = python_env_group,
---     callback = function()
---         vim.schedule(function()
---             local f = require("nipunlakshank.utils.functions")
---             local python_env_path = vim.fn.stdpath("data") .. "/python"
---             local stat = vim.uv.fs_stat(python_env_path)
---             if not (stat and stat.type == "directory") then
---                 local success, err, _ = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
---                 if not success then
---                     vim.print("Failed to create python env directory: " .. err)
---                     return
---                 end
---             end
---
---             if vim.fn.has("win32") == 1 then
---                 f.async_cmd(
---                     "python -m venv "
---                         .. python_env_path
---                         .. ";  "
---                         .. python_env_path
---                         .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
---                 )
---                 vim.g.python3_host_prog = python_env_path .. "/Scripts/python"
---             else
---                 f.async_cmd(
---                     "mkdir -p "
---                         .. python_env_path
---                         .. " && python3 -m venv "
---                         .. python_env_path
---                         .. " && source "
---                         .. python_env_path
---                         .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
---                 )
---                 vim.g.python3_host_prog = python_env_path .. "/bin/python3"
---             end
---         end)
---     end,
--- })
+--[[ autocmd("User", {
+    pattern = "VeryLazy",
+    group = python_env_group,
+    callback = function()
+        vim.schedule(function()
+            local python_env_path = vim.fn.stdpath("data") .. "/python"
+            local py_activate = python_env_path .. "/bin/activate"
+            local py_executable = python_env_path .. "/bin/python3"
+
+            local abort = function(out)
+                dd("Failed activating python env: " .. out.stderr)
+                dd(out)
+                bt()
+            end
+
+            local try_activate = function()
+                local out = vim.system({
+                    "source", py_activate, "&&", "pip", "install", "--upgrade", "pip", "&&",
+                    "pip", "install", "neovim"
+                }):wait()
+                if out.code ~= 0 then
+                    abort(out)
+                    return
+                end
+                vim.g.python3_host_prog = py_executable
+            end
+
+            local init = function()
+                vim.system({ "rmdir", python_env_path }):wait()
+                local env_out = vim.system({ "python3", "-m", "venv", python_env_path }):wait()
+                if env_out.code ~= 0 then abort(env_out) end
+                try_activate()
+            end
+
+            vim.uv.fs_stat(py_activate, function(err, stat)
+                dd(err, stat)
+                if not stat and err then
+                    init()
+                    return
+                end
+                try_activate()
+            end)
+
+            ------------- WARN: delete below code after completing above code ---------------
+
+
+            -- if stat and stat.type == "directory" then
+            --     activate()
+            --     return
+            -- end
+            --
+            -- local success, err, _ = vim.uv.fs_mkdir(python_env_path, 493) -- 493 is 755 in octal
+            -- if not success then
+            --     vim.print("Failed to create python env directory: " .. err)
+            --     return
+            -- end
+            --
+            -- if vim.fn.has("win32") == 1 then
+            --     f.async_cmd(
+            --         "python -m venv "
+            --         .. python_env_path
+            --         .. ";  "
+            --         .. python_env_path
+            --         .. "/Scripts/activate && pip install --upgrade pip && pip install neovim; deactivate"
+            --     )
+            --     vim.g.python3_host_prog = python_env_path .. "/Scripts/python"
+            -- else
+            --     f.async_cmd(
+            --         "mkdir -p "
+            --         .. python_env_path
+            --         .. " && python3 -m venv "
+            --         .. python_env_path
+            --         .. " && source "
+            --         .. python_env_path
+            --         .. "/bin/activate && pip install --upgrade pip && pip install neovim && deactivate"
+            --     )
+            --     vim.g.python3_host_prog = python_env_path .. "/bin/python3"
+            -- end
+        end)
+    end,
+}) ]]
 
 autocmd({ "FileType" }, {
     group = ft_group,
