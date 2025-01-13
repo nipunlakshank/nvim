@@ -51,6 +51,7 @@ return {
                 blade = { "blade-formatter", timeout_ms = 1000 },
                 php = { "pint", lsp_format = "prefer", stop_after_first = true },
                 html = { "prettierd", "prettier", lsp_format = "prefer", stop_after_first = true },
+                css = { "prettierd", "prettier", lsp_format = "prefer", stop_after_first = true },
             },
             default_format_opts = { lsp_format = "fallback" },
             format_on_save = function(bufnr)
@@ -72,10 +73,10 @@ return {
                     return
                 end
 
-                local timeout = 500
-                if vim.tbl_contains({ "blade" }, vim.bo[bufnr].filetype) then
-                    timeout = 1000
-                end
+                -- local timeout = 500
+                -- if vim.tbl_contains({ "blade" }, vim.bo[bufnr].filetype) then
+                --     timeout = 1000
+                -- end
 
                 -- local lsp_format = "fallback"
                 -- if vim.tbl_contains({ "lua", "javascript", "typescript" }, vim.bo[bufnr].filetype) then

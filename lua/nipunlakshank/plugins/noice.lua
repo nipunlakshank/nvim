@@ -39,9 +39,9 @@ return {
                 lsp_doc_border = true,        -- add a border to hover docs and signature help
             },
             cmdline = {
-                enabled = true,   -- enables the Noice cmdline UI
-                view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-                opts = {},        -- global options for the cmdline. See section on views
+                enabled = true,         -- enables the Noice cmdline UI
+                view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom | `cmdline_popup` for a floating input
+                opts = {},              -- global options for the cmdline. See section on views
                 ---@type table<string, CmdlineFormat>
                 format = {
                     -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.

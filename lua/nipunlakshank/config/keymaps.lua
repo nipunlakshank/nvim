@@ -91,6 +91,9 @@ vim.keymap.set("n", "<leader>ft", "<cmd>TodoFzfLua<cr>", get_opts("Find todo-com
 vim.keymap.set("n", "<leader>fl", "<cmd>FzfLua resume<cr>", get_opts("FzfLua last state"))
 vim.keymap.set("n", "<leader>fp", "<cmd>FzfLua profiles<cr>", get_opts("Select FzfLua profile"))
 
+-- file-tree
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", get_opts("Toggle file tree"))
+
 -- formatting
 vim.keymap.set("n", "<leader>lf", function()
     vim.cmd([[normal mf]])
@@ -136,3 +139,10 @@ vim.keymap.set("n", "<leader>cn", function()
         end
     end)
 end)
+
+-- TailwindCSS
+vim.keymap.set("n", "<leader>tc", "<cmd>TailwindConcealToggle<cr>", get_opts("Toggle conceal classes (TailwindCSS)"))
+
+-- Cloak
+vim.keymap.set("n", "<leader>ct", "<cmd>CloakPreviewLine<cr>", get_opts("Cloak preview line"))
+vim.keymap.set("n", "<leader>cT", "<cmd>CloakToggle<cr>", get_opts("Toggle cloak"))

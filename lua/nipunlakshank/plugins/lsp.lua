@@ -26,9 +26,6 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
-            ---This will get executed on LspAttach
-            ---@param client vim.lsp.Client
-            ---@param bufnr integer
             local on_attach = function(client, bufnr)
                 local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -46,23 +43,24 @@ return {
                 vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
                 vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
 
-                client.handlers["textDocument/publishDiagnostics"] =
-                    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-                        -- Disable underline, it's very annoying
-                        underline = false,
-                        virtual_text = true,
-                        -- Enable virtual text, override spacing to 4
-                        -- virtual_text = {spacing = 4},
-                        -- Use a function to dynamically turn signs off
-                        -- and on, using buffer local variables
-                        signs = true,
-                        update_in_insert = false
-                    })
 
                 --[[ client.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
                     border = "rounded",
                 }) ]]
             end
+
+            vim.lsp.handlers["textDocument/publishDiagnostics"] =
+                vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+                    -- Disable underline, it's very annoying
+                    underline = false,
+                    virtual_text = true,
+                    -- Enable virtual text, override spacing to 4
+                    -- virtual_text = {spacing = 4},
+                    -- Use a function to dynamically turn signs off
+                    -- and on, using buffer local variables
+                    signs = true,
+                    update_in_insert = false
+                })
 
             local handlers = {
                 -- The first entry (without a key) will be the default handler
