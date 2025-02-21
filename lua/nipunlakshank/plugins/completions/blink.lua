@@ -13,7 +13,6 @@ return {
     -- build = 'nix run .#build-plugin',
 
     config = function()
-
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         local opts = {
