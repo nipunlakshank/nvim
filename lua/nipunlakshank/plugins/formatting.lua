@@ -49,7 +49,7 @@ return {
                     stop_after_first = true,
                 },
                 blade = { "blade-formatter", timeout_ms = 1000 },
-                php = { "pint", lsp_format = "prefer", stop_after_first = true },
+                php = { "pint", lsp_format = "fallback", stop_after_first = true },
                 html = { "prettierd", "prettier", lsp_format = "prefer", stop_after_first = true },
                 css = { "prettierd", "prettier", lsp_format = "prefer", stop_after_first = true },
             },
