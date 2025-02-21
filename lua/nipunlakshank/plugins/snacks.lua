@@ -90,17 +90,6 @@ return {
                     only_scope = false,   -- only show indent guides of the scope
                     only_current = false, -- only show indent guides in the current window
                     hl = "IblIndent", ---@type string|string[] hl groups for indent guides
-                    -- can be a list of hl groups to cycle through
-                    -- hl = {
-                    --     "SnacksIndent1",
-                    --     "SnacksIndent2",
-                    --     "SnacksIndent3",
-                    --     "SnacksIndent4",
-                    --     "SnacksIndent5",
-                    --     "SnacksIndent6",
-                    --     "SnacksIndent7",
-                    --     "SnacksIndent8",
-                    -- },
                 },
                 -- animate scopes. Enabled by default for Neovim >= 0.10
                 -- Works on older versions but has to trigger redraws during animation.
@@ -151,6 +140,10 @@ return {
             notifier = {
                 enabled = true,
                 timeout = 3000,
+                filter = function(notif)
+                    return not notif.msg:find('No information available')
+                        and not notif.msg:find('man.lua: "no manual entry for ')
+                end,
             },
             lazygit = { win = { border = "rounded" } },
             quickfile = { enabled = true },
@@ -171,6 +164,33 @@ return {
                     title_pos = "center",
                     footer_pos = "center",
                 },
+            },
+            image = {
+                formats = { "png", "jpg", "jpeg", "gif", "bmp", "webp", "tiff", "heic", "avif", "mp4", "mov", "avi", "mkv", "webm" },
+                force = false, -- try displaying the image, even if the terminal does not support it
+                markdown = {
+                    -- enable image viewer for markdown files
+                    -- if your env doesn't support unicode placeholders, this will be disabled
+                    enabled = true,
+                    inline = true, -- render the image inline in the buffer (takes precedence over `opts.float` on supported terminals)
+                    float = true,  -- render the image in a floating window
+                    max_width = 80,
+                    max_height = 40,
+                },
+                -- window options applied to windows displaying image buffers
+                -- an image buffer is a buffer with `filetype=image`
+                wo = {
+                    wrap = false,
+                    number = false,
+                    relativenumber = false,
+                    cursorcolumn = false,
+                    signcolumn = "no",
+                    foldcolumn = "0",
+                    list = false,
+                    spell = false,
+                    statuscolumn = "",
+                },
+                env = {},
             },
         }
 
