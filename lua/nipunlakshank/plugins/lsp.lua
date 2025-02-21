@@ -8,6 +8,7 @@ return {
             { "saghen/blink.cmp", optional = true },
             { "hrsh7th/nvim-cmp", optional = true },
             "folke/lazydev.nvim",
+            "nvim-java/nvim-java",
         },
         config = function()
             local diagnostic_signs = require("nipunlakshank.utils.icons").diagnostic_signs
