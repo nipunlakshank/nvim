@@ -10,7 +10,7 @@ local nvim_cmp = {
     capabilities = function() return require('blink.cmp').get_lsp_capabilities() end,
 }
 
-local active = nvim_cmp
+local active = blink
 
 local cmp = require("nipunlakshank.utils.cmp").set_client(active)
 
