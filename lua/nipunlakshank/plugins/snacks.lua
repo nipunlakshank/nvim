@@ -177,6 +177,10 @@ return {
                     max_width = 80,
                     max_height = 40,
                 },
+                doc = {
+                    inline = false,
+                    float = true,
+                },
                 -- window options applied to windows displaying image buffers
                 -- an image buffer is a buffer with `filetype=image`
                 wo = {

@@ -104,6 +104,23 @@ return {
                     })
                 end,
 
+                -- nix
+                nil_ls = function()
+                    lspconfig.nil_ls.setup({
+                        capabilities = lsp_capabilities,
+                        on_attach = on_attach,
+                        settings = {
+                            ['nil'] = {
+                                formatting = {
+                                    format = {
+                                        command = "nixfmt",
+                                    },
+                                },
+                            },
+                        },
+                    })
+                end,
+
                 -- emmet
                 emmet_language_server = function()
                     lspconfig.emmet_language_server.setup({

@@ -52,6 +52,7 @@ return {
                 php = { "pint", lsp_format = "fallback", stop_after_first = true },
                 html = { "prettierd", "prettier", lsp_format = "prefer", stop_after_first = true },
                 css = { "prettierd", "prettier", lsp_format = "prefer", stop_after_first = true },
+                nix = { "nixfmt", lsp_format = "prefer", stop_after_first = true },
             },
             default_format_opts = { lsp_format = "fallback" },
             format_on_save = function(bufnr)

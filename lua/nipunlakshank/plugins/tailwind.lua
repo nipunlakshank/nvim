@@ -43,7 +43,7 @@ return {
             -- see the extension section to learn more
             extension = {
                 queries = {}, -- a list of filetypes having custom `class` queries
-                patterns = { -- a map of filetypes to Lua pattern lists
+                patterns = {  -- a map of filetypes to Lua pattern lists
                     -- example:
                     -- rust = { "class=[\"']([^\"']+)[\"']" },
                     -- javascript = { "clsx%(([^)]+)%)" },
@@ -52,6 +52,5 @@ return {
         }
 
         require("tailwind-tools").setup(opts)
-        vim.cmd("TailwindConcealEnable")
     end,
 }
