@@ -19,7 +19,7 @@ opt.splitbelow = true
 opt.autochdir = false
 opt.showmode = false
 opt.completeopt = { "menu", "menuone", "noinsert" }
-opt.updatetime = 200
+opt.updatetime = 100
 opt.laststatus = 3
 -- opt.iskeyword:append("-")
 -- opt.clipboard:append("unnamedplus")
@@ -30,6 +30,7 @@ opt.shiftwidth = 4
 opt.softtabstop = 4
 opt.expandtab = true
 opt.smartindent = true
+opt.breakindent = true
 opt.smarttab = true
 
 -- Word wrap
@@ -47,13 +48,14 @@ opt.hlsearch = true
 -- Appearance
 opt.guifont = "Jetbrains Mono:h14"
 opt.termguicolors = true
-opt.signcolumn = "yes:2"
+opt.signcolumn = "yes:3"
+opt.numberwidth = 3
 opt.cursorline = true
 opt.cmdheight = 1
 opt.scrolloff = 10
 opt.fillchars = { eob = " " }
 opt.guicursor =
-    "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
+"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- folds
 opt.foldmethod = "expr"
