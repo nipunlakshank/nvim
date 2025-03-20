@@ -1,19 +1,7 @@
 local config = function()
     local treesitter = require("nvim-treesitter.configs")
-    local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-
-    ---@diagnostic disable-next-line: inject-field
-    parsers.blade = {
-        install_info = {
-            url = "https://github.com/EmranMR/tree-sitter-blade",
-            files = { "src/parser.c" },
-            branch = "main",
-        },
-        filetype = "blade",
-    }
 
     treesitter.setup({
-
         ensure_installed = {
             "lua",
             "luadoc",
