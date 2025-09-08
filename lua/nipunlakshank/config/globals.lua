@@ -3,4 +3,6 @@ vim.g.maplocalleader = "\\"
 
 vim.g.have_nerd_font = true
 
-_G.colorscheme = "catppuccin"
+vim.o.winborder = "rounded"
+
+_G.colorscheme = "rose-pine"
