@@ -3,7 +3,7 @@ local extension = {
 }
 
 local filename = {
-    -- [".env"] = "dotenv"
+    [".envrc"] = "sh"
 }
 
 local pattern = {

@@ -39,7 +39,7 @@ return {
             },
             filetypes = {
                 -- yaml = false,
-                -- markdown = false,
+                markdown = true,
                 harpoon = false,
                 help = false,
                 gitcommit = false,
