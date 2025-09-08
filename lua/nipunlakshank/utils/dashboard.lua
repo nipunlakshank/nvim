@@ -26,6 +26,7 @@ local presets = {
                 title = "Git Status",
                 section = "terminal",
                 enabled = function()
+                    ---@module "snacks"
                     return Snacks.git.get_root() ~= nil
                 end,
                 cmd = "git status --short --branch --renames",
