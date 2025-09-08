@@ -1,10 +1,32 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 local highlight_yank_group = vim.api.nvim_create_augroup("HighlightYankGroup", {})
-local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
+-- local python_env_group = vim.api.nvim_create_augroup("PythonEnvGroup", {})
 local colorscheme_group = vim.api.nvim_create_augroup("ColorSchemeGroup", {})
 local ft_group = vim.api.nvim_create_augroup("FileTypeGroup", {})
 local autosave_group = vim.api.nvim_create_augroup("autosave", { clear = true })
+
+
+-- Lsp settings
+autocmd("LspAttach", {
+    callback = function(args)
+        local opts = { noremap = true, silent = true, buffer = args.buf }
+
+        vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+        vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+        vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<cr>", opts)
+        vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+        vim.keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+        vim.keymap.set("n", "go", "<cmd>Lspsaga goto_type_definition<cr>", opts)
+        vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
+        vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+        vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+        vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", opts)
+        vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+        vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+        vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<cr>", opts)
+    end,
+})
 
 autocmd("User", {
     pattern = "AutoSaveWritePost",
