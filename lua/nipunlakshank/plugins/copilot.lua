@@ -39,6 +39,7 @@ return {
             },
             filetypes = {
                 -- yaml = false,
+                javascript = true,
                 markdown = true,
                 harpoon = false,
                 help = false,

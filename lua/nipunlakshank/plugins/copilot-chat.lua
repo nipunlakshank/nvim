@@ -9,7 +9,7 @@ return {
         event = { "BufRead", "BufNewFile" },
         keys = {
             {
-                "<leader>ccq",
+                "<leader>cq",
                 function()
                     local input = vim.fn.input("Quick Chat: ")
                     if input ~= "" then
@@ -17,13 +17,20 @@ return {
                     end
                 end,
                 desc = "CopilotChat - Quick chat",
+            },
+            {
+                "<leader>ch",
+                function()
+                    require("CopilotChat").open()
+                end,
+                desc = "CopilotChat - Open chat",
             }
         },
         config = function()
             local copilot = require("CopilotChat")
             copilot.setup({
                 system_prompt = "How can I assist you today?",
-                model = 'gpt-4o',
+                model = 'gpt-4.1',
                 temperature = 0.5,
                 window = {
                     layout = 'vertical',
@@ -37,7 +44,7 @@ return {
                 highlight_selection = true,
                 highlight_headers = true,
                 auto_follow_cursor = true,
-                auto_insert_mode = false,
+                auto_insert_mode = true,
                 insert_at_end = false,
                 clear_chat_on_new_prompt = false,
                 log_level = 'info',

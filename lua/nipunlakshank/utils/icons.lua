@@ -9,10 +9,10 @@ M.debugging_signs = {
 }
 
 M.diagnostic_signs = {
-    Error = " ",
-    Warn = " ",
-    Hint = "",
-    Info = "",
+    ERROR = " ",
+    WARN = " ",
+    HINT = "",
+    INFO = "",
 }
 
 M.cmp_icons = {

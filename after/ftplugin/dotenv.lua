@@ -14,6 +14,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
             vim.bo.syntax = "confini"
             return
         end ]]
-        vim.bo.syntax = "sh"
+        vim.bo.syntax = "zsh"
     end,
 })

@@ -11,6 +11,12 @@ return {
                 cterm_color = "65",
                 name = "Zsh",
             },
+            css = {
+                icon = "󰌜",
+                color = "#61afef",
+                cterm_color = "75",
+                name = "Css",
+            },
         },
         -- globally enable different highlight colors per icon (default to true)
         -- if set to false all icons will have the default icon's color
@@ -22,10 +28,10 @@ return {
         -- different tables, first by filename, and if not found by extension; this
         -- prevents cases when file doesn't have any extension but still gets some icon
         -- because its name happened to match some extension (default to false)
-        strict = true,
+        strict = false,
         -- set the light or dark variant manually, instead of relying on `background`
         -- (default to nil)
-        variant = "light|dark",
+        -- variant = "light|dark",
         -- same as `override` but specifically for overrides by filename
         -- takes effect when `strict` is true
         override_by_filename = {

@@ -15,6 +15,7 @@ return {
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
             local cmp = require("nipunlakshank.utils.cmp").get_client()
+            local mason_registry = require("mason-registry")
 
             local lsp_capabilities = require("lspconfig").util.default_config
             lsp_capabilities.capabilities =
@@ -22,10 +23,10 @@ return {
 
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
-            for type, icon in pairs(diagnostic_signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-            end
+            -- for type, icon in pairs(diagnostic_signs) do
+            --     local hl = "DiagnosticSign" .. type
+            --     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+            -- end
 
             -- Configure how diagnostics are displayed
             vim.diagnostic.config({
@@ -34,7 +35,43 @@ return {
                     -- current_line = true,
                 },
                 -- underline = false,
+                signs = {
+                    text = { diagnostic_signs.ERROR, diagnostic_signs.WARN, diagnostic_signs.INFO, diagnostic_signs.HINT },
+                },
             })
+
+            local vue_ls_path = vim.fn.stdpath('data')
+                .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+
+            local vue_plugin = {
+                name = '@vue/typescript-plugin',
+                location = vue_ls_path,
+                languages = { 'vue' },
+                configNamespace = 'typescript',
+            }
+            local vtsls_config = {
+                capabilities = lsp_capabilities,
+                settings = {
+                    vtsls = {
+                        tsserver = {
+                            globalPlugins = {
+                                vue_plugin,
+                            },
+                        },
+                    },
+                },
+                filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'vue' },
+            }
+
+            local ts_ls_config = {
+                capabilities = lsp_capabilities,
+                init_options = {
+                    plugins = {
+                        vue_plugin,
+                    },
+                },
+                filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'vue' },
+            }
 
             local handlers = {
                 -- The first entry (without a key) will be the default handler
@@ -72,6 +109,24 @@ return {
                                 },
                             },
                         },
+                    })
+                end,
+
+                -- ts_ls
+                ts_ls = function()
+                    lspconfig.ts_ls.setup(ts_ls_config)
+                end,
+
+                -- vtsls
+                vtsls = function()
+                    lspconfig.vtsls.setup(vtsls_config)
+                end,
+
+                -- vue_ls
+                vue_ls = function()
+                    lspconfig.vue_ls.setup({
+                        capabilities = lsp_capabilities,
+                        filetypes = { 'vue' },
                     })
                 end,
 
